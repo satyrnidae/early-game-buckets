@@ -1,30 +1,28 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "new-buckets",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "New Buckets",
+  "description": "Adds two new early-game buckets, made from wood and ceramic respectively.",
   "authors": [
-    "Me!"
+    "Isabel Maskrey"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/satyrnidae/new-buckets-fabric"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "assets/new-buckets/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "dev.satyrn.silk.new_buckets.NewBucketsMod"
     ]
   },
-  "mixins": [
-    "modid.mixins.json"
-  ],
+  "mixins": [],
 
   "depends": {
     "fabricloader": ">=0.7.4",
@@ -32,6 +30,6 @@
     "minecraft": "1.16.x"
   },
   "suggests": {
-    "another-mod": "*"
+    "kiln": ">=1.1.1+1.16.5"
   }
 }
