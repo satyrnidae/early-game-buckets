@@ -1,14 +1,14 @@
 package dev.satyrn.silk.new_buckets.item;
 
 import dev.satyrn.silk.new_buckets.NewBucketsMod;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tag.FluidTags;
 
 /**
- *
+ * Implementation for a wooden bucket item.
+ * @author Isabel Maskrey
+ * @since 1.0.0
  */
 public class WoodenBucketItem extends CustomBucketItem {
     /**
