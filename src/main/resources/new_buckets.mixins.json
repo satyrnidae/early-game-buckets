@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.satyrn.silk.new_buckets.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "AnimalEntityMixin",
+    "CowEntityMixin",
+    "EntityMixin",
+    "FishEntityMixin",
+    "LivingEntityMixin",
+    "MobEntityMixin",
+    "PassiveEntityMixin",
+    "PathAwareEntityMixin",
+    "WaterCreatureEntityMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
