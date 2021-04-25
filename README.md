@@ -7,13 +7,18 @@
 
 A small fabric mod which adds some new early-game buckets!
 
+## Okay, but why though?
+
+I wanted some early game buckets, because I'm apparently too lazy to just go mining instead of writing an entire mod in
+a day.
+
+Sometimes you just do things because it felt right in the moment, and then it's five AM the next day and you still
+haven't slept... anyways this was one of those times.
+
 ## Wooden Bucket
 
 The **wooden bucket** is the first bucket you'll likely be able to craft.  It requires seven wooden planks arranged in a
 U-shape and has durability for up to 32 uses.
-
-![A wooden bucket]()
-![The crafting recipe for a wooden bucket]()
 
 You can carry water, milk, and fish in a wooden bucket, but you can't carry lava!
 
@@ -25,9 +30,6 @@ containing a liquid as fuel, nor can you repair non-empty buckets.
 
 The **clay bucket** is an unfired ceramic bucket.  It is not able to hold any liquids until it is fired.
 
-![A clay "bucket"]()
-![The crafting recipe for a clay bucket]()
-
 Clay buckets can be fired in a furnace or kiln.
 
 ## Ceramic Bucket
@@ -35,13 +37,8 @@ Clay buckets can be fired in a furnace or kiln.
 The **ceramic bucket** is a bucket made by firing a clay bucket in a furnace or kiln. Ceramic buckets can carry water,
 milk, lava, and fish.
 
-![A ceramic bucket]()
-![The recipe for a ceramic bucket]()
-
 Picking up lava in a ceramic bucket will greatly reduce its durability. Ceramic lava buckets can be used as a fuel
 source like iron lava buckets, but the fragile ceramic breaks and is consumed when the bucket is used in this manner.
-
-![A ceramic lava bucket used a fuel]()
 
 Ceramic buckets are twice as durable as wooden ones. Empty buckets may be repaired in the crafting grid or at an anvil.
 You cannot repair non-empty buckets.
