@@ -120,6 +120,28 @@ public abstract class CustomFishBucketItem extends CustomBucketItem {
                 tooltip.add(mutableText);
             }
         }
+    }
 
+    /**
+     * Checks if the item can be repaired with a given ingredient.
+     * @param stack The stack to repair.
+     * @param ingredient The ingredient to repair with.
+     * @return {@code false}, as fish buckets cannot be repaired.
+     * @since 1.0.0
+     */
+    @Override
+    public boolean canRepair(ItemStack stack, ItemStack ingredient) {
+        return false;
+    }
+
+    /**
+     * Disables repair of this item via the crafting grid.
+     * @param stack The item stack.
+     * @return {@code false}, as fish buckets cannot be repaired.
+     * @since 1.0.0
+     */
+    @Override
+    public boolean canRepairViaCrafting(ItemStack stack) {
+        return false;
     }
 }
