@@ -1,0 +1,25 @@
+{
+  "type": "new_buckets:crafting_shaped_damageable",
+  "pattern": [
+    "AAA",
+    "BEB",
+    "CCC"
+  ],
+  "key": {
+    "A": {
+      "tag": "new_buckets:milk_buckets"
+    },
+    "B": {
+      "item": "minecraft:sugar"
+    },
+    "C": {
+      "item": "minecraft:wheat"
+    },
+    "E": {
+      "item": "minecraft:egg"
+    }
+  },
+  "result": {
+    "item": "minecraft:cake"
+  }
+}
