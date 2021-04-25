@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "new-buckets",
+  "id": "new_buckets",
   "version": "${version}",
 
   "name": "New Buckets",
@@ -14,7 +14,7 @@
   },
 
   "license": "MIT",
-  "icon": "assets/new-buckets/icon.png",
+  "icon": "assets/new_buckets/icon.png",
 
   "environment": "*",
   "entrypoints": {
@@ -22,7 +22,9 @@
       "dev.satyrn.silk.new_buckets.NewBucketsMod"
     ]
   },
-  "mixins": [],
+  "mixins": [
+    "new_buckets.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",
