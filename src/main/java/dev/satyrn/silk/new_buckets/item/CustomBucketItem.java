@@ -1,5 +1,6 @@
 package dev.satyrn.silk.new_buckets.item;
 
+import dev.satyrn.silk.new_buckets.NewBucketsMod;
 import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidDrainable;
@@ -26,7 +27,7 @@ import net.minecraft.world.World;
  * @author Isabel Maskrey
  * @since 1.0.0
  */
-public abstract class CustomBucketItem extends BucketItem {
+public abstract class CustomBucketItem extends BucketItem implements DisableRepairItem {
     private final Fluid fluid;
 
     /**
@@ -77,30 +78,31 @@ public abstract class CustomBucketItem extends BucketItem {
      */
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        HitResult hitResult = raycast(world, user, this.fluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
+        BlockHitResult hitResult = raycast(world, user, this.fluid == Fluids.EMPTY ? RaycastContext.FluidHandling.SOURCE_ONLY : RaycastContext.FluidHandling.NONE);
         if (hitResult.getType() == HitResult.Type.MISS) {
             return TypedActionResult.pass(itemStack);
         } else if (hitResult.getType() != HitResult.Type.BLOCK) {
             return TypedActionResult.pass(itemStack);
         } else {
-            BlockHitResult blockHitResult = (BlockHitResult)hitResult;
-            BlockPos blockPos = blockHitResult.getBlockPos();
-            Direction direction = blockHitResult.getSide();
+            BlockPos blockPos = hitResult.getBlockPos();
+            Direction direction = hitResult.getSide();
             BlockPos blockPos2 = blockPos.offset(direction);
             if (world.canPlayerModifyAt(user, blockPos) && user.canPlaceOn(blockPos2, direction, itemStack)) {
                 BlockState blockState;
                 if (this.fluid == Fluids.EMPTY) {
                     blockState = world.getBlockState(blockPos);
                     if (blockState.getBlock() instanceof FluidDrainable) {
-                        Fluid fluid = ((FluidDrainable)blockState.getBlock()).tryDrainFluid(world, blockPos, blockState);
-                        if (fluid != Fluids.EMPTY) {
-                            Item filledItem = this.getFilledItem(fluid);
-                            if (filledItem != Items.AIR) {
+                        Fluid fluid = blockState.getFluidState().getFluid();
+                        Item filledItem = this.getFilledItem(fluid);
+                        if (filledItem != Items.AIR) {
+                            fluid = ((FluidDrainable) blockState.getBlock()).tryDrainFluid(world, blockPos, blockState);
+                            if (fluid != Fluids.EMPTY) {
                                 user.incrementStat(Stats.USED.getOrCreateStat(this));
                                 this.playFillSound(user, fluid);
                                 ItemStack filledBucketStack = ItemUsage.method_30012(itemStack, user, new ItemStack(filledItem));
                                 if (!user.isCreative()) {
                                     filledBucketStack.setDamage(itemStack.getDamage());
+                                    NewBucketsMod.copyEnchantmentItemTags(itemStack, filledBucketStack);
                                 }
                                 if (!world.isClient) {
                                     Criteria.FILLED_BUCKET.trigger((ServerPlayerEntity) user, new ItemStack(fluid.getBucketItem()));
@@ -115,15 +117,13 @@ public abstract class CustomBucketItem extends BucketItem {
                 } else {
                     blockState = world.getBlockState(blockPos);
                     BlockPos blockPos3 = blockState.getBlock() instanceof FluidFillable && this.fluid == Fluids.WATER ? blockPos : blockPos2;
-                    if (this.placeFluid(user, world, blockPos3, blockHitResult)) {
+                    if (this.placeFluid(user, world, blockPos3, hitResult)) {
                         this.onEmptied(world, itemStack, blockPos3);
                         if (user instanceof ServerPlayerEntity) {
                             Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity)user, blockPos3, itemStack);
                         }
                         user.incrementStat(Stats.USED.getOrCreateStat(this));
-                        itemStack.damage(1, user, (playerEntity) -> {
-                            playerEntity.sendToolBreakStatus(hand);
-                        });
+                        itemStack.damage(this.getDamageForFluid(this.fluid), user, (playerEntity) -> playerEntity.sendToolBreakStatus(hand));
                         return TypedActionResult.success(this.getEmptiedStack(itemStack, user), world.isClient());
                     } else {
                         return TypedActionResult.fail(itemStack);
@@ -137,20 +137,62 @@ public abstract class CustomBucketItem extends BucketItem {
 
     /**
      * Gets the emptied item stack for this bucket.
-     * @param stack The current item stack.
+     * @param sourceStack The current item stack.
      * @param player The player which used the item.
      * @return The emptied item stack.
      * @since 1.0.0
      */
     @Override
-    protected ItemStack getEmptiedStack(ItemStack stack, PlayerEntity player) {
-        if (player.abilities.creativeMode || stack.isEmpty()) {
-            return stack;
+    protected ItemStack getEmptiedStack(ItemStack sourceStack, PlayerEntity player) {
+        if (player.abilities.creativeMode || sourceStack.isEmpty()) {
+            return sourceStack;
         }
 
-        ItemStack itemStack = new ItemStack(this.getEmptyItem());
-        itemStack.setDamage(stack.getDamage());
+        ItemStack targetStack = new ItemStack(this.getEmptyItem());
+        targetStack.setDamage(sourceStack.getDamage());
+        NewBucketsMod.copyEnchantmentItemTags(sourceStack, targetStack);
 
-        return itemStack;
+        return targetStack;
+    }
+
+    /**
+     * Gets the damage that the bucket will accrue when dispensing a specific liquid.
+     * @param fluid The fluid being dispensed
+     * @return The amount of damage that the stack should take.
+     * @since 1.0.0
+     */
+    protected int getDamageForFluid(Fluid fluid) {
+        if (fluid == Fluids.EMPTY) {
+            return 0;
+        }
+        if (fluid.isIn(FluidTags.LAVA)) {
+            return 2;
+        }
+        return 1;
+    }
+
+    /**
+     * Checks if the item can be repaired by another stack.
+     * @param stack The item to repair.
+     * @param ingredient The ingredient to repair with.
+     * @return {@code false} if there is any fluid in the bucket; otherwise, calls super implementation.
+     * @since 1.0.0
+     */
+    @Override
+    public boolean canRepair(ItemStack stack, ItemStack ingredient) {
+        if (this.fluid != Fluids.EMPTY) {
+            return false;
+        }
+        return super.canRepair(stack, ingredient);
+    }
+
+    /**
+     * Disables crafting repair for items which contain a fluid.
+     * @param itemStack The item stack.
+     * @return {@code true} if the bucket is empty and can be repaired in the crafting grid; otherwise, {@code false}.
+     * @since 1.0.0
+     */
+    public boolean canRepairViaCrafting(ItemStack itemStack) {
+        return this.fluid == Fluids.EMPTY;
     }
 }
