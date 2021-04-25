@@ -44,6 +44,10 @@ dependencies {
 	testRuntime group: 'net.bytebuddy', name: 'byte-buddy', version: '1.9.3'
 }
 
+minecraft {
+	accessWidener = file('src/main/resources/new_buckets.accesswidener')
+}
+
 processResources {
 	inputs.property "version", project.version
 

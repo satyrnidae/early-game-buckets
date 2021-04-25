@@ -34,5 +34,6 @@
   },
   "suggests": {
     "kiln": ">=1.1.1+1.16.5"
-  }
+  },
+  "accessWidener": "new_buckets.accesswidener"
 }
