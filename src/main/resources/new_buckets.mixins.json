@@ -12,6 +12,7 @@
     "MobEntityMixin",
     "PassiveEntityMixin",
     "PathAwareEntityMixin",
+    "RepairItemRecipeMixin",
     "WaterCreatureEntityMixin"
   ],
   "client": [],
