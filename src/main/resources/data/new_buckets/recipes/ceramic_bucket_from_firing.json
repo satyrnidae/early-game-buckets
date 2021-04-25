@@ -1,0 +1,9 @@
+{
+  "type": "kiln:firing",
+  "ingredient": {
+    "item": "new_buckets:clay_bucket"
+  },
+  "result": "new_buckets:ceramic_bucket",
+  "experience": 0.1,
+  "cookingtime": 100
+}
