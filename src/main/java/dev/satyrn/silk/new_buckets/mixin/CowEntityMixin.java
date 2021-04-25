@@ -34,13 +34,15 @@ public abstract class CowEntityMixin extends AnimalEntityMixin {
     @Inject(method = "interactMob", at = @At("HEAD"), cancellable = true)
     private void injectInteractMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack itemStack = player.getStackInHand(hand);
-        if (itemStack.getItem() == NewBucketsMod.WOODEN_BUCKET && !this.isBaby()) {
+        if (!this.isBaby() && (itemStack.getItem() == NewBucketsMod.WOODEN_BUCKET || itemStack.getItem() == NewBucketsMod.CERAMIC_BUCKET)) {
             player.playSound(SoundEvents.ENTITY_COW_MILK, 1.0F, 1.0F);
-            ItemStack bucket = ItemUsage.method_30012(itemStack, player, NewBucketsMod.WOODEN_MILK_BUCKET.getDefaultStack());
-            bucket.setDamage(itemStack.getDamage());
-            player.setStackInHand(hand, bucket);
+            ItemStack milkBucketStack = ItemUsage.method_30012(itemStack, player, itemStack.getItem() == NewBucketsMod.WOODEN_BUCKET
+                    ? NewBucketsMod.WOODEN_MILK_BUCKET.getDefaultStack()
+                    : NewBucketsMod.CERAMIC_MILK_BUCKET.getDefaultStack());
+            milkBucketStack.setDamage(itemStack.getDamage());
+            NewBucketsMod.copyEnchantmentItemTags(itemStack, milkBucketStack);
+            player.setStackInHand(hand, milkBucketStack);
 
-            // Return the action result.
             cir.setReturnValue(ActionResult.success(this.getWorld().isClient));
             cir.cancel();
         }
