@@ -27,7 +27,7 @@ public class WoodenBucketItem extends CustomBucketItem {
      * @return The item for a given fluid, or {@code Items.AIR} if the bucket cannot be filled.
      */
     @Override
-    protected Item getFilledItem(Fluid fluid) {
+    public Item getFilledItem(Fluid fluid) {
         if (fluid.isIn(FluidTags.WATER)) {
             return NewBucketsMod.WOODEN_WATER_BUCKET;
         }

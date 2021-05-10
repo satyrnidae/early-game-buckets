@@ -28,7 +28,7 @@ public class CeramicBucketItem extends CustomBucketItem {
      * @since 1.0.0
      */
     @Override
-    protected Item getFilledItem(Fluid fluid) {
+    public Item getFilledItem(Fluid fluid) {
         if (fluid.isIn(FluidTags.WATER)) {
             return NewBucketsMod.CERAMIC_WATER_BUCKET;
         }

@@ -28,7 +28,7 @@ import net.minecraft.world.World;
  * @since 1.0.0
  */
 public abstract class CustomBucketItem extends BucketItem implements DisableRepairItem {
-    private final Fluid fluid;
+    public final Fluid fluid;
 
     /**
      * Initializes a new breakable bucket.
@@ -47,7 +47,7 @@ public abstract class CustomBucketItem extends BucketItem implements DisableRepa
      * @return The filled item type. Returns {@code Items.AIR} if no item exists.
      * @since 1.0.0
      */
-    protected Item getFilledItem(Fluid fluid) {
+    public Item getFilledItem(Fluid fluid) {
         return Items.AIR;
     }
 
@@ -64,7 +64,7 @@ public abstract class CustomBucketItem extends BucketItem implements DisableRepa
      * @param fluid The fluid which was filled.
      * @since 1.0.0
      */
-    protected void playFillSound(PlayerEntity user, Fluid fluid) {
+    public void playFillSound(PlayerEntity user, Fluid fluid) {
         user.playSound(fluid.isIn(FluidTags.LAVA) ? SoundEvents.ITEM_BUCKET_FILL_LAVA : SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
     }
 
@@ -143,7 +143,7 @@ public abstract class CustomBucketItem extends BucketItem implements DisableRepa
      * @since 1.0.0
      */
     @Override
-    protected ItemStack getEmptiedStack(ItemStack sourceStack, PlayerEntity player) {
+    public ItemStack getEmptiedStack(ItemStack sourceStack, PlayerEntity player) {
         if (player.abilities.creativeMode || sourceStack.isEmpty()) {
             return sourceStack;
         }
@@ -161,7 +161,7 @@ public abstract class CustomBucketItem extends BucketItem implements DisableRepa
      * @return The amount of damage that the stack should take.
      * @since 1.0.0
      */
-    protected int getDamageForFluid(Fluid fluid) {
+    public int getDamageForFluid(Fluid fluid) {
         if (fluid == Fluids.EMPTY) {
             return 0;
         }
