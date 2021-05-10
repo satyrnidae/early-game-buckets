@@ -4,7 +4,10 @@
   "package": "dev.satyrn.silk.new_buckets.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractBlockMixin",
     "AnimalEntityMixin",
+    "BlockMixin",
+    "CauldronBlockMixin",
     "CowEntityMixin",
     "EntityMixin",
     "FishEntityMixin",
