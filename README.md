@@ -1,5 +1,5 @@
 # Early-Game Buckets
-![Java CI with Gradle](https://github.com/satyrnidae/new-buckets-fabric/workflows/build/badge.svg) [![CurseForge](http://cf.way2muchnoise.eu/475470.svg)](https://www.curseforge.com/minecraft/mc-mods/new-buckets-fabric) [![Versions](http://cf.way2muchnoise.eu/versions/475470.svg)](https://minecraft.curseforge.com/projects/new-buckets-fabric/files)
+![Java CI with Gradle](https://github.com/satyrnidae/new-buckets-fabric/workflows/build/badge.svg) [![CurseForge](http://cf.way2muchnoise.eu/475470.svg)](https://www.curseforge.com/minecraft/mc-mods/new-buckets-fabric) [![Versions](http://cf.way2muchnoise.eu/versions/475470.svg)](https://www.curseforge.com/minecraft/mc-mods/new-buckets-fabric/files)
 
 <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api">
     <img src="https://i.imgur.com/Ol1Tcf8.png" alt="Requires Fabric API" height="40">
