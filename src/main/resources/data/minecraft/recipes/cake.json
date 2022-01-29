@@ -1,18 +1,18 @@
 {
-  "type": "new_buckets:crafting_shaped_damageable",
+  "type": "early_buckets:crafting_shaped_breakable",
   "pattern": [
-    "AAA",
-    "BEB",
-    "CCC"
+    "BBB",
+    "SES",
+    "WWW"
   ],
   "key": {
-    "A": {
-      "tag": "new_buckets:milk_buckets"
-    },
     "B": {
+      "tag": "early_buckets:milk_buckets"
+    },
+    "S": {
       "item": "minecraft:sugar"
     },
-    "C": {
+    "W": {
       "item": "minecraft:wheat"
     },
     "E": {

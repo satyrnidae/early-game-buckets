@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "new_buckets:item/ceramic_pufferfish_bucket"
-  }
-}

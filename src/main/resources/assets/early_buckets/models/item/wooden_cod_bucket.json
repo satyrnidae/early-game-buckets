@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "early_buckets:item/wooden_cod_bucket"
+  }
+}
