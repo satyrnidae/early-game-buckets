@@ -20,7 +20,7 @@ containing a liquid as fuel, nor can you repair non-empty buckets.
 
 ## Clay Bucket
 
-The **clay bucket** is an unfired ceramic bucket.  It is not able to hold any liquids until it is fired.
+The **clay bucket** is an unfired ceramic bucket.  It is not able to hold any liquids until it is fired... *or will it?*
 
 Clay buckets can be fired in a furnace or kiln.
 
