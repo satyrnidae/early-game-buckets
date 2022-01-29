@@ -1,4 +1,4 @@
-# New Buckets
+# Early-Game Buckets
 ![Java CI with Gradle](https://github.com/satyrnidae/new-buckets-fabric/workflows/build/badge.svg) [![CurseForge](http://cf.way2muchnoise.eu/475470.svg)](https://www.curseforge.com/minecraft/mc-mods/new-buckets-fabric) [![Versions](http://cf.way2muchnoise.eu/versions/475470.svg)](https://minecraft.curseforge.com/projects/new-buckets-fabric/files)
 
 <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api">
@@ -6,14 +6,6 @@
 </a>
 
 A small fabric mod which adds some new early-game buckets!
-
-## Okay, but why though?
-
-I wanted some early game buckets, because I'm apparently too lazy to just go mining instead of writing an entire mod in
-a day.
-
-Sometimes you just do things because it felt right in the moment, and then it's five AM the next day and you still
-haven't slept... anyways this was one of those times.
 
 ## Wooden Bucket
 
