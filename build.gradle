@@ -1,11 +1,11 @@
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
+	id 'fabric-loom' version '0.11-SNAPSHOT'
 	id 'maven-publish'
 	id 'groovy'
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -13,6 +13,7 @@ group = project.maven_group
 
 repositories {
 	maven { url "https://maven.satyrn.dev/" }
+    mavenCentral()
 }
 
 dependencies {
@@ -26,11 +27,11 @@ dependencies {
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
-	testImplementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.7'
-	testImplementation group: 'org.spockframework', name: 'spock-core', version: '1.3-groovy-2.5'
-	testImplementation group: 'junit', name: 'junit', version: '4.12'
-	testRuntimeClasspath group: 'org.objenesis', name: 'objenesis', version: '2.6'
-	testRuntimeClasspath group: 'net.bytebuddy', name: 'byte-buddy', version: '1.9.3'
+	testImplementation group: 'org.codehaus.groovy', name: 'groovy-all', version: '3.0.8'
+	testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.0-groovy-2.5'
+	testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+	testRuntimeClasspath group: 'org.objenesis', name: 'objenesis', version: '3.2'
+	testRuntimeClasspath group: 'net.bytebuddy', name: 'byte-buddy', version: '1.12.7'
 }
 
 processResources {
@@ -42,7 +43,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 16
+	it.options.release = 17
 }
 
 java {
