@@ -1,0 +1,35 @@
+{
+  "parent": "early_buckets:ceramic_bucket",
+  "display": {
+    "icon": {
+      "item": "early_buckets:ceramic_lava_bucket",
+      "nbt": "{Damage:127}"
+    },
+    "title": {
+      "translate": "advancements.early_buckets.flash_fire.title"
+    },
+    "description": {
+      "translate": "advancements.early_buckets.flash_fire.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "annouce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "flash_fire": {
+      "trigger": "early_buckets:filled_bucket",
+      "conditions": {
+        "empty": {
+          "items": ["early_buckets:clay_bucket"]
+        },
+        "filled": {
+          "items": ["early_buckets:ceramic_lava_bucket"]
+        }
+      }
+    }
+  },
+  "requirements": [
+    ["flash_fire"]
+  ]
+}

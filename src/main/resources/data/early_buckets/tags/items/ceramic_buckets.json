@@ -1,0 +1,15 @@
+{
+  "replace": "false",
+  "values": [
+    "early_buckets:ceramic_axolotl_bucket",
+    "early_buckets:ceramic_bucket",
+    "early_buckets:ceramic_cod_bucket",
+    "early_buckets:ceramic_lava_bucket",
+    "early_buckets:ceramic_milk_bucket",
+    "early_buckets:ceramic_powder_snow_bucket",
+    "early_buckets:ceramic_pufferfish_bucket",
+    "early_buckets:ceramic_salmon_bucket",
+    "early_buckets:ceramic_tropical_fish_bucket",
+    "early_buckets:ceramic_water_bucket"
+  ]
+}
