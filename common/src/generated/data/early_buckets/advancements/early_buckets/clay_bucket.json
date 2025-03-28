@@ -1,0 +1,35 @@
+{
+  "parent": "early_buckets:early_buckets/wooden_bucket",
+  "criteria": {
+    "clay_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "early_buckets:clay_buckets"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.early_buckets.clay_bucket.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "early_buckets:clay_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.early_buckets.clay_bucket.title"
+    }
+  },
+  "requirements": [
+    [
+      "clay_bucket"
+    ]
+  ]
+}

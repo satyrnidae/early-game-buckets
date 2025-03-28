@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ceramic_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "early_buckets:ceramic_buckets"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_clay_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "early_buckets:clay_buckets"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "early_buckets:ceramic_water_bucket_from_firing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_clay_bucket",
+      "has_ceramic_bucket",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "early_buckets:ceramic_water_bucket_from_firing"
+    ]
+  }
+}

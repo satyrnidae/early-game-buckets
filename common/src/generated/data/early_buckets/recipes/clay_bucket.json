@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "clay_bucket",
+  "key": {
+    "X": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "pattern": [
+    "X X",
+    " X "
+  ],
+  "result": {
+    "item": "early_buckets:clay_bucket"
+  }
+}

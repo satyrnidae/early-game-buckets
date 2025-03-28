@@ -1,0 +1,23 @@
+// 1.19.2	2025-03-27T12:17:36.0819358	Tags for minecraft:item
+d820e18e86288e07e4028584931308da524429b6 data/c/tags/items/buckets/ceramic.json
+5a9092ff87f4f122d67e907e86f89019dc22ed17 data/c/tags/items/buckets/clay.json
+0a3e311bbf651590ed0b51ce9b2140ff4d529802 data/c/tags/items/buckets/iron.json
+95bba4083881ab94192447adc9bb1b8a2faaf950 data/c/tags/items/buckets/milk.json
+fbc15084db82fdff6e1a39fa868c1fb5d852ea33 data/c/tags/items/buckets/wooden.json
+a55a8bb532c6aa3f2f8732e2d5b1440a97c9b59f data/early_buckets/tags/items/bricks.json
+ebbe25b11b599f7811133a0e080cda2200d99b98 data/early_buckets/tags/items/ceramic_buckets.json
+9b75356e14c605ff64574508a283e338440e64ab data/early_buckets/tags/items/clay_buckets.json
+78234b19b745889d1d507f85033ca4ef05a568c6 data/early_buckets/tags/items/eggs.json
+0c7af092ca174b3a65636e1e3d101e786cd50420 data/early_buckets/tags/items/milk_buckets.json
+db119a77c1922c95b20460b39412e2aa32918f2c data/early_buckets/tags/items/sand.json
+e801bdef0719e27dd7decd88269ada7c5740348e data/early_buckets/tags/items/sugar.json
+885c46b5e8f61f5165f6d71ec9d20a32916e8aa9 data/early_buckets/tags/items/wheat.json
+e86e62cd4ee45014704f202b1e1528adc965ed5f data/early_buckets/tags/items/wooden_buckets.json
+db7769da06d17bc0ce91278ac297de26fda03764 data/forge/tags/items/buckets.json
+d820e18e86288e07e4028584931308da524429b6 data/forge/tags/items/buckets/ceramic.json
+5a9092ff87f4f122d67e907e86f89019dc22ed17 data/forge/tags/items/buckets/clay.json
+0a3e311bbf651590ed0b51ce9b2140ff4d529802 data/forge/tags/items/buckets/iron.json
+fbc15084db82fdff6e1a39fa868c1fb5d852ea33 data/forge/tags/items/buckets/wooden.json
+95bba4083881ab94192447adc9bb1b8a2faaf950 data/forge/tags/items/milk.json
+95bba4083881ab94192447adc9bb1b8a2faaf950 data/forge/tags/items/milk/milk.json
+ac611f16f7bcc275778030eb84626d3908733377 data/minecraft/tags/items/axolotl_tempt_items.json

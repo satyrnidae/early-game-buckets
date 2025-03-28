@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "${group}",
+    "id": "early_buckets",
+    "version": "${version}",
+    "metadata": {
+      "name": "Early Game Buckets",
+      "description": "This is an example description! Tell everyone what your mod is about!",
+      "contributors": {
+        "Me!": "Author"
+      },
+      "icon": "assets/early_buckets/icon.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "entrypoints": {
+      "init": [
+        "dev.satyrn.early_buckets.quilt.BucketModQuilt"
+      ],
+      "client_init": [
+        "dev.satyrn.early_buckets.quilt.client.BucketModQuiltClient"
+      ]
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "version": "*"
+      },
+      {
+        "id": "quilt_base",
+        "version": "*"
+      },
+      {
+        "id": "minecraft",
+        "version": ">=1.19.2"
+      },
+      {
+        "id": "architectury",
+        "version": ">=6.6.92"
+      }
+    ]
+  },
+  "mixin": [
+    "early_buckets.mixins.json"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "criteria": {
+    "wooden_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "early_buckets:wooden_buckets"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "early_buckets:textures/gui/advancements/backgrounds/water.png",
+    "description": {
+      "translate": "advancements.early_buckets.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "early_buckets:wooden_axolotl_bucket",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancements.early_buckets.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "wooden_bucket"
+    ]
+  ]
+}

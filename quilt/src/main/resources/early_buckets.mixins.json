@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "package": "dev.satyrn.early_buckets.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "client.accessor.AbstractFurnaceScreenAccessor"
+  ],
+  "mixins": [
+    "AbstractCookingRecipeMixin",
+    "AxolotlMixin",
+    "BucketableMixin",
+    "CowMixin",
+    "FurnaceFuelSlotMixin",
+    "RepairItemRecipeMixin",
+    "accessor.BlocksAccessor",
+    "accessor.CriteriaTriggersAccessor",
+    "accessor.LiquidBlockAccessor",
+    "accessor.ShapedRecipeAccessor",
+    "accessor.ShapedRecipeBuilderAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

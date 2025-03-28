@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "early_buckets:item/cracked_ceramic_tropical_fish_bucket"
+  }
+}

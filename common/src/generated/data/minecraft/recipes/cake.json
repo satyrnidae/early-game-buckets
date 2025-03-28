@@ -1,0 +1,26 @@
+{
+  "type": "early_buckets:crafting_shaped_breakable",
+  "group": "cake",
+  "key": {
+    "A": {
+      "tag": "early_buckets:milk_buckets"
+    },
+    "B": {
+      "tag": "early_buckets:sugar"
+    },
+    "C": {
+      "tag": "early_buckets:wheat"
+    },
+    "E": {
+      "tag": "early_buckets:eggs"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BEB",
+    "CCC"
+  ],
+  "result": {
+    "item": "minecraft:cake"
+  }
+}

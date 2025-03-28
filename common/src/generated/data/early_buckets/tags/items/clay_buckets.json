@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#forge:buckets/clay",
+      "required": false
+    },
+    {
+      "id": "#c:buckets/clay",
+      "required": false
+    }
+  ]
+}
