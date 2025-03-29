@@ -22,12 +22,12 @@ public class FiringRecipeBookComponent extends AbstractFurnaceRecipeBookComponen
     }
 
     @Override
-    protected @NotNull Component getRecipeFilterName() {
+    protected Component getRecipeFilterName() {
         return FILTER_NAME;
     }
 
     @Override
-    protected @NotNull Set<Item> getFuelItems() {
+    protected Set<Item> getFuelItems() {
         return AbstractFurnaceBlockEntity.getFuel().keySet();
     }
 

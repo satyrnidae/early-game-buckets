@@ -22,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -44,9 +45,13 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      * @param type     The entity type.
      * @param fluid    The fluid that the bucket contains.
      * @param settings The item initialization settings.
+     *
      * @since 1.0.0
      */
-    public CustomEntityBucketItem(EntityType<?> type, Fluid fluid, SoundEvent emptyingSound, Properties settings) {
+    public CustomEntityBucketItem(final @NotNull EntityType<?> type,
+                                  final @NotNull Fluid fluid,
+                                  final @NotNull SoundEvent emptyingSound,
+                                  final @NotNull Properties settings) {
         super(fluid, settings);
         this.entityType = type;
         this.emptyingSound = emptyingSound;
@@ -59,10 +64,14 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      * @param world  The world in which the bucket was emptied.
      * @param stack  The item stack containing the bucket that was emptied.
      * @param pos    The position at which the bucket was emptied.
+     *
      * @since 2.0.0+alpha.1
      */
     @Override
-    public void checkExtraContent(@Nullable Player player, Level world, ItemStack stack, BlockPos pos) {
+    public void checkExtraContent(final @Nullable Player player,
+                                  final @NotNull Level world,
+                                  final @NotNull ItemStack stack,
+                                  final @NotNull BlockPos pos) {
         if (world instanceof final ServerLevel serverLevel) {
             this.spawnEntity(serverLevel, player, stack, pos);
             world.gameEvent(player, GameEvent.ENTITY_PLACE, pos);
@@ -75,10 +84,13 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      * @param player The player entity.
      * @param world  The world in which the sound should play.
      * @param pos    The position of the sound source.
+     *
      * @since 1.0.0
      */
     @Override
-    protected void playEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos) {
+    protected void playEmptySound(final @Nullable Player player,
+                                  final @NotNull LevelAccessor world,
+                                  final @NotNull BlockPos pos) {
         world.playSound(player, pos, this.emptyingSound, SoundSource.NEUTRAL, 1.0F, 1.0F);
     }
 
@@ -89,10 +101,14 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      * @param world   The world instance.
      * @param tooltip The tooltip of the item.
      * @param context The tooltip context.
+     *
      * @since 1.0.0
      */
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> tooltip, TooltipFlag context) {
+    public void appendHoverText(final @NotNull ItemStack stack,
+                                final @Nullable Level world,
+                                final @NotNull List<Component> tooltip,
+                                final @NotNull TooltipFlag context) {
         if (this.entityType == EntityType.TROPICAL_FISH) {
             CompoundTag compoundTag = stack.getTag();
             if (compoundTag != null && compoundTag.contains("BucketVariantTag", 3)) {
@@ -125,11 +141,13 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      *
      * @param stack      The stack to repair.
      * @param ingredient The ingredient to repair with.
+     *
      * @return {@code false}, as fish buckets cannot be repaired.
+     *
      * @since 1.0.0
      */
     @Override
-    public boolean isValidRepairItem(ItemStack stack, ItemStack ingredient) {
+    public boolean isValidRepairItem(final @NotNull ItemStack stack, final @NotNull ItemStack ingredient) {
         return false;
     }
 
@@ -137,6 +155,7 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      * Disables repair of this item via the crafting grid.
      *
      * @return {@code false}, as fish buckets cannot be repaired.
+     *
      * @since 1.0.0
      */
     @Override
@@ -150,10 +169,14 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      * @param serverWorld The server world into which the fish should spawn.
      * @param stack       The item stack.
      * @param pos         The position at which to spawn the fish.
+     *
      * @since 1.0.0
      */
     @SuppressWarnings("deprecation")
-    private void spawnEntity(ServerLevel serverWorld, Player player, ItemStack stack, BlockPos pos) {
+    private void spawnEntity(final @NotNull ServerLevel serverWorld,
+                             final @Nullable Player player,
+                             final @NotNull ItemStack stack,
+                             final @NotNull BlockPos pos) {
         Entity entity = this.entityType.spawn(serverWorld, stack, null, pos, MobSpawnType.BUCKET, true, false);
         if (entity instanceof final Bucketable bucketable && entity instanceof Mob mob) {
             Bucketable.loadDefaultDataFromBucketTag(mob, stack.getOrCreateTag());

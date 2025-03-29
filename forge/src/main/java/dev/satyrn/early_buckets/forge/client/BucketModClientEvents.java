@@ -12,7 +12,8 @@ import org.jetbrains.annotations.NotNull;
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = BucketModCommon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class BucketModClientEvents {
-    private BucketModClientEvents() {}
+    private BucketModClientEvents() {
+    }
 
     @SubscribeEvent
     static void onClientSetup(final @NotNull FMLClientSetupEvent event) {

@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -37,11 +36,13 @@ public interface CustomBucket {
      * Gets the damage that the bucket will accrue when dispensing a specific liquid.
      *
      * @param fluid The fluid being dispensed
+     *
      * @return The amount of damage that the stack should take.
+     *
      * @since 1.0.0
      */
     @SuppressWarnings("deprecation")
-    default int getDamageOnDispenseFluid(@NotNull Fluid fluid) {
+    default int getDamageOnDispenseFluid(final @NotNull Fluid fluid) {
         if (fluid.is(FluidTags.LAVA)) {
             return 2;
         }
@@ -55,9 +56,10 @@ public interface CustomBucket {
      * Gets the damage that the bucket will accrue when dispensing a specific entity.
      *
      * @param entityType The entity being dispensed.
+     *
      * @return The damage accrued.
      */
-    default int getDamageOnEntityInteraction(@NotNull EntityType<?> entityType) {
+    default int getDamageOnEntityInteraction(final @NotNull EntityType<?> entityType) {
         if (entityType.is(BucketTags.EntityTypes.FISH)) {
             return 1;
         }
@@ -66,10 +68,12 @@ public interface CustomBucket {
 
     /**
      * Gets the damage that the bucket will accrue when dispensing a specific block.
+     *
      * @param block The block to dispense.
+     *
      * @return The damage accrued.
      */
-    default int getDamageOnDispenseBlock(@NotNull Block block) {
+    default int getDamageOnDispenseBlock(final @NotNull Block block) {
         if (block == Blocks.POWDER_SNOW) {
             return 1;
         }
@@ -82,11 +86,12 @@ public interface CustomBucket {
      *
      * @param sourceStack The item stack for the bucket which was emptied.
      * @param player      The player who emptied the bucket.
+     *
      * @return An item stack containing the empty bucket.
+     *
      * @since 2.0.0+alpha.1
      */
-    @Contract("_, _ -> !null")
-    @NotNull ItemStack getEmptyItemStack(final @NotNull ItemStack sourceStack, final @NotNull Player player);
+    ItemStack getEmptyItemStack(final @NotNull ItemStack sourceStack, final @NotNull Player player);
 
     /**
      * Attempts to fill the bucket with the given fluid.
@@ -94,11 +99,13 @@ public interface CustomBucket {
      *
      * @param sourceStack The item stack that contains the bucket to be filled.
      * @param fluid       The fluid with which the bucket should be filled.
+     *
      * @return An item stack containing the bucket which has been filled with the block, or {@link ItemStack#EMPTY} if
      * the bucket could not be filled with the given fluid.
+     *
      * @since 2.0.0+alpha.1
      */
-    @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, @NotNull Fluid fluid);
+    ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Fluid fluid);
 
     /**
      * Attempts to fill the bucket with the given block.
@@ -108,9 +115,10 @@ public interface CustomBucket {
      *
      * @return An item stack containing the bucket which has been filled with the block, or {@link ItemStack#EMPTY} if
      * the bucket could not be filled with the given block.
+     *
      * @since 2.0.0+alpha.1
      */
-    @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, @NotNull Block block);
+    ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Block block);
 
     /**
      * Attempts to shove an entity into the bucket.
@@ -118,28 +126,32 @@ public interface CustomBucket {
      *
      * @param sourceStack The bucket into which the entity is being unceremoniously stuffed.
      * @param entity      The entity being stuffed into the bucket.
+     *
      * @return The item stack containing the bucket with the entity inside, or {@link ItemStack#EMPTY} if the bucket
      * could not be filled with the entity.
+     *
      * @since 2.0.0+alpha.1
      */
-    @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, LivingEntity entity);
+    ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull LivingEntity entity);
 
     /**
      * Attempts to fill the bucket with cow juice.
      * Should return {@link ItemStack#EMPTY} if the concept of cow juice is too weird for the bucket.
      *
      * @param sourceStack The item stack of the bucket being filled.
+     *
      * @return The filled item stack.
+     *
      * @since 2.0.0+alpha.1
      */
-    @NotNull ItemStack getMilkBucketItemStack(@NotNull ItemStack sourceStack);
+    ItemStack getMilkBucketItemStack(final @NotNull ItemStack sourceStack);
 
     /**
      * Gets the fluid for this bucket.
      *
      * @return The fluid.
      */
-    @NotNull Fluid getFluid();
+    Fluid getFluid();
 
     /**
      * Plays a sound based on the stack that was returned after fill.
@@ -147,6 +159,6 @@ public interface CustomBucket {
      * @param user              The player that used the bucket.
      * @param returnedItemStack The filled bucket item stack.
      */
-    default void playSoundOnFill(Player user, ItemStack returnedItemStack) {
+    default void playSoundOnFill(final @NotNull Player user, final @NotNull ItemStack returnedItemStack) {
     }
 }

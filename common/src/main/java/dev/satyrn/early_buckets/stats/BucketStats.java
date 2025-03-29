@@ -9,11 +9,18 @@ import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
 
 public final class BucketStats {
-    static final DeferredRegister<ResourceLocation> CUSTOM_STATS = DeferredRegister.create(BucketModCommon.MOD_ID, Registry.CUSTOM_STAT_REGISTRY);
-    static final ResourceLocation INTERACT_WITH_KILN_ID = new ResourceLocation(BucketModCommon.MOD_ID, "interact_with_kiln");
-    public static final RegistrySupplier<ResourceLocation> INTERACT_WITH_KILN = CUSTOM_STATS.register(INTERACT_WITH_KILN_ID, () -> INTERACT_WITH_KILN_ID);
+    public static final RegistrySupplier<ResourceLocation> INTERACT_WITH_KILN;
+    
+    static final DeferredRegister<ResourceLocation> CUSTOM_STATS = DeferredRegister.create(BucketModCommon.MOD_ID,
+            Registry.CUSTOM_STAT_REGISTRY);
 
-    private BucketStats() {}
+    static {
+        final ResourceLocation interactWithKilnId = new ResourceLocation(BucketModCommon.MOD_ID, "interact_with_kiln");
+        INTERACT_WITH_KILN = CUSTOM_STATS.register(interactWithKilnId, () -> interactWithKilnId);
+    }
+
+    private BucketStats() {
+    }
 
     public static void register() {
         CUSTOM_STATS.register();

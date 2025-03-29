@@ -10,12 +10,20 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
 public final class BucketBlocks {
-    static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BucketModCommon.MOD_ID, Registry.BLOCK_REGISTRY);
+    public static final RegistrySupplier<Block> KILN;
 
-    public static final RegistrySupplier<Block> KILN = BLOCKS.register("kiln", () -> new KilnBlock(BlockBehaviour.Properties.of(
-            Material.STONE).requiresCorrectToolForDrops().strength(2.0F, 6.0F).lightLevel(BlocksAccessor.invokeLitBlockEmission(13))));
+    static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BucketModCommon.MOD_ID,
+            Registry.BLOCK_REGISTRY);
 
-    private BucketBlocks() {}
+    static {
+        KILN = BLOCKS.register("kiln", () -> new KilnBlock(BlockBehaviour.Properties.of(Material.STONE)
+                .requiresCorrectToolForDrops()
+                .strength(2.0F, 6.0F)
+                .lightLevel(BlocksAccessor.invokeLitBlockEmission(13))));
+    }
+
+    private BucketBlocks() {
+    }
 
     public static void register() {
         BLOCKS.register();

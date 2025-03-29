@@ -14,6 +14,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -27,7 +28,7 @@ import static dev.satyrn.early_buckets.world.item.BucketItems.createItemStack;
  */
 public class BreakableShapedRecipe extends ShapedRecipe {
     // The recipe's group.
-    private final String group;
+    private final @Nullable String group;
     // The recipe width.
     private final int width;
     // The recipe height.
@@ -39,7 +40,7 @@ public class BreakableShapedRecipe extends ShapedRecipe {
     // The damage value applied to damageable item stacks by the recipe.
     private final int damage;
     // Randomizer for the class.
-    private final @NotNull RandomSource random;
+    private final RandomSource random;
 
     /**
      * Initializes a new shaped recipe with transferable damage values.
@@ -50,9 +51,16 @@ public class BreakableShapedRecipe extends ShapedRecipe {
      * @param height      The height of the recipe.
      * @param ingredients The recipe ingredients.
      * @param output      The recipe output.
+     *
      * @since 1.0.0
      */
-    public BreakableShapedRecipe(ResourceLocation id, String group, int width, int height, NonNullList<Ingredient> ingredients, int damage, ItemStack output) {
+    public BreakableShapedRecipe(final @NotNull ResourceLocation id,
+                                 final @Nullable String group,
+                                 final int width,
+                                 final int height,
+                                 final @NotNull NonNullList<Ingredient> ingredients,
+                                 final int damage,
+                                 final @NotNull ItemStack output) {
         super(id, group, width, height, ingredients, output);
         this.group = group;
         this.width = width;
@@ -67,10 +75,11 @@ public class BreakableShapedRecipe extends ShapedRecipe {
      * Gets a list of items remaining after crafting.
      *
      * @param inventory The crafting inventory.
+     *
      * @return A list of remaining items.
      */
     @Override
-    public @NotNull NonNullList<ItemStack> getRemainingItems(CraftingContainer inventory) {
+    public NonNullList<ItemStack> getRemainingItems(CraftingContainer inventory) {
         NonNullList<ItemStack> defaultedList = NonNullList.withSize(inventory.getContainerSize(), ItemStack.EMPTY);
 
         for (int i = 0; i < defaultedList.size(); ++i) {
@@ -106,7 +115,7 @@ public class BreakableShapedRecipe extends ShapedRecipe {
      * @return {@link BucketRecipeSerializers#CRAFTING_SHAPED_BREAKABLE_SERIALIZER}.
      */
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {
+    public RecipeSerializer<?> getSerializer() {
         return BucketRecipeSerializers.CRAFTING_SHAPED_BREAKABLE_SERIALIZER.get();
     }
 
@@ -122,18 +131,21 @@ public class BreakableShapedRecipe extends ShapedRecipe {
          *
          * @param identifier The recipe identifier.
          * @param jsonObject The JSON data.
+         *
          * @return The deserialized recipe.
          */
         @Override
-        public @NotNull BreakableShapedRecipe fromJson(ResourceLocation identifier, JsonObject jsonObject) {
+        public BreakableShapedRecipe fromJson(ResourceLocation identifier, JsonObject jsonObject) {
             final String group = GsonHelper.getAsString(jsonObject, "group", "");
             final int damage = GsonHelper.getAsInt(jsonObject, "damage", 1);
-            final Map<String, Ingredient> symbols = ShapedRecipeAccessor.callKeyFromJson(GsonHelper.getAsJsonObject(jsonObject, "key"));
+            final Map<String, Ingredient> symbols = ShapedRecipeAccessor.callKeyFromJson(
+                    GsonHelper.getAsJsonObject(jsonObject, "key"));
             final String[] pattern = ShapedRecipeAccessor.callShrink(
                     ShapedRecipeAccessor.callPatternFromJson(GsonHelper.getAsJsonArray(jsonObject, "pattern")));
             final int width = pattern.length > 0 ? pattern[0].length() : 0;
             final int height = pattern.length;
-            final NonNullList<Ingredient> ingredients = ShapedRecipeAccessor.callDissolvePattern(pattern, symbols, width, height);
+            final NonNullList<Ingredient> ingredients = ShapedRecipeAccessor.callDissolvePattern(pattern, symbols,
+                    width, height);
             final ItemStack output = itemStackFromJson(GsonHelper.getAsJsonObject(jsonObject, "result"));
             return new BreakableShapedRecipe(identifier, group, width, height, ingredients, damage, output);
         }
@@ -143,10 +155,11 @@ public class BreakableShapedRecipe extends ShapedRecipe {
          *
          * @param identifier    The recipe identifier.
          * @param packetByteBuf The packet byte buffer.
+         *
          * @return The deserialized recipe.
          */
         @Override
-        public @NotNull BreakableShapedRecipe fromNetwork(ResourceLocation identifier, FriendlyByteBuf packetByteBuf) {
+        public BreakableShapedRecipe fromNetwork(ResourceLocation identifier, FriendlyByteBuf packetByteBuf) {
             final int width = packetByteBuf.readVarInt();
             final int height = packetByteBuf.readVarInt();
             final int damage = packetByteBuf.readVarInt();

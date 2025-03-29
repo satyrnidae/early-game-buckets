@@ -13,15 +13,17 @@ import org.spongepowered.asm.mixin.Unique;
 
 import java.util.Objects;
 
+@Unique
 @Mixin(AbstractCookingRecipe.class)
 public abstract class AbstractCookingRecipeMixin implements Recipe<Container> {
     @Unique private final RandomSource early_buckets$randomSource = RandomSource.create();
 
     @Override
-    public @NotNull NonNullList<ItemStack> getRemainingItems(Container container) {
-        NonNullList<ItemStack> nonNullList = Recipe.super.getRemainingItems(container);
+    public NonNullList<ItemStack> getRemainingItems(Container container) {
+        @NotNull NonNullList<ItemStack> nonNullList = Recipe.super.getRemainingItems(container);
 
         // Damage items in the fuel slot if they can be depleted.
+        // This might not even work
         final @NotNull var fuelItem = container.getItem(AbstractFurnaceMenu.FUEL_SLOT).getItem();
         if (fuelItem.hasCraftingRemainingItem()) {
             final @NotNull var remainingItem = Objects.requireNonNull(fuelItem.getCraftingRemainingItem());

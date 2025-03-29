@@ -14,22 +14,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public class KilnBlockEntity extends AbstractFurnaceBlockEntity {
-    public KilnBlockEntity(BlockPos blockPos, BlockState blockState) {
+    public KilnBlockEntity(final @NotNull BlockPos blockPos, final @NotNull BlockState blockState) {
         super(BucketBlockEntityTypes.KILN.get(), blockPos, blockState, BucketRecipeTypes.FIRING.get());
     }
 
     @Override
-    protected @NotNull Component getDefaultName() {
+    protected Component getDefaultName() {
         return Component.translatable(Util.makeDescriptionId("container", BucketBlocks.KILN.getId()));
     }
 
     @Override
-    protected int getBurnDuration(ItemStack itemStack) {
+    protected int getBurnDuration(final @NotNull ItemStack itemStack) {
         return super.getBurnDuration(itemStack) / 2;
     }
 
     @Override
-    protected @NotNull AbstractContainerMenu createMenu(int i, Inventory inventory) {
+    protected AbstractContainerMenu createMenu(final int i, final @NotNull Inventory inventory) {
         return new KilnMenu(i, inventory, this, this.dataAccess);
     }
 }

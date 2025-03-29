@@ -8,7 +8,8 @@ import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
 public final class BucketModClient {
-    private BucketModClient() {}
+    private BucketModClient() {
+    }
 
     public static void initClient() {
         MenuRegistry.registerScreenFactory(BucketMenuTypes.KILN_MENU.get(), KilnScreen::new);

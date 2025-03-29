@@ -1,8 +1,8 @@
 package dev.satyrn.early_buckets.core.cauldron;
 
 import dev.satyrn.early_buckets.BucketModCommon;
-import dev.satyrn.early_buckets.world.item.CustomBucket;
 import dev.satyrn.early_buckets.world.item.BucketItems;
+import dev.satyrn.early_buckets.world.item.CustomBucket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,16 +35,22 @@ import java.util.function.Predicate;
 public final class CustomBucketCauldronInteractions {
 
     // Fill a cauldron with lava.
-    private static final CauldronInteraction FILL_WITH_LAVA = (state, world, pos, player, hand, stack) -> emptyBucket(world, pos, player, hand, stack, Blocks.LAVA_CAULDRON.defaultBlockState(), SoundEvents.BUCKET_EMPTY_LAVA);
+    private static final CauldronInteraction FILL_WITH_LAVA = (state, world, pos, player, hand, stack) -> emptyBucket(
+            world, pos, player, hand, stack, Blocks.LAVA_CAULDRON.defaultBlockState(), SoundEvents.BUCKET_EMPTY_LAVA);
     // Fill a cauldron with water.
-    private static final CauldronInteraction FILL_WITH_WATER = (state, world, pos, player, hand, stack) -> emptyBucket(world, pos, player, hand, stack, Blocks.WATER_CAULDRON.defaultBlockState()
-            .setValue(LayeredCauldronBlock.LEVEL, 3), SoundEvents.BUCKET_EMPTY);
+    private static final CauldronInteraction FILL_WITH_WATER = (state, world, pos, player, hand, stack) -> emptyBucket(
+            world, pos, player, hand, stack,
+            Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3),
+            SoundEvents.BUCKET_EMPTY);
     // Fill a cauldron with powder snow.
-    private static final CauldronInteraction FILL_WITH_POWDER_SNOW = (state, world, pos, player, hand, stack) -> emptyBucket(world, pos, player, hand, stack, Blocks.POWDER_SNOW_CAULDRON.defaultBlockState()
-            .setValue(LayeredCauldronBlock.LEVEL, 3), SoundEvents.BUCKET_EMPTY_POWDER_SNOW);
+    private static final CauldronInteraction FILL_WITH_POWDER_SNOW = (state, world, pos, player, hand, stack) -> emptyBucket(
+            world, pos, player, hand, stack,
+            Blocks.POWDER_SNOW_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3),
+            SoundEvents.BUCKET_EMPTY_POWDER_SNOW);
 
     // Do not instantiate BucketsCauldronBehavior
-    private CustomBucketCauldronInteractions() {}
+    private CustomBucketCauldronInteractions() {
+    }
 
     /**
      * Registers cauldron behaviors for the new bucket types.
@@ -93,23 +99,43 @@ public final class CustomBucketCauldronInteractions {
         CauldronInteraction.POWDER_SNOW.put(BucketItems.WOODEN_POWDER_SNOW_BUCKET.get(), FILL_WITH_POWDER_SNOW);
 
         // Fill a ceramic bucket with lava
-        CauldronInteraction.LAVA.put(BucketItems.CERAMIC_BUCKET.get(), (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack, blockState -> true, SoundEvents.BUCKET_FILL_LAVA));
+        CauldronInteraction.LAVA.put(BucketItems.CERAMIC_BUCKET.get(),
+                (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack,
+                        blockState -> true, SoundEvents.BUCKET_FILL_LAVA));
         // Fill a clay bucket with lava
-        CauldronInteraction.LAVA.put(BucketItems.CLAY_BUCKET.get(), (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack, blockState -> true, SoundEvents.BUCKET_FILL_LAVA));
+        CauldronInteraction.LAVA.put(BucketItems.CLAY_BUCKET.get(),
+                (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack,
+                        blockState -> true, SoundEvents.BUCKET_FILL_LAVA));
 
         // Fill a ceramic bucket with water
-        CauldronInteraction.WATER.put(BucketItems.CERAMIC_BUCKET.get(), (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack, blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL_LAVA));
+        CauldronInteraction.WATER.put(BucketItems.CERAMIC_BUCKET.get(),
+                (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack,
+                        blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3,
+                        SoundEvents.BUCKET_FILL_LAVA));
         // Fill a clay bucket with water
-        CauldronInteraction.WATER.put(BucketItems.CLAY_BUCKET.get(), (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack, blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL));
+        CauldronInteraction.WATER.put(BucketItems.CLAY_BUCKET.get(),
+                (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack,
+                        blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL));
         // Fill a wooden bucket with water
-        CauldronInteraction.WATER.put(BucketItems.WOODEN_BUCKET.get(), (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack, blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL));
+        CauldronInteraction.WATER.put(BucketItems.WOODEN_BUCKET.get(),
+                (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack,
+                        blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL));
 
         // Fill a ceramic bucket with powder snow
-        CauldronInteraction.POWDER_SNOW.put(BucketItems.CERAMIC_BUCKET.get(), (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack, blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL_POWDER_SNOW));
+        CauldronInteraction.POWDER_SNOW.put(BucketItems.CERAMIC_BUCKET.get(),
+                (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack,
+                        blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3,
+                        SoundEvents.BUCKET_FILL_POWDER_SNOW));
         // Fill a clay bucket with powder snow
-        CauldronInteraction.POWDER_SNOW.put(BucketItems.CLAY_BUCKET.get(), (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack, blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL_POWDER_SNOW));
+        CauldronInteraction.POWDER_SNOW.put(BucketItems.CLAY_BUCKET.get(),
+                (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack,
+                        blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3,
+                        SoundEvents.BUCKET_FILL_POWDER_SNOW));
         // Fill a ceramic bucket with water
-        CauldronInteraction.POWDER_SNOW.put(BucketItems.WOODEN_BUCKET.get(), (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack, blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL_POWDER_SNOW));
+        CauldronInteraction.POWDER_SNOW.put(BucketItems.WOODEN_BUCKET.get(),
+                (state, world, pos, player, hand, stack) -> fillBucket(state, world, pos, player, hand, stack,
+                        blockState -> blockState.getValue(LayeredCauldronBlock.LEVEL) == 3,
+                        SoundEvents.BUCKET_FILL_POWDER_SNOW));
     }
 
     /**
@@ -122,16 +148,24 @@ public final class CustomBucketCauldronInteractions {
      * @param stack      The item being used to fill the cauldron.
      * @param state      The new state of the block.
      * @param soundEvent The sound that should be played if the cauldron is filled.
+     *
      * @return The action result for the item.
      */
-    private static InteractionResult emptyBucket(Level world, BlockPos pos, Player player, InteractionHand hand, ItemStack stack, BlockState state, SoundEvent soundEvent) {
+    private static InteractionResult emptyBucket(Level world,
+                                                 BlockPos pos,
+                                                 Player player,
+                                                 InteractionHand hand,
+                                                 ItemStack stack,
+                                                 BlockState state,
+                                                 SoundEvent soundEvent) {
         if (!world.isClientSide) {
             final Item item = stack.getItem();
             ItemStack returningStack = new ItemStack(Items.BUCKET);
             if (item instanceof final CustomBucket bucket) {
                 returningStack = bucket.getEmptyItemStack(stack, player);
                 // All necessary checks are done in the damage method. ;)
-                returningStack.hurtAndBreak(bucket.getDamageOnDispenseFluid(bucket.getFluid()), player, playerEntity -> playerEntity.broadcastBreakEvent(hand));
+                returningStack.hurtAndBreak(bucket.getDamageOnDispenseFluid(bucket.getFluid()), player,
+                        playerEntity -> playerEntity.broadcastBreakEvent(hand));
             }
             player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, returningStack));
             player.awardStat(Stats.FILL_CAULDRON);
@@ -155,9 +189,17 @@ public final class CustomBucketCauldronInteractions {
      * @param stack      The item that the cauldron is being emptied into.
      * @param predicate  Whether the cauldron's current block state will allow the bucket to be filled.
      * @param soundEvent The sound that should be played if the cauldron is emptied.
+     *
      * @return The action result for the item.
      */
-    private static InteractionResult fillBucket(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, ItemStack stack, Predicate<BlockState> predicate, SoundEvent soundEvent) {
+    private static InteractionResult fillBucket(BlockState state,
+                                                Level world,
+                                                BlockPos pos,
+                                                Player player,
+                                                InteractionHand hand,
+                                                ItemStack stack,
+                                                Predicate<BlockState> predicate,
+                                                SoundEvent soundEvent) {
         InteractionResult result = InteractionResult.sidedSuccess(world.isClientSide);
         if (!world.isClientSide) {
             final ItemStack initialStack = stack.copy();
@@ -179,7 +221,9 @@ public final class CustomBucketCauldronInteractions {
                     returnedStack = stack;
                 }
             } else {
-                final Item returnedItem = isWaterCauldron ? Items.WATER_BUCKET : isLavaCauldron ? Items.LAVA_BUCKET : isPowderSnowCauldron ? Items.POWDER_SNOW_BUCKET : item;
+                final Item returnedItem = isWaterCauldron
+                        ? Items.WATER_BUCKET
+                        : isLavaCauldron ? Items.LAVA_BUCKET : isPowderSnowCauldron ? Items.POWDER_SNOW_BUCKET : item;
                 returnedStack = new ItemStack(returnedItem);
             }
 
@@ -192,7 +236,8 @@ public final class CustomBucketCauldronInteractions {
             // Keep the returned stack to use later instead of letting it be destroyed by ItemUsage
             final ItemStack returnedStackCopy = returnedStack.copy();
 
-            result = CauldronInteraction.fillBucket(state, world, pos, player, hand, stack, returnedStack, predicate, soundEvent);
+            result = CauldronInteraction.fillBucket(state, world, pos, player, hand, stack, returnedStack, predicate,
+                    soundEvent);
             if (result.consumesAction()) {
                 if (item instanceof final CustomBucket bucket) {
                     bucket.playSoundOnFill(player, returnedStackCopy);

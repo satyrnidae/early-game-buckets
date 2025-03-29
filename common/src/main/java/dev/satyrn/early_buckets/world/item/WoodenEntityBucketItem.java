@@ -19,9 +19,13 @@ public class WoodenEntityBucketItem extends CustomEntityBucketItem {
      * @param type     The entity type.
      * @param fluid    The fluid.
      * @param settings The item initialization settings.
+     *
      * @since 1.0.0
      */
-    public WoodenEntityBucketItem(EntityType<?> type, Fluid fluid, SoundEvent emptyingSound, Properties settings) {
+    public WoodenEntityBucketItem(final @NotNull EntityType<?> type,
+                                  final @NotNull Fluid fluid,
+                                  final @NotNull SoundEvent emptyingSound,
+                                  final @NotNull Properties settings) {
         super(type, fluid, emptyingSound, settings);
     }
 
@@ -29,10 +33,11 @@ public class WoodenEntityBucketItem extends CustomEntityBucketItem {
      * Gets the emptied item for this bucket.
      *
      * @return The emptied item for this bucket
+     *
      * @since 1.0.0
      */
     @Override
-    public @NotNull Item getEmptyItem() {
+    public Item getEmptyItem() {
         return BucketItems.WOODEN_BUCKET.get();
     }
 }

@@ -13,7 +13,8 @@ import net.minecraft.world.entity.player.Inventory;
 
 @Environment(EnvType.CLIENT)
 public class KilnScreen extends AbstractFurnaceScreen<KilnMenu> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BucketModCommon.MOD_ID, "textures/gui/container/kiln.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(BucketModCommon.MOD_ID,
+            "textures/gui/container/kiln.png");
 
     public KilnScreen(KilnMenu kilnMenu, Inventory inventory, Component component) {
         super(kilnMenu, new FiringRecipeBookComponent(), inventory, component, TEXTURE);
@@ -23,8 +24,9 @@ public class KilnScreen extends AbstractFurnaceScreen<KilnMenu> {
     public void init() {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
-        ((AbstractFurnaceScreenAccessor)this).setWidthTooNarrow(this.width < 379);
-        this.recipeBookComponent.init(this.width, this.height, this.minecraft, ((AbstractFurnaceScreenAccessor) this).getWidthTooNarrow(), this.menu);
+        ((AbstractFurnaceScreenAccessor) this).setWidthTooNarrow(this.width < 379);
+        this.recipeBookComponent.init(this.width, this.height, this.minecraft,
+                ((AbstractFurnaceScreenAccessor) this).getWidthTooNarrow(), this.menu);
         this.leftPos = this.recipeBookComponent.updateScreenPosition(this.width, this.imageWidth);
         this.titleLabelX = (this.imageWidth - this.font.width(this.title)) / 2;
     }

@@ -9,6 +9,10 @@ architectury {
 
 loom {
     accessWidenerPath.set(project(":common").loom.accessWidenerPath)
+
+    mixin {
+        defaultRefmapName = "early_buckets.fabric.refmap.json"
+    }
 }
 
 configurations {

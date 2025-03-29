@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -23,11 +24,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @author Isabel Maskrey
  * @since 1.0.0
  */
+@Unique
 @Mixin(Cow.class)
 public abstract class CowMixin extends Animal {
 
     CowMixin(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
+        throw new AssertionError();
     }
 
     /**

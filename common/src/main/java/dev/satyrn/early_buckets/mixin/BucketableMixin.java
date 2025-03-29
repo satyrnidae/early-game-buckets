@@ -16,17 +16,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@Unique
 @Mixin({Axolotl.class, AbstractFish.class, Tadpole.class})
 public abstract class BucketableMixin implements Bucketable {
 
     @Inject(method = "mobInteract", at = @At("HEAD"), cancellable = true)
-    public void early_buckets$mobInteract(final Player player, final InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        final LivingEntity livingEntityThis = (LivingEntity)(Object)this;
-        final Bucketable bucketableThis = (Bucketable)livingEntityThis;
+    public void early_buckets$mobInteract(final Player player,
+                                          final InteractionHand hand,
+                                          CallbackInfoReturnable<InteractionResult> cir) {
+        final LivingEntity livingEntityThis = (LivingEntity) (Object) this;
+        final Bucketable bucketableThis = (Bucketable) livingEntityThis;
 
         final ItemStack stackInHand = player.getItemInHand(hand);
         final Item itemInHand = stackInHand.getItem();
@@ -39,7 +43,8 @@ public abstract class BucketableMixin implements Bucketable {
                 livingEntityThis.playSound(bucketableThis.getPickupSound(), 1.0F, 1.0F);
                 bucketableThis.saveToBucketTag(filledItemStack);
 
-                final ItemStack exchangedStack = ItemUtils.createFilledResult(stackInHand, player, filledItemStack, false);
+                final ItemStack exchangedStack = ItemUtils.createFilledResult(stackInHand, player, filledItemStack,
+                        false);
 
                 player.setItemInHand(hand, exchangedStack);
 

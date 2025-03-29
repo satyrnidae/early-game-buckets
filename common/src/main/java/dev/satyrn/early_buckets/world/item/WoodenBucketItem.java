@@ -24,9 +24,10 @@ public class WoodenBucketItem extends CustomBucketItem {
      *
      * @param fluid    The fluid which this bucket contains.
      * @param settings The item initialization settings.
+     *
      * @since 1.0.0
      */
-    public WoodenBucketItem(Fluid fluid, Properties settings) {
+    public WoodenBucketItem(final @NotNull Fluid fluid, final @NotNull Properties settings) {
         super(fluid, settings);
     }
 
@@ -36,13 +37,15 @@ public class WoodenBucketItem extends CustomBucketItem {
      *
      * @param sourceStack The item stack that contains the bucket to be filled.
      * @param fluid       The fluid with which the bucket should be filled.
+     *
      * @return An item stack containing the bucket which has been filled with the block, or {@link ItemStack#EMPTY} if
      * the bucket could not be filled with the given fluid.
+     *
      * @since 2.0.0+alpha.1
      */
     @Override
     @SuppressWarnings("deprecation")
-    public @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, @NotNull Fluid fluid) {
+    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Fluid fluid) {
         if (fluid.is(FluidTags.WATER)) {
             return createItemStack(BucketItems.WOODEN_WATER_BUCKET.get(), sourceStack);
         }
@@ -53,6 +56,7 @@ public class WoodenBucketItem extends CustomBucketItem {
      * Gets an item which represents the bucket, filled with snow.
      *
      * @return The item which represents the snow-filled bucket.
+     *
      * @since 2.0.0+alpha.1
      */
     @Override
@@ -66,12 +70,13 @@ public class WoodenBucketItem extends CustomBucketItem {
      *
      * @param sourceStack The bucket into which the entity is being unceremoniously stuffed.
      * @param entity      The entity being stuffed into the bucket.
+     *
      * @return The item stack containing the bucket with the entity inside, or {@link ItemStack#EMPTY} if the bucket
      * could not be filled with the entity.
      */
     @Override
     @SuppressWarnings("deprecation")
-    public @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, LivingEntity entity) {
+    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull LivingEntity entity) {
         if (this.fluid.is(FluidTags.WATER)) {
             final EntityType<?> type = entity.getType();
             if (EntityType.AXOLOTL.equals(type)) {
@@ -97,10 +102,11 @@ public class WoodenBucketItem extends CustomBucketItem {
      * Should return {@link ItemStack#EMPTY} if the concept of cow juice is too weird for the bucket.
      *
      * @param sourceStack The item stack of the bucket being filled.
+     *
      * @return The filled item stack.
      */
     @Override
-    public @NotNull ItemStack getMilkBucketItemStack(@NotNull ItemStack sourceStack) {
+    public ItemStack getMilkBucketItemStack(final @NotNull ItemStack sourceStack) {
         if (Fluids.EMPTY.equals(this.fluid)) {
             return BucketItems.createItemStack(BucketItems.WOODEN_MILK_BUCKET.get(), sourceStack);
         }
@@ -111,10 +117,11 @@ public class WoodenBucketItem extends CustomBucketItem {
      * Gets the emptied item for this bucket.
      *
      * @return The emptied item for this bucket
+     *
      * @since 1.0.0
      */
     @Override
-    public @NotNull Item getEmptyItem() {
+    public Item getEmptyItem() {
         return BucketItems.WOODEN_BUCKET.get();
     }
 }

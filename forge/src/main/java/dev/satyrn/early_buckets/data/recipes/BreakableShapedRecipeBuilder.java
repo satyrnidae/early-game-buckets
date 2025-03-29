@@ -22,53 +22,50 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class BreakableShapedRecipeBuilder extends ShapedRecipeBuilder {
-    private BreakableShapedRecipeBuilder(ItemLike itemLike, int i) {
+    private BreakableShapedRecipeBuilder(final @NotNull ItemLike itemLike, final int i) {
         super(itemLike, i);
         this.group(Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(itemLike.asItem())).getPath());
     }
 
-    public static BreakableShapedRecipeBuilder shaped(ItemLike result) {
+    public static BreakableShapedRecipeBuilder shaped(final @NotNull ItemLike result) {
         return new BreakableShapedRecipeBuilder(result, 1);
     }
 
     @Override
     public void save(final @NotNull Consumer<FinishedRecipe> consumer, final @NotNull ResourceLocation arg) {
-        ((ShapedRecipeBuilderAccessor)this).invokeEnsureValid(arg);
-        ((ShapedRecipeBuilderAccessor)this).getAdvancement()
+        ((ShapedRecipeBuilderAccessor) this).invokeEnsureValid(arg);
+        ((ShapedRecipeBuilderAccessor) this).getAdvancement()
                 .parent(ROOT_RECIPE_ADVANCEMENT)
-                    .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(arg))
-                    .rewards(AdvancementRewards.Builder.recipe(arg))
-                    .requirements(RequirementsStrategy.OR);
-        consumer.accept(
-                new Result(
-                        arg,
-                        this.getResult(),
-                        ((ShapedRecipeBuilderAccessor) this).getCount(),
-                        ((ShapedRecipeBuilderAccessor) this).getGroup() == null ? "" : ((ShapedRecipeBuilderAccessor) this).getGroup(),
-                        ((ShapedRecipeBuilderAccessor) this).getRows(),
-                        ((ShapedRecipeBuilderAccessor) this).getKey(),
-                        ((ShapedRecipeBuilderAccessor) this).getAdvancement(),
-                        new ResourceLocation(arg.getNamespace(), "recipes/" + Objects.requireNonNull(
-                                this.getResult().getItemCategory()).getRecipeFolderName() + "/" + arg.getPath())
-                )
-        );
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(arg))
+                .rewards(AdvancementRewards.Builder.recipe(arg))
+                .requirements(RequirementsStrategy.OR);
+        consumer.accept(new Result(arg, this.getResult(), ((ShapedRecipeBuilderAccessor) this).getCount(),
+                ((ShapedRecipeBuilderAccessor) this).getGroup() == null
+                        ? ""
+                        : ((ShapedRecipeBuilderAccessor) this).getGroup(),
+                ((ShapedRecipeBuilderAccessor) this).getRows(), ((ShapedRecipeBuilderAccessor) this).getKey(),
+                ((ShapedRecipeBuilderAccessor) this).getAdvancement(), new ResourceLocation(arg.getNamespace(),
+                "recipes/" +
+                        Objects.requireNonNull(this.getResult().getItemCategory()).getRecipeFolderName() +
+                        "/" +
+                        arg.getPath())));
     }
 
     public static class Result extends ShapedRecipeBuilder.Result {
 
-        public Result(ResourceLocation arg,
-                      Item arg2,
-                      int i,
-                      String string,
-                      List<String> list,
-                      Map<Character, Ingredient> map,
-                      Advancement.Builder arg3,
-                      ResourceLocation arg4) {
+        public Result(final @NotNull ResourceLocation arg,
+                      final @NotNull Item arg2,
+                      final int i,
+                      final @NotNull String string,
+                      final @NotNull List<String> list,
+                      final @NotNull Map<Character, Ingredient> map,
+                      final @NotNull Advancement.Builder arg3,
+                      final @NotNull ResourceLocation arg4) {
             super(arg, arg2, i, string, list, map, arg3, arg4);
         }
 
         @Override
-        public @NotNull RecipeSerializer<?> getType() {
+        public RecipeSerializer<?> getType() {
             return BucketRecipeSerializers.CRAFTING_SHAPED_BREAKABLE_SERIALIZER.get();
         }
     }

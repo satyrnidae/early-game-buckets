@@ -40,9 +40,10 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @param fluid    The fluid which this bucket contains.
      * @param settings The item initialization settings.
+     *
      * @since 1.0.0
      */
-    protected CustomBucketItem(Fluid fluid, Properties settings) {
+    protected CustomBucketItem(final @NotNull Fluid fluid, final @NotNull Properties settings) {
         super(fluid, settings);
         this.fluid = fluid;
     }
@@ -53,11 +54,13 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @param sourceStack The item stack for the bucket which was emptied.
      * @param player      The player who emptied the bucket.
+     *
      * @return An item stack containing the empty bucket.
+     *
      * @since 2.0.0+alpha.1
      */
     @Override
-    public @NotNull ItemStack getEmptyItemStack(@NotNull ItemStack sourceStack, @NotNull Player player) {
+    public ItemStack getEmptyItemStack(final @NotNull ItemStack sourceStack, final @NotNull Player player) {
         if (player.getAbilities().instabuild) {
             return sourceStack;
         }
@@ -70,7 +73,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @return The empty item.
      */
-    public abstract @NotNull Item getEmptyItem();
+    public abstract Item getEmptyItem();
 
     /**
      * Attempts to fill the bucket with the given fluid.
@@ -78,11 +81,13 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @param sourceStack The item stack that contains the bucket to be filled.
      * @param fluid       The fluid with which the bucket should be filled.
+     *
      * @return An item stack containing the bucket which has been filled with the block, or {@link ItemStack#EMPTY} if
      * the bucket could not be filled with the given fluid.
+     *
      * @since 2.0.0+alpha.1
      */
-    public @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, @NotNull Fluid fluid) {
+    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Fluid fluid) {
         return ItemStack.EMPTY;
     }
 
@@ -94,13 +99,16 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @return An item stack containing the bucket which has been filled with the block, or {@link ItemStack#EMPTY} if
      * the bucket could not be filled with the given block.
+     *
      * @since 2.0.0+alpha.1
      */
-    public @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, @NotNull Block block) {
+    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Block block) {
         if (Fluids.EMPTY.equals(this.fluid)) {
             if (Blocks.POWDER_SNOW.equals(block)) {
                 Item powderSnowItem = this.getPowderSnowFilledItem();
-                return powderSnowItem != null ? BucketItems.createItemStack(this.getPowderSnowFilledItem(), sourceStack) : ItemStack.EMPTY;
+                return powderSnowItem != null
+                        ? BucketItems.createItemStack(this.getPowderSnowFilledItem(), sourceStack)
+                        : ItemStack.EMPTY;
             }
             if (block instanceof BubbleColumnBlock || block instanceof SimpleWaterloggedBlock) {
                 return getFilledItemStack(sourceStack, Fluids.WATER);
@@ -117,6 +125,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      * Gets an item which represents the bucket, filled with snow.
      *
      * @return The item which represents the snow-filled bucket.
+     *
      * @since 2.0.0+alpha.1
      */
     public @Nullable Item getPowderSnowFilledItem() {
@@ -129,10 +138,11 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @param sourceStack The bucket into which the entity is being unceremoniously stuffed.
      * @param entity      The entity being stuffed into the bucket.
+     *
      * @return The item stack containing the bucket with the entity inside, or {@link ItemStack#EMPTY} if the bucket
      * could not be filled with the entity.
      */
-    public @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, LivingEntity entity) {
+    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull LivingEntity entity) {
         return ItemStack.EMPTY;
     }
 
@@ -141,9 +151,10 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      * Should return {@link ItemStack#EMPTY} if the concept of cow juice is too weird for the bucket.
      *
      * @param sourceStack The item stack of the bucket being filled.
+     *
      * @return The filled item stack.
      */
-    public @NotNull ItemStack getMilkBucketItemStack(@NotNull ItemStack sourceStack) {
+    public @NotNull ItemStack getMilkBucketItemStack(final @NotNull ItemStack sourceStack) {
         return ItemStack.EMPTY;
     }
 
@@ -152,11 +163,13 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @param stack      The item to repair.
      * @param ingredient The ingredient to repair with.
+     *
      * @return {@code false} if there is any fluid in the bucket; otherwise, calls super implementation.
+     *
      * @since 1.0.0
      */
     @Override
-    public boolean isValidRepairItem(ItemStack stack, ItemStack ingredient) {
+    public boolean isValidRepairItem(final @NotNull ItemStack stack, final @NotNull ItemStack ingredient) {
         if (this.fluid != Fluids.EMPTY) {
             return false;
         }
@@ -167,6 +180,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      * Disables crafting repair for items which contain a fluid.
      *
      * @return {@code true} if the bucket is empty and can be repaired in the crafting grid; otherwise, {@code false}.
+     *
      * @since 1.0.0
      */
     @Override
@@ -181,13 +195,17 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      * @param world The world wherein the bucket is being used.
      * @param user  The player who is using the bucket.
      * @param hand  The hand in which the bucket is being held.
+     *
      * @return Whether the event passed or failed, as well as the resultant item stack.
      */
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(final @NotNull Level world,
+                                                  final @NotNull Player user,
+                                                  final @NotNull InteractionHand hand) {
         // We need to replicate the bucket functionality -_-
         final ItemStack stackInHand = user.getItemInHand(hand);
-        final BlockHitResult blockHitResult = getPlayerPOVHitResult(world, user, Fluids.EMPTY.equals(this.fluid) ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
+        final BlockHitResult blockHitResult = getPlayerPOVHitResult(world, user,
+                Fluids.EMPTY.equals(this.fluid) ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
         if (!HitResult.Type.BLOCK.equals(blockHitResult.getType())) {
             // We either missed or didn't hit a block...
             return InteractionResultHolder.pass(stackInHand);
@@ -197,7 +215,8 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
             final Direction hitSide = blockHitResult.getDirection();
             final BlockPos offsetByHitSideBlockPos = hitBlockPos.offset(hitSide.getNormal());
 
-            if (world.mayInteract(user, hitBlockPos) && user.mayUseItemAt(offsetByHitSideBlockPos, hitSide, stackInHand)) {
+            if (world.mayInteract(user, hitBlockPos) &&
+                    user.mayUseItemAt(offsetByHitSideBlockPos, hitSide, stackInHand)) {
                 final BlockState hitBlockState = world.getBlockState(hitBlockPos);
 
                 // Make sure we are empty before trying to fill ourselves.
@@ -214,21 +233,24 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
 
                             // Then check if the block drained successfully
                             if (!drainedFluidStack.isEmpty()) {
-                                if (Items.CLAY_BALL.equals(filledBucketStack.getItem()) && !world.isClientSide && world.random.nextInt(20) == 0) {
-                                    filledBucketStack = BucketItems.createItemStack(BucketItems.CLAY_WATER_BUCKET.get(), stackInHand);
+                                if (Items.CLAY_BALL.equals(filledBucketStack.getItem()) &&
+                                        !world.isClientSide &&
+                                        world.random.nextInt(20) == 0) {
+                                    filledBucketStack = BucketItems.createItemStack(BucketItems.CLAY_WATER_BUCKET.get(),
+                                            stackInHand);
                                 }
 
                                 // And we have successfully drained the block!
                                 user.awardStat(Stats.ITEM_USED.get(this));
-                                pickup.getPickupSound()
-                                        .ifPresent((sound) -> user.playSound(sound, 1.0F, 1.0F));
+                                pickup.getPickupSound().ifPresent((sound) -> user.playSound(sound, 1.0F, 1.0F));
                                 this.playSoundOnFill(user, filledBucketStack);
                                 world.gameEvent(user, GameEvent.FLUID_PICKUP, hitBlockPos);
                                 if (!world.isClientSide && user instanceof final ServerPlayer serverPlayer) {
                                     BucketModCommon.FILL_BUCKET.trigger(serverPlayer, stackInHand, filledBucketStack);
                                     CriteriaTriggers.FILLED_BUCKET.trigger(serverPlayer, filledBucketStack);
                                 }
-                                final ItemStack exchangedStack = ItemUtils.createFilledResult(stackInHand, user, filledBucketStack);
+                                final ItemStack exchangedStack = ItemUtils.createFilledResult(stackInHand, user,
+                                        filledBucketStack);
 
                                 return InteractionResultHolder.sidedSuccess(exchangedStack, world.isClientSide);
                             }
@@ -237,13 +259,15 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
                     return InteractionResultHolder.fail(stackInHand);
                 } else {
                     // Hey! We aren't empty!
-                    final BlockPos placeFluidAtBlockPos = hitBlockState.getBlock() instanceof LiquidBlockContainer && Fluids.WATER.equals(this.fluid) ? hitBlockPos : offsetByHitSideBlockPos;
+                    final BlockPos placeFluidAtBlockPos = hitBlockState.getBlock() instanceof LiquidBlockContainer &&
+                            Fluids.WATER.equals(this.fluid) ? hitBlockPos : offsetByHitSideBlockPos;
                     if (this.emptyContents(user, world, placeFluidAtBlockPos, blockHitResult)) {
                         this.checkExtraContent(user, world, stackInHand, placeFluidAtBlockPos);
 
                         user.awardStat(Stats.ITEM_USED.get(this));
                         final ItemStack emptyItemStack = this.getEmptyItemStack(stackInHand, user);
-                        emptyItemStack.hurtAndBreak(this.getDamageOnDispenseFluid(this.fluid), user, player -> player.broadcastBreakEvent(hand));
+                        emptyItemStack.hurtAndBreak(this.getDamageOnDispenseFluid(this.fluid), user,
+                                player -> player.broadcastBreakEvent(hand));
 
                         if (user instanceof final ServerPlayer serverPlayer) {
                             CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, placeFluidAtBlockPos, stackInHand);
@@ -264,7 +288,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      * @return The fluid.
      */
     @Override
-    public @NotNull Fluid getFluid() {
+    public Fluid getFluid() {
         return this.fluid;
     }
 }

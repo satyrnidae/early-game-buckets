@@ -22,7 +22,7 @@ public class CeramicEntityBucketItem extends CustomEntityBucketItem {
      * @param settings The item initialization settings.
      * @since 1.0.0
      */
-    public CeramicEntityBucketItem(EntityType<?> type, Fluid fluid, SoundEvent emptyingSound, Properties settings) {
+    public CeramicEntityBucketItem(final @NotNull EntityType<?> type, final @NotNull Fluid fluid, final @NotNull SoundEvent emptyingSound, final @NotNull Properties settings) {
         super(type, fluid, emptyingSound, settings);
     }
 
@@ -33,7 +33,7 @@ public class CeramicEntityBucketItem extends CustomEntityBucketItem {
      * @since 1.0.0
      */
     @Override
-    public @NotNull Item getEmptyItem() {
+    public Item getEmptyItem() {
         return BucketItems.CERAMIC_BUCKET.get();
     }
 
@@ -44,7 +44,7 @@ public class CeramicEntityBucketItem extends CustomEntityBucketItem {
      * @return The translation key. If the bucket stack damage is over 87.5%, appends .cracked to the translation key.
      */
     @Override
-    public @NotNull String getDescriptionId(ItemStack stack) {
+    public String getDescriptionId(final @NotNull ItemStack stack) {
         String translationKey = this.getDescriptionId();
         if ((float) stack.getDamageValue() / stack.getMaxDamage() >= 0.875F) {
             translationKey += ".cracked";

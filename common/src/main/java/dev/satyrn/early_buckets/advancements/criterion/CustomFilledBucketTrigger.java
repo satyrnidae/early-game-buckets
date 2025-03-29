@@ -18,7 +18,7 @@ public class CustomFilledBucketTrigger extends SimpleCriterionTrigger<CustomFill
     /**
      * The identifier for this criterion
      */
-    static final @NotNull ResourceLocation ID = new ResourceLocation(BucketModCommon.MOD_ID, "filled_bucket");
+    static final ResourceLocation ID = new ResourceLocation(BucketModCommon.MOD_ID, "filled_bucket");
 
     /**
      * Gets the ID of this criterion.
@@ -26,14 +26,14 @@ public class CustomFilledBucketTrigger extends SimpleCriterionTrigger<CustomFill
      * @return The {@link CustomFilledBucketTrigger#ID} of this criterion.
      */
     @Override
-    public @NotNull ResourceLocation getId() {
+    public ResourceLocation getId() {
         return ID;
     }
 
     @Override
-    protected @NotNull TriggerInstance createInstance(JsonObject jsonObject,
-                                                      EntityPredicate.Composite composite,
-                                                      DeserializationContext deserializationContext) {
+    protected TriggerInstance createInstance(JsonObject jsonObject,
+                                             EntityPredicate.Composite composite,
+                                             DeserializationContext deserializationContext) {
         final @NotNull ItemPredicate emptyItemPredicate = ItemPredicate.fromJson(jsonObject.get("empty"));
         final @NotNull ItemPredicate filledItemPredicate = ItemPredicate.fromJson(jsonObject.get("filled"));
         return new TriggerInstance(composite, emptyItemPredicate, filledItemPredicate);
@@ -55,10 +55,6 @@ public class CustomFilledBucketTrigger extends SimpleCriterionTrigger<CustomFill
         // The filled item's predicate
         private final ItemPredicate filled;
 
-        public static TriggerInstance filledCustomBucket(ItemPredicate empty, ItemPredicate filled) {
-            return new TriggerInstance(EntityPredicate.Composite.ANY, empty, filled);
-        }
-
         /**
          * Creates a new set of conditions for the criterion.
          *
@@ -71,11 +67,16 @@ public class CustomFilledBucketTrigger extends SimpleCriterionTrigger<CustomFill
             this.filled = filled;
         }
 
+        public static TriggerInstance filledCustomBucket(ItemPredicate empty, ItemPredicate filled) {
+            return new TriggerInstance(EntityPredicate.Composite.ANY, empty, filled);
+        }
+
         /**
          * Checks whether the empty and filled item stacks match their respective predicates.
          *
          * @param empty  A stack containing the empty bucket item.
          * @param filled A stack containing the full bucket item.
+         *
          * @return {@code true} if both predicates return {@code true}; otherwise, {@code false}.
          */
         public boolean matches(ItemStack empty, ItemStack filled) {
@@ -86,9 +87,10 @@ public class CustomFilledBucketTrigger extends SimpleCriterionTrigger<CustomFill
          * Serializes this object to json.
          *
          * @param predicateSerializer The serializer.
+         *
          * @return The serialized {@link JsonObject}.
          */
-        public @NotNull JsonObject serializeToJson(SerializationContext predicateSerializer) {
+        public JsonObject serializeToJson(SerializationContext predicateSerializer) {
             final JsonObject json = super.serializeToJson(predicateSerializer);
             json.add("empty", this.empty.serializeToJson());
             json.add("filled", this.filled.serializeToJson());

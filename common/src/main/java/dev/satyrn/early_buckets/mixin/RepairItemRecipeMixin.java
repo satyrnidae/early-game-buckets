@@ -8,6 +8,7 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RepairItemRecipe;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -18,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @author Isabel Maskrey
  * @since 1.0.0
  */
+@Unique
 @Mixin(RepairItemRecipe.class)
 public abstract class RepairItemRecipeMixin extends CustomRecipe {
 

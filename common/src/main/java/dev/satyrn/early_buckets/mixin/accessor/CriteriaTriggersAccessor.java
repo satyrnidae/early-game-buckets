@@ -2,7 +2,6 @@ package dev.satyrn.early_buckets.mixin.accessor;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.CriterionTrigger;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
@@ -19,11 +18,12 @@ public interface CriteriaTriggersAccessor {
      * Calls {@code Criteria.register(Criterion)}.
      *
      * @param object The object to register.
-     * @param <T> The criterion type.
+     * @param <T>    The criterion type.
+     *
      * @return The registered criterion.
      */
     @Invoker()
-    static <T extends CriterionTrigger<?>> @NotNull T callRegister(T object) {
+    static <T extends CriterionTrigger<?>> T callRegister(T object) {
         throw new AssertionError();
     }
 }

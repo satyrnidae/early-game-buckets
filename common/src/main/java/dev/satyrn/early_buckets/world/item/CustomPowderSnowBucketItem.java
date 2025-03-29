@@ -45,7 +45,10 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      * @param returnedItem The item that should be returned when the block is placed.
      * @param settings     The settings for the item,
      */
-    public CustomPowderSnowBucketItem(final @NotNull Block block, final @NotNull SoundEvent placeSound, final @NotNull Item returnedItem, final @NotNull Properties settings) {
+    public CustomPowderSnowBucketItem(final @NotNull Block block,
+                                      final @NotNull SoundEvent placeSound,
+                                      final @NotNull Item returnedItem,
+                                      final @NotNull Properties settings) {
         super(settings);
         this.block = block;
         this.placeSound = placeSound;
@@ -56,10 +59,11 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      * Attempts to use the item on a block.
      *
      * @param context The usage context.
+     *
      * @return An {@link net.minecraft.world.InteractionResult} describing what happens.
      */
     @Override
-    public @NotNull InteractionResult useOn(UseOnContext context) {
+    public InteractionResult useOn(final @NotNull UseOnContext context) {
         final Player playerInContext = context.getPlayer();
 
         if (playerInContext != null) {
@@ -84,9 +88,10 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      * Attempts to place the block.
      *
      * @param context The item placement context.
+     *
      * @return Action result indicating whether the block could be placed.
      */
-    private InteractionResult place(final BlockPlaceContext context) {
+    private InteractionResult place(final @NotNull BlockPlaceContext context) {
         if (!context.canPlace()) {
             return InteractionResult.FAIL;
         } else {
@@ -104,17 +109,22 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
                 final BlockState blockState = worldInContext.getBlockState(blockPosInContext);
                 if (blockState.is(placementState.getBlock())) {
                     blockState.getBlock()
-                            .setPlacedBy(worldInContext, blockPosInContext, blockState, playerInContext, stackInContext);
+                            .setPlacedBy(worldInContext, blockPosInContext, blockState, playerInContext,
+                                    stackInContext);
                     if (playerInContext instanceof final ServerPlayer serverPlayer) {
                         CriteriaTriggers.PLACED_BLOCK.trigger(serverPlayer, blockPosInContext, stackInContext);
                     }
                 }
 
                 final SoundType blockSoundGroup = blockState.getSoundType();
-                worldInContext.playSound(playerInContext, blockPosInContext, this.placeSound, SoundSource.BLOCKS, (blockSoundGroup.getVolume() + 1.0F) / 2.0F, blockSoundGroup.getPitch() * 0.8F);
+                worldInContext.playSound(playerInContext, blockPosInContext, this.placeSound, SoundSource.BLOCKS,
+                        (blockSoundGroup.getVolume() + 1.0F) / 2.0F, blockSoundGroup.getPitch() * 0.8F);
                 worldInContext.gameEvent(playerInContext, GameEvent.BLOCK_PLACE, blockPosInContext);
-                if (playerInContext != null && !playerInContext.getAbilities().instabuild && !worldInContext.isClientSide) {
-                    stackInContext.hurtAndBreak(this.getDamageOnDispenseBlock(this.block), playerInContext, player -> player.broadcastBreakEvent(context.getHand()));
+                if (playerInContext != null &&
+                        !playerInContext.getAbilities().instabuild &&
+                        !worldInContext.isClientSide) {
+                    stackInContext.hurtAndBreak(this.getDamageOnDispenseBlock(this.block), playerInContext,
+                            player -> player.broadcastBreakEvent(context.getHand()));
                 }
 
                 return InteractionResult.sidedSuccess(worldInContext.isClientSide);
@@ -127,12 +137,13 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      *
      * @param context The item placement context.
      * @param state   The placement state of the block.
+     *
      * @return {@code true} if the block can be placed; otherwise, {@code false}.
      */
-    private boolean canPlace(final BlockPlaceContext context, final BlockState state) {
+    private boolean canPlace(final @NotNull BlockPlaceContext context, final @NotNull BlockState state) {
         final Player playerEntity = context.getPlayer();
-        return (state.canSurvive(context.getLevel(), context.getClickedPos())) && context.getLevel()
-                .mayInteract(playerEntity, context.getClickedPos());
+        return (state.canSurvive(context.getLevel(), context.getClickedPos())) &&
+                context.getLevel().mayInteract(playerEntity, context.getClickedPos());
     }
 
     /**
@@ -140,7 +151,7 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      *
      * @return The block that this item places.
      */
-    public @NotNull Block getBlock() {
+    public Block getBlock() {
         return this.block;
     }
 
@@ -150,11 +161,13 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      *
      * @param sourceStack The item stack for the bucket which was emptied.
      * @param player      The player who emptied the bucket.
+     *
      * @return An item stack containing the empty bucket.
+     *
      * @since 2.0.0+alpha.1
      */
     @Override
-    public @NotNull ItemStack getEmptyItemStack(@NotNull ItemStack sourceStack, @NotNull Player player) {
+    public ItemStack getEmptyItemStack(final @NotNull ItemStack sourceStack, final @NotNull Player player) {
         if (player.getAbilities().instabuild) {
             return sourceStack;
         }
@@ -168,12 +181,14 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      *
      * @param sourceStack The item stack that contains the bucket to be filled.
      * @param fluid       The fluid with which the bucket should be filled.
+     *
      * @return An item stack containing the bucket which has been filled with the block, or {@link ItemStack#EMPTY} if
      * the bucket could not be filled with the given fluid.
+     *
      * @since 2.0.0+alpha.1
      */
     @Override
-    public @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, @NotNull Fluid fluid) {
+    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Fluid fluid) {
         return ItemStack.EMPTY;
     }
 
@@ -185,12 +200,14 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      *
      * @param sourceStack The source item stack
      * @param block       The block to fill the bucket
+     *
      * @return An item stack containing the bucket which has been filled with the block, or {@link ItemStack#EMPTY} if
      * the bucket could not be filled with the given block.
+     *
      * @since 2.0.0+alpha.1
      */
     @Override
-    public @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, @NotNull Block block) {
+    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Block block) {
         return ItemStack.EMPTY;
     }
 
@@ -200,12 +217,14 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      *
      * @param sourceStack The bucket into which the entity is being unceremoniously stuffed.
      * @param entity      The entity being stuffed into the bucket.
+     *
      * @return The item stack containing the bucket with the entity inside, or {@link ItemStack#EMPTY} if the bucket
      * could not be filled with the entity.
+     *
      * @since 2.0.0+alpha.1
      */
     @Override
-    public @NotNull ItemStack getFilledItemStack(@NotNull ItemStack sourceStack, LivingEntity entity) {
+    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull LivingEntity entity) {
         return ItemStack.EMPTY;
     }
 
@@ -214,11 +233,13 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      * Should return {@link ItemStack#EMPTY} if the concept of cow juice is too weird for the bucket.
      *
      * @param sourceStack The item stack of the bucket being filled.
+     *
      * @return The filled item stack.
+     *
      * @since 2.0.0+alpha.1
      */
     @Override
-    public @NotNull ItemStack getMilkBucketItemStack(@NotNull ItemStack sourceStack) {
+    public ItemStack getMilkBucketItemStack(final @NotNull ItemStack sourceStack) {
         return ItemStack.EMPTY;
     }
 
@@ -228,7 +249,7 @@ public class CustomPowderSnowBucketItem extends Item implements CustomBucket, Re
      * @return The fluid.
      */
     @Override
-    public @NotNull Fluid getFluid() {
+    public Fluid getFluid() {
         return Fluids.EMPTY;
     }
 }

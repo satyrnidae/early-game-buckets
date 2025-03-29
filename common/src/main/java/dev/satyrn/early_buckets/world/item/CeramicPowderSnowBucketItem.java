@@ -19,7 +19,9 @@ public class CeramicPowderSnowBucketItem extends CustomPowderSnowBucketItem {
      * @param placeSound The sound that should play when the block is placed.
      * @param settings   The settings for the item,
      */
-    public CeramicPowderSnowBucketItem(@NotNull Block block, @NotNull SoundEvent placeSound, @NotNull Properties settings) {
+    public CeramicPowderSnowBucketItem(final @NotNull Block block,
+                                       final @NotNull SoundEvent placeSound,
+                                       final @NotNull Properties settings) {
         super(block, placeSound, BucketItems.CERAMIC_BUCKET.get(), settings);
     }
 
@@ -27,10 +29,11 @@ public class CeramicPowderSnowBucketItem extends CustomPowderSnowBucketItem {
      * Gets the translation key for an item stack.
      *
      * @param stack The stack that requires a translation key.
+     *
      * @return The translation key. If the bucket stack damage is over 87.5%, appends .cracked to the translation key.
      */
     @Override
-    public @NotNull String getDescriptionId(ItemStack stack) {
+    public String getDescriptionId(final @NotNull ItemStack stack) {
         String translationKey = this.getDescriptionId();
         if ((float) stack.getDamageValue() / stack.getMaxDamage() >= 0.875F) {
             translationKey += ".cracked";

@@ -9,34 +9,49 @@ import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(modid = BucketModCommon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class BucketModDataEvents {
-    private BucketModDataEvents() {}
+public final class BucketModDataEvents {
+    private BucketModDataEvents() {
+    }
 
     @SubscribeEvent
     static void onGatherData(final @NotNull GatherDataEvent event) {
         // client
         event.getGenerator()
-                .addProvider(event.includeClient(), new BucketModSoundsProvider(event.getGenerator(), event.getModContainer().getModId(), event.getExistingFileHelper()));
+                .addProvider(event.includeClient(),
+                        new BucketModSoundsProvider(event.getGenerator(), event.getModContainer().getModId(),
+                                event.getExistingFileHelper()));
         event.getGenerator()
-                .addProvider(event.includeClient(), new BucketModLanguageProvider(event.getGenerator(), event.getModContainer().getModId(), "en_us"));
+                .addProvider(event.includeClient(),
+                        new BucketModLanguageProvider(event.getGenerator(), event.getModContainer().getModId(),
+                                "en_us"));
         event.getGenerator()
-                .addProvider(event.includeClient(), new BucketModItemModelProvider(event.getGenerator(), event.getModContainer().getModId(), event.getExistingFileHelper()));
+                .addProvider(event.includeClient(),
+                        new BucketModItemModelProvider(event.getGenerator(), event.getModContainer().getModId(),
+                                event.getExistingFileHelper()));
         event.getGenerator()
-                .addProvider(event.includeClient(), new BucketModBlockStateProvider(event.getGenerator(), event.getModContainer().getModId(), event.getExistingFileHelper()));
+                .addProvider(event.includeClient(),
+                        new BucketModBlockStateProvider(event.getGenerator(), event.getModContainer().getModId(),
+                                event.getExistingFileHelper()));
         event.getGenerator()
-                .addProvider(event.includeClient(), new BucketModPirateLanguageProvider(event.getGenerator(), event.getModContainer().getModId(), "en_pt"));
+                .addProvider(event.includeClient(),
+                        new BucketModPirateLanguageProvider(event.getGenerator(), event.getModContainer().getModId(),
+                                "en_pt"));
 
         // server
         event.getGenerator()
-                .addProvider(event.includeServer(), new BucketModEntityTypeTagsProvider(event.getGenerator(), event.getModContainer().getModId(), event.getExistingFileHelper()));
-        var blockTagsProvider = new BucketModBlockTagsProvider(event.getGenerator(), event.getModContainer().getModId(), event.getExistingFileHelper());
+                .addProvider(event.includeServer(),
+                        new BucketModEntityTypeTagsProvider(event.getGenerator(), event.getModContainer().getModId(),
+                                event.getExistingFileHelper()));
+        var blockTagsProvider = new BucketModBlockTagsProvider(event.getGenerator(), event.getModContainer().getModId(),
+                event.getExistingFileHelper());
+        event.getGenerator().addProvider(event.includeServer(), blockTagsProvider);
         event.getGenerator()
-                .addProvider(event.includeServer(), blockTagsProvider);
+                .addProvider(event.includeServer(),
+                        new BucketModItemTagsProvider(event.getGenerator(), blockTagsProvider,
+                                event.getModContainer().getModId(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(event.includeServer(), new BucketModRecipeProvider(event.getGenerator()));
         event.getGenerator()
-                .addProvider(event.includeServer(), new BucketModItemTagsProvider(event.getGenerator(), blockTagsProvider, event.getModContainer().getModId(), event.getExistingFileHelper()));
-        event.getGenerator()
-                .addProvider(event.includeServer(), new BucketModRecipeProvider(event.getGenerator()));
-        event.getGenerator()
-                .addProvider(event.includeServer(), new BucketModAdvancementProvider(event.getGenerator(), event.getExistingFileHelper()));
+                .addProvider(event.includeServer(),
+                        new BucketModAdvancementProvider(event.getGenerator(), event.getExistingFileHelper()));
     }
 }

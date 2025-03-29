@@ -24,9 +24,10 @@ public abstract class CustomMilkBucketItem extends MilkBucketItem implements Rep
      * Initializes the custom milk bucket class.
      *
      * @param settings The item initialization settings.
+     *
      * @since 1.0.0
      */
-    public CustomMilkBucketItem(Properties settings) {
+    public CustomMilkBucketItem(final @NotNull Properties settings) {
         super(settings);
     }
 
@@ -36,24 +37,31 @@ public abstract class CustomMilkBucketItem extends MilkBucketItem implements Rep
      * @param stack The item being used.
      * @param world The world in which the item is being used.
      * @param user  The user of the item.
+     *
      * @return The resulting item stack.
+     *
      * @since 1.0.0
      */
     @Override
-    public @NotNull ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity user) {
+    public ItemStack finishUsingItem(final @NotNull ItemStack stack,
+                                     final @NotNull Level world,
+                                     final @NotNull LivingEntity user) {
         if (user instanceof final ServerPlayer serverPlayerEntity) {
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
             serverPlayerEntity.awardStat(Stats.ITEM_USED.get(this));
         }
 
-        InteractionHand hand = user.getMainHandItem() == stack ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        final InteractionHand hand = user.getMainHandItem() == stack
+                ? InteractionHand.MAIN_HAND
+                : InteractionHand.OFF_HAND;
 
         if (!world.isClientSide) {
             user.removeAllEffects();
         }
 
-        ItemStack emptyBucket = user instanceof Player player && !player.getAbilities().instabuild ?
-                BucketItems.createItemStack(this.getEmptyItem(), stack) : stack;
+        ItemStack emptyBucket = user instanceof Player player && !player.getAbilities().instabuild
+                ? BucketItems.createItemStack(this.getEmptyItem(), stack)
+                : stack;
         emptyBucket.setDamageValue(stack.getDamageValue());
         emptyBucket.hurtAndBreak(1, user, entity -> entity.broadcastBreakEvent(hand));
 
@@ -64,6 +72,7 @@ public abstract class CustomMilkBucketItem extends MilkBucketItem implements Rep
      * Gets the empty bucket item for this bucket of milk.
      *
      * @return The empty bucket item.
+     *
      * @since 1.0.0
      */
     protected abstract Item getEmptyItem();
@@ -73,11 +82,13 @@ public abstract class CustomMilkBucketItem extends MilkBucketItem implements Rep
      *
      * @param stack      The stack to repair.
      * @param ingredient The ingredient to repair with.
+     *
      * @return {@code false}, as milk buckets cannot be repaired.
+     *
      * @since 1.0.0
      */
     @Override
-    public boolean isValidRepairItem(ItemStack stack, ItemStack ingredient) {
+    public boolean isValidRepairItem(final @NotNull ItemStack stack, final @NotNull ItemStack ingredient) {
         return false;
     }
 
@@ -85,6 +96,7 @@ public abstract class CustomMilkBucketItem extends MilkBucketItem implements Rep
      * Disables repair of this item via the crafting grid.
      *
      * @return {@code false}, as milk buckets cannot be repaired.
+     *
      * @since 1.0.0
      */
     @Override

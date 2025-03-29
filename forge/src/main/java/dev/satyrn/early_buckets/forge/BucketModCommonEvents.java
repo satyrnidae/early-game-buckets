@@ -9,14 +9,17 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(modid = BucketModCommon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class BucketModCommonEvents {
+public final class BucketModCommonEvents {
+    private BucketModCommonEvents() {
+    }
+
     @SubscribeEvent
-    public void onCommonSetup(final @NotNull FMLCommonSetupEvent commonSetupEvent) {
+    static void onCommonSetup(final @NotNull FMLCommonSetupEvent commonSetupEvent) {
         BucketModCommon.postInit();
     }
 
     @SubscribeEvent
-    public void burnTime(FurnaceFuelBurnTimeEvent event) {
+    static void burnTime(final @NotNull FurnaceFuelBurnTimeEvent event) {
         if (!event.getItemStack().isEmpty()) {
             if (event.getItemStack().getItem() == BucketItems.WOODEN_BUCKET.get()) {
                 event.setBurnTime(20);
