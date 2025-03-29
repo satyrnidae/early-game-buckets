@@ -89,6 +89,10 @@ public class BucketModLanguageProvider extends LanguageProvider {
 
         this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("flash_fire")) + ".title", "No Kiln, No Problem");
         this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("flash_fire")) + ".description", "Flash-fire a clay bucket in some lava.");
+
+        this.add("gui.early_buckets.category.firing", "Firing");
+        this.add("gui.early_buckets.category.firing.experience", "%s XP");
+        this.add("gui.early_buckets.category.firing.cook_time", "%ss");
     }
 
     private void addCeramicBucket(RegistrySupplier<Item> bucket, String translationBase) {

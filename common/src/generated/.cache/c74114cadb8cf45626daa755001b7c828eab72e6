@@ -1,4 +1,4 @@
-// 1.19.2	2025-03-27T19:46:29.5456227	Early Game Buckets Recipe Provider
+// 1.19.2	2025-03-29T03:34:21.2400417	Early Game Buckets Recipe Provider
 5ebc83dd7e743543f424e21ffc3d727825ae29ae data/early_buckets/advancements/recipes/building_blocks/cracked_stone_bricks.json
 e89726c138e95b56f035307def22a5a6faf1f397 data/early_buckets/advancements/recipes/building_blocks/deepslate.json
 62131fa8b44ddbb5db4651a94a2950ced5706672 data/early_buckets/advancements/recipes/building_blocks/glass.json
@@ -7,6 +7,7 @@ e89726c138e95b56f035307def22a5a6faf1f397 data/early_buckets/advancements/recipes
 091c1c1f1430c3bf7b57f6f9b77648a1617f7f52 data/early_buckets/advancements/recipes/building_blocks/smooth_red_sandstone.json
 a9acb121617e72e25bbf8c7c5849e7ed0e5788ff data/early_buckets/advancements/recipes/building_blocks/smooth_sandstone.json
 71290bb7152d4bb2353cc558432b1c8f315f4f49 data/early_buckets/advancements/recipes/building_blocks/smooth_stone.json
+8433b2e5416fc96eec3e0bb0323ab61b86160b1c data/early_buckets/advancements/recipes/building_blocks/stone.json
 dc260cc462a0e32afd4e8044adbd96357e6d943b data/early_buckets/advancements/recipes/building_blocks/terracotta.json
 10654de7da299b3f4256e4d4736d0a5c589ea344 data/early_buckets/advancements/recipes/decorations/black_glazed_terracotta.json
 2c1c6a81e020d0be18788bff1ee8010a7b2d896c data/early_buckets/advancements/recipes/decorations/blue_glazed_terracotta.json
@@ -71,6 +72,7 @@ a22e616227227866b65d49bf4955529d237466cf data/early_buckets/recipes/pink_glazed_
 3aa5dc8b56036bfb9a1d0b7aa9243dc33da35498 data/early_buckets/recipes/smooth_red_sandstone.json
 6d74494f564f972768e9fcf07dcd836f53a27699 data/early_buckets/recipes/smooth_sandstone.json
 a8e2b028e7b55dddec9053703d0e1a0ccab634f9 data/early_buckets/recipes/smooth_stone.json
+8ea0a80445f290713acf0e4af9aee0325bfac282 data/early_buckets/recipes/stone.json
 1c7ed07c00ccb80b40dde22a11edf1cafbba4215 data/early_buckets/recipes/terracotta.json
 8fad6254d01cc7823ccd4161f45581a8e314430a data/early_buckets/recipes/white_glazed_terracotta.json
 ef6b42fa1a48a976563a407dc3af14dafee3c0db data/early_buckets/recipes/wooden_bucket.json

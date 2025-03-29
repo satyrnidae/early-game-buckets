@@ -12,6 +12,6 @@ public final class BucketModClient {
     }
 
     public static void initClient() {
-        MenuRegistry.registerScreenFactory(BucketMenuTypes.KILN_MENU.get(), KilnScreen::new);
+        MenuRegistry.registerScreenFactory(BucketMenuTypes.KILN.get(), KilnScreen::new);
     }
 }

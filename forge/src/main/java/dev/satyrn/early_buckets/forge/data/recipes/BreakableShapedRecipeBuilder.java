@@ -1,4 +1,4 @@
-package dev.satyrn.early_buckets.data.recipes;
+package dev.satyrn.early_buckets.forge.data.recipes;
 
 import dev.satyrn.early_buckets.mixin.accessor.ShapedRecipeBuilderAccessor;
 import dev.satyrn.early_buckets.world.item.crafting.BucketRecipeSerializers;

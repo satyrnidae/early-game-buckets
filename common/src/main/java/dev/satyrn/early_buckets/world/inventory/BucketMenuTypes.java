@@ -7,13 +7,13 @@ import net.minecraft.core.Registry;
 import net.minecraft.world.inventory.MenuType;
 
 public final class BucketMenuTypes {
-    public static final RegistrySupplier<MenuType<KilnMenu>> KILN_MENU;
-    ;
+    public static final RegistrySupplier<MenuType<KilnMenu>> KILN;
+
     static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(BucketModCommon.MOD_ID,
             Registry.MENU_REGISTRY);
 
     static {
-        KILN_MENU = MENU_TYPES.register("kiln", () -> new MenuType<>(KilnMenu::new));
+        KILN = MENU_TYPES.register("kiln", () -> new MenuType<>(KilnMenu::new));
     }
 
     private BucketMenuTypes() {

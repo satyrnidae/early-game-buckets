@@ -1,7 +1,7 @@
 package dev.satyrn.early_buckets.forge.data.provider.server;
 
 import dev.satyrn.early_buckets.BucketModCommon;
-import dev.satyrn.early_buckets.data.recipes.BreakableShapedRecipeBuilder;
+import dev.satyrn.early_buckets.forge.data.recipes.BreakableShapedRecipeBuilder;
 import dev.satyrn.early_buckets.tags.BucketTags;
 import dev.satyrn.early_buckets.world.item.BucketItems;
 import dev.satyrn.early_buckets.world.item.crafting.BucketRecipeSerializers;
@@ -54,6 +54,10 @@ public class BucketModRecipeProvider extends RecipeProvider {
                 .define('C', BucketTags.Items.WHEAT)
                 .unlockedBy("has_egg", has(BucketTags.Items.EGGS))
                 .save(consumer, Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(Blocks.CAKE.asItem())));
+        SimpleCookingRecipeBuilder.cooking(Ingredient.of(Blocks.COBBLESTONE), Blocks.STONE, 0.1F, 100, BucketRecipeSerializers.FIRING_SERIALIZER.get())
+                .group(getDefaultGroupName(Items.STONE))
+                .unlockedBy("has_cobblestone", has(Blocks.COBBLESTONE))
+                .save(consumer, getDefaultRecipeName(Blocks.STONE));
         SimpleCookingRecipeBuilder.cooking(Ingredient.of(Items.CLAY_BALL), Items.BRICK, 0.3F, 100,
                         BucketRecipeSerializers.FIRING_SERIALIZER.get())
                 .group(getDefaultGroupName(Items.BRICK))

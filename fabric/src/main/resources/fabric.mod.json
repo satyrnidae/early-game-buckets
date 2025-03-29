@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "early_buckets.mixins.json"
+    "early_buckets.common.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.16.10",

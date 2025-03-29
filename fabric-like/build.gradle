@@ -2,12 +2,6 @@ architectury {
     common rootProject.enabled_platforms.split(',')
 }
 
-loom {
-    mixin {
-        defaultRefmapName = "early_buckets.fabriclike.refmap.json"
-    }
-}
-
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
     modImplementation "net.fabricmc.fabric-api:fabric-api:$rootProject.fabric_api_version"

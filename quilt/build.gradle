@@ -8,10 +8,6 @@ repositories {
 
 loom {
     accessWidenerPath.set(project(":common").loom.accessWidenerPath)
-
-    mixin {
-        defaultRefmapName = "early_buckets.quilt.refmap.json"
-    }
 }
 
 architectury {

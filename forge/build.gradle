@@ -10,7 +10,7 @@ loom {
     }
 
     forge {
-        mixinConfig "early_buckets.mixins.json"
+        mixinConfig "early_buckets.common.mixins.json"
         mixinConfig "early_buckets.forge.mixins.json"
     }
     runs {
