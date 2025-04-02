@@ -44,6 +44,10 @@ subprojects {
             name = "ModMaven"
             url = "https://modmaven.dev"
         }
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
     }
 
     loom {
