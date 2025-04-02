@@ -7,7 +7,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 import static dev.satyrn.early_buckets.world.item.BucketItems.createItemStack;
 
@@ -28,7 +29,7 @@ public class CeramicBucketItem extends CustomBucketItem {
      *
      * @since 1.0.0
      */
-    public CeramicBucketItem(final @NotNull Fluid fluid, final @NotNull Properties settings) {
+    public CeramicBucketItem(final Fluid fluid, final Properties settings) {
         super(fluid, settings);
     }
 
@@ -46,8 +47,8 @@ public class CeramicBucketItem extends CustomBucketItem {
      */
     @Override
     @SuppressWarnings("deprecation")
-    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Fluid fluid) {
-        Item filledItem = null;
+    public ItemStack getFilledItemStack(final ItemStack sourceStack, final Fluid fluid) {
+        @Nullable Item filledItem = null;
         if (fluid.is(FluidTags.WATER)) {
             filledItem = BucketItems.CERAMIC_WATER_BUCKET.get();
         } else if (fluid.is(FluidTags.LAVA)) {
@@ -80,7 +81,7 @@ public class CeramicBucketItem extends CustomBucketItem {
      */
     @Override
     @SuppressWarnings("deprecation")
-    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull LivingEntity entity) {
+    public ItemStack getFilledItemStack(final ItemStack sourceStack, final LivingEntity entity) {
         if (this.fluid.is(FluidTags.WATER)) {
             final EntityType<?> type = entity.getType();
             if (EntityType.AXOLOTL.equals(type)) {
@@ -110,7 +111,7 @@ public class CeramicBucketItem extends CustomBucketItem {
      * @return The filled item stack.
      */
     @Override
-    public ItemStack getMilkBucketItemStack(final @NotNull ItemStack sourceStack) {
+    public ItemStack getMilkBucketItemStack(final ItemStack sourceStack) {
         if (Fluids.EMPTY.equals(this.fluid)) {
             return BucketItems.createItemStack(BucketItems.CERAMIC_MILK_BUCKET.get(), sourceStack);
         }
@@ -138,7 +139,7 @@ public class CeramicBucketItem extends CustomBucketItem {
      */
 
     @Override
-    public String getDescriptionId(final @NotNull ItemStack stack) {
+    public String getDescriptionId(final ItemStack stack) {
         String translationKey = this.getDescriptionId();
         if ((float) stack.getDamageValue() / (float) stack.getMaxDamage() >= CRACKS_AT_USE_PERCENT) {
             translationKey += ".cracked";

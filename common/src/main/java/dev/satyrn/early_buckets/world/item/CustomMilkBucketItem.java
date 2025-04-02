@@ -10,7 +10,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MilkBucketItem;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Custom item for milk bucket implementations.
@@ -27,7 +26,7 @@ public abstract class CustomMilkBucketItem extends MilkBucketItem implements Rep
      *
      * @since 1.0.0
      */
-    public CustomMilkBucketItem(final @NotNull Properties settings) {
+    public CustomMilkBucketItem(final Properties settings) {
         super(settings);
     }
 
@@ -43,9 +42,9 @@ public abstract class CustomMilkBucketItem extends MilkBucketItem implements Rep
      * @since 1.0.0
      */
     @Override
-    public ItemStack finishUsingItem(final @NotNull ItemStack stack,
-                                     final @NotNull Level world,
-                                     final @NotNull LivingEntity user) {
+    public ItemStack finishUsingItem(final ItemStack stack,
+                                     final Level world,
+                                     final LivingEntity user) {
         if (user instanceof final ServerPlayer serverPlayerEntity) {
             CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayerEntity, stack);
             serverPlayerEntity.awardStat(Stats.ITEM_USED.get(this));
@@ -88,7 +87,7 @@ public abstract class CustomMilkBucketItem extends MilkBucketItem implements Rep
      * @since 1.0.0
      */
     @Override
-    public boolean isValidRepairItem(final @NotNull ItemStack stack, final @NotNull ItemStack ingredient) {
+    public boolean isValidRepairItem(final ItemStack stack, final ItemStack ingredient) {
         return false;
     }
 

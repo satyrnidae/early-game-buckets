@@ -8,21 +8,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.SoundDefinition;
 import net.minecraftforge.common.data.SoundDefinitionsProvider;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.IntStream;
 
 public class BucketModSoundsProvider extends SoundDefinitionsProvider {
-    public BucketModSoundsProvider(final @NotNull DataGenerator generator,
-                                   final @NotNull String modId,
-                                   final @NotNull ExistingFileHelper helper) {
+    public BucketModSoundsProvider(final DataGenerator generator, final String modId, final ExistingFileHelper helper) {
         super(generator, modId, helper);
     }
 
     @Override
     public void registerSounds() {
-        SoundDefinition.Sound[] fireCrackleSounds = IntStream.range(1,6).mapToObj(i -> SoundDefinition.Sound.sound(new ResourceLocation("block/furnace/fire_crackle" + i), SoundDefinition.SoundType.SOUND)).toArray(
-                SoundDefinition.Sound[]::new);
+        SoundDefinition.Sound[] fireCrackleSounds = IntStream.range(1, 6)
+                .mapToObj(i -> SoundDefinition.Sound.sound(new ResourceLocation("block/furnace/fire_crackle" + i),
+                        SoundDefinition.SoundType.SOUND))
+                .toArray(SoundDefinition.Sound[]::new);
 
         this.add(BucketSoundEvents.KILN_FIRE_CRACKLE, SoundDefinition.definition()
                 .subtitle(Util.makeDescriptionId("subtitles.block", BucketBlocks.KILN.getId()) + ".fire_crackle")
@@ -30,7 +29,7 @@ public class BucketModSoundsProvider extends SoundDefinitionsProvider {
     }
 
     @Override
-    public @NotNull String getName() {
-        return "Early Game Buckets: Sound Events";
+    public String getName() {
+        return "Early Game Buckets Sound Event Provider";
     }
 }

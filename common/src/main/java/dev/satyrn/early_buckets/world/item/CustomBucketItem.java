@@ -1,7 +1,7 @@
 package dev.satyrn.early_buckets.world.item;
 
 import dev.satyrn.early_buckets.BucketModCommon;
-import dev.satyrn.early_buckets.mixin.accessor.LiquidBlockAccessor;
+import dev.satyrn.early_buckets.mixin.world.level.block.LiquidBlockAccessor;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,8 +22,8 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 /**
  * A custom bucket handler for the buckets implemented by this mod.
@@ -43,7 +43,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @since 1.0.0
      */
-    protected CustomBucketItem(final @NotNull Fluid fluid, final @NotNull Properties settings) {
+    protected CustomBucketItem(final Fluid fluid, final Properties settings) {
         super(fluid, settings);
         this.fluid = fluid;
     }
@@ -60,7 +60,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      * @since 2.0.0+alpha.1
      */
     @Override
-    public ItemStack getEmptyItemStack(final @NotNull ItemStack sourceStack, final @NotNull Player player) {
+    public ItemStack getEmptyItemStack(final ItemStack sourceStack, final Player player) {
         if (player.getAbilities().instabuild) {
             return sourceStack;
         }
@@ -87,7 +87,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @since 2.0.0+alpha.1
      */
-    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Fluid fluid) {
+    public ItemStack getFilledItemStack(final ItemStack sourceStack, final Fluid fluid) {
         return ItemStack.EMPTY;
     }
 
@@ -102,10 +102,10 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @since 2.0.0+alpha.1
      */
-    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Block block) {
+    public ItemStack getFilledItemStack(final ItemStack sourceStack, final Block block) {
         if (Fluids.EMPTY.equals(this.fluid)) {
             if (Blocks.POWDER_SNOW.equals(block)) {
-                Item powderSnowItem = this.getPowderSnowFilledItem();
+                @Nullable Item powderSnowItem = this.getPowderSnowFilledItem();
                 return powderSnowItem != null
                         ? BucketItems.createItemStack(this.getPowderSnowFilledItem(), sourceStack)
                         : ItemStack.EMPTY;
@@ -142,7 +142,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      * @return The item stack containing the bucket with the entity inside, or {@link ItemStack#EMPTY} if the bucket
      * could not be filled with the entity.
      */
-    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull LivingEntity entity) {
+    public ItemStack getFilledItemStack(final ItemStack sourceStack, final LivingEntity entity) {
         return ItemStack.EMPTY;
     }
 
@@ -154,7 +154,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      *
      * @return The filled item stack.
      */
-    public @NotNull ItemStack getMilkBucketItemStack(final @NotNull ItemStack sourceStack) {
+    public ItemStack getMilkBucketItemStack(final ItemStack sourceStack) {
         return ItemStack.EMPTY;
     }
 
@@ -169,7 +169,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      * @since 1.0.0
      */
     @Override
-    public boolean isValidRepairItem(final @NotNull ItemStack stack, final @NotNull ItemStack ingredient) {
+    public boolean isValidRepairItem(final ItemStack stack, final ItemStack ingredient) {
         if (this.fluid != Fluids.EMPTY) {
             return false;
         }
@@ -199,9 +199,7 @@ public abstract class CustomBucketItem extends BucketItem implements Repairable,
      * @return Whether the event passed or failed, as well as the resultant item stack.
      */
     @Override
-    public InteractionResultHolder<ItemStack> use(final @NotNull Level world,
-                                                  final @NotNull Player user,
-                                                  final @NotNull InteractionHand hand) {
+    public InteractionResultHolder<ItemStack> use(final Level world, final Player user, final InteractionHand hand) {
         // We need to replicate the bucket functionality -_-
         final ItemStack stackInHand = user.getItemInHand(hand);
         final BlockHitResult blockHitResult = getPlayerPOVHitResult(world, user,

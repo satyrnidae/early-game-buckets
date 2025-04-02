@@ -7,8 +7,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
 
 import static dev.satyrn.early_buckets.world.item.BucketItems.createItemStack;
 
@@ -27,7 +27,7 @@ public class WoodenBucketItem extends CustomBucketItem {
      *
      * @since 1.0.0
      */
-    public WoodenBucketItem(final @NotNull Fluid fluid, final @NotNull Properties settings) {
+    public WoodenBucketItem(final Fluid fluid, final Properties settings) {
         super(fluid, settings);
     }
 
@@ -45,7 +45,7 @@ public class WoodenBucketItem extends CustomBucketItem {
      */
     @Override
     @SuppressWarnings("deprecation")
-    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Fluid fluid) {
+    public ItemStack getFilledItemStack(final ItemStack sourceStack, final Fluid fluid) {
         if (fluid.is(FluidTags.WATER)) {
             return createItemStack(BucketItems.WOODEN_WATER_BUCKET.get(), sourceStack);
         }
@@ -60,7 +60,7 @@ public class WoodenBucketItem extends CustomBucketItem {
      * @since 2.0.0+alpha.1
      */
     @Override
-    public @Nullable Item getPowderSnowFilledItem() {
+    public @Nonnull Item getPowderSnowFilledItem() {
         return BucketItems.WOODEN_POWDER_SNOW_BUCKET.get();
     }
 
@@ -76,7 +76,7 @@ public class WoodenBucketItem extends CustomBucketItem {
      */
     @Override
     @SuppressWarnings("deprecation")
-    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull LivingEntity entity) {
+    public ItemStack getFilledItemStack(final ItemStack sourceStack, final LivingEntity entity) {
         if (this.fluid.is(FluidTags.WATER)) {
             final EntityType<?> type = entity.getType();
             if (EntityType.AXOLOTL.equals(type)) {
@@ -106,7 +106,7 @@ public class WoodenBucketItem extends CustomBucketItem {
      * @return The filled item stack.
      */
     @Override
-    public ItemStack getMilkBucketItemStack(final @NotNull ItemStack sourceStack) {
+    public ItemStack getMilkBucketItemStack(final ItemStack sourceStack) {
         if (Fluids.EMPTY.equals(this.fluid)) {
             return BucketItems.createItemStack(BucketItems.WOODEN_MILK_BUCKET.get(), sourceStack);
         }

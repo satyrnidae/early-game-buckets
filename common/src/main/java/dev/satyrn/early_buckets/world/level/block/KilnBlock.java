@@ -16,32 +16,32 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class KilnBlock extends AbstractFurnaceBlock {
-    public KilnBlock(final @NotNull BlockBehaviour.Properties properties) {
+    public KilnBlock(final BlockBehaviour.Properties properties) {
         super(properties);
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(final @NotNull BlockPos blockPos,
-                                                final @NotNull BlockState blockState) {
+    public @Nullable BlockEntity newBlockEntity(final BlockPos blockPos,
+                                                final BlockState blockState) {
         return new KilnBlockEntity(blockPos, blockState);
     }
 
     @Override
-    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(final @NotNull Level level,
-                                                                            final @NotNull BlockState blockState,
-                                                                            final @NotNull BlockEntityType<T> blockEntityType) {
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(final Level level,
+                                                                            final BlockState blockState,
+                                                                            final BlockEntityType<T> blockEntityType) {
         return createFurnaceTicker(level, blockEntityType, BucketBlockEntityTypes.KILN.get());
     }
 
     @Override
-    protected void openContainer(final @NotNull Level level,
-                                 final @NotNull BlockPos blockPos,
-                                 final @NotNull Player player) {
-        BlockEntity blockEntity = level.getBlockEntity(blockPos);
+    protected void openContainer(final Level level,
+                                 final BlockPos blockPos,
+                                 final Player player) {
+        final @Nullable BlockEntity blockEntity = level.getBlockEntity(blockPos);
         if (blockEntity instanceof KilnBlockEntity kiln) {
             player.openMenu(kiln);
             player.awardStat(BucketStats.INTERACT_WITH_KILN.get());
@@ -49,10 +49,10 @@ public class KilnBlock extends AbstractFurnaceBlock {
     }
 
     @Override
-    public void animateTick(final @NotNull BlockState blockState,
-                            final @NotNull Level level,
-                            final @NotNull BlockPos blockPos,
-                            final @NotNull RandomSource randomSource) {
+    public void animateTick(final BlockState blockState,
+                            final Level level,
+                            final BlockPos blockPos,
+                            final RandomSource randomSource) {
         if (blockState.getValue(LIT)) {
             final double centerX = blockPos.getX() + 0.5;
             final double originY = blockPos.getY();

@@ -6,7 +6,6 @@ import dev.satyrn.early_buckets.forge.data.provider.server.*;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(modid = BucketModCommon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public final class BucketModDataEvents {
@@ -14,7 +13,7 @@ public final class BucketModDataEvents {
     }
 
     @SubscribeEvent
-    static void onGatherData(final @NotNull GatherDataEvent event) {
+    static void onGatherData(final GatherDataEvent event) {
         // client
         event.getGenerator()
                 .addProvider(event.includeClient(),

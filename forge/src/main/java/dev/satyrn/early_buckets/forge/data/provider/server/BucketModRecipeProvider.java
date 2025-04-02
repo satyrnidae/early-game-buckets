@@ -18,7 +18,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -28,21 +27,21 @@ public class BucketModRecipeProvider extends RecipeProvider {
         super(arg);
     }
 
-    public static ResourceLocation getFiringRecipeName(ItemLike arg) {
+    public static ResourceLocation getFiringRecipeName(final ItemLike arg) {
         return new ResourceLocation(BucketModCommon.MOD_ID, Objects.requireNonNull(
                 ForgeRegistries.ITEMS.getKey(arg.asItem())).getPath() + "_from_firing");
     }
 
-    public static ResourceLocation getDefaultRecipeName(ItemLike result) {
+    public static ResourceLocation getDefaultRecipeName(final ItemLike result) {
         return new ResourceLocation(BucketModCommon.MOD_ID, Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(result.asItem())).getPath());
     }
 
-    private static @NotNull String getDefaultGroupName(ItemLike result) {
+    private static String getDefaultGroupName(final ItemLike result) {
         return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(result.asItem())).getPath();
     }
 
     @Override
-    protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> consumer) {
+    protected void buildCraftingRecipes(final Consumer<FinishedRecipe> consumer) {
         BreakableShapedRecipeBuilder.shaped(Blocks.CAKE)
                 .group(getDefaultGroupName(Blocks.CAKE))
                 .pattern("AAA")
@@ -237,7 +236,7 @@ public class BucketModRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "Early Game Buckets Recipe Provider";
     }
 

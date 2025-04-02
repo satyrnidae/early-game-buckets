@@ -25,7 +25,6 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.PredicateManager;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -33,19 +32,56 @@ import java.util.function.Consumer;
 
 public class BucketModAdvancementProvider extends AdvancementProvider {
 
-    public BucketModAdvancementProvider(DataGenerator generatorIn, ExistingFileHelper fileHelperIn) {
+    public BucketModAdvancementProvider(final DataGenerator generatorIn, final ExistingFileHelper fileHelperIn) {
         super(generatorIn, fileHelperIn);
+    }
+
+    public static ResourceLocation getTranslationLocation(final String advancement) {
+        return new ResourceLocation(BucketModCommon.MOD_ID, advancement);
+    }
+
+    private static ResourceLocation getAdvancementLocation(final String advancement) {
+        return new ResourceLocation(BucketModCommon.MOD_ID, BucketModCommon.MOD_ID + "/" + advancement);
+    }
+
+    private static void addTadpoleCriteria(final Advancement.Builder builder) {
+        final var bucketItems = new RegistrySupplier[]{BucketItems.WOODEN_TADPOLE_BUCKET, BucketItems.CERAMIC_TADPOLE_BUCKET};
+        addBucketableCriteria(builder, bucketItems);
+    }
+
+    private static void addAxolotlCriteria(final Advancement.Builder builder) {
+        final var bucketItems = new RegistrySupplier[]{BucketItems.CERAMIC_AXOLOTL_BUCKET, BucketItems.WOODEN_AXOLOTL_BUCKET, BucketItems.CLAY_AXOLOTL_BUCKET};
+        addBucketableCriteria(builder, bucketItems);
+    }
+
+    private static void addFishCriteria(final Advancement.Builder builder) {
+        final var bucketItems = new RegistrySupplier[]{BucketItems.CERAMIC_COD_BUCKET, BucketItems.CERAMIC_TROPICAL_FISH_BUCKET, BucketItems.CERAMIC_PUFFERFISH_BUCKET, BucketItems.CERAMIC_SALMON_BUCKET, BucketItems.WOODEN_COD_BUCKET, BucketItems.WOODEN_TROPICAL_FISH_BUCKET, BucketItems.WOODEN_PUFFERFISH_BUCKET, BucketItems.WOODEN_SALMON_BUCKET};
+        addBucketableCriteria(builder, bucketItems);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private static void addBucketableCriteria(final Advancement.Builder builder,
+                                              final RegistrySupplier[] bucketItemSuppliers) {
+        for (final var item : bucketItemSuppliers) {
+            builder.addCriterion(item.getId().getPath(), FilledBucketTrigger.TriggerInstance.filledBucket(
+                    ItemPredicate.Builder.item().of((ItemLike) item.get()).build()));
+        }
+    }
+
+    private static ResourceLocation getAbsoluteResourceLoc(final ResourceLocation relative) {
+        return new ResourceLocation(relative.getNamespace(), "advancements/" + relative.getPath() + ".json");
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    protected void registerAdvancements(@NotNull Consumer<Advancement> consumer, @NotNull ExistingFileHelper fileHelper) {
+    protected void registerAdvancements(final Consumer<Advancement> consumer, final ExistingFileHelper fileHelper) {
 
         try {
             final Gson gson = new Gson();
             // Alter Minecraft advancements to support fish buckets
             final var fishBucket = new ResourceLocation("husbandry/tactical_fishing");
-            try (var reader = fileHelper.getResource(getAbsoluteResourceLoc(fishBucket), PackType.SERVER_DATA).openAsReader()) {
+            try (var reader = fileHelper.getResource(getAbsoluteResourceLoc(fishBucket), PackType.SERVER_DATA)
+                    .openAsReader()) {
                 var advancement = Advancement.Builder.fromJson(
                         gson.fromJson(reader, JsonElement.class).getAsJsonObject(),
                         new DeserializationContext(getAbsoluteResourceLoc(fishBucket), new PredicateManager()));
@@ -55,7 +91,8 @@ public class BucketModAdvancementProvider extends AdvancementProvider {
             }
 
             final var axolotlBucket = new ResourceLocation("husbandry/axolotl_in_a_bucket");
-            try (var reader = fileHelper.getResource(getAbsoluteResourceLoc(axolotlBucket), PackType.SERVER_DATA).openAsReader()) {
+            try (var reader = fileHelper.getResource(getAbsoluteResourceLoc(axolotlBucket), PackType.SERVER_DATA)
+                    .openAsReader()) {
                 var advancement = Advancement.Builder.fromJson(
                         gson.fromJson(reader, JsonElement.class).getAsJsonObject(),
                         new DeserializationContext(getAbsoluteResourceLoc(axolotlBucket), new PredicateManager()));
@@ -65,7 +102,8 @@ public class BucketModAdvancementProvider extends AdvancementProvider {
             }
 
             final var tadpoleBucket = new ResourceLocation("husbandry/tadpole_in_a_bucket");
-            try (var reader = fileHelper.getResource(getAbsoluteResourceLoc(tadpoleBucket), PackType.SERVER_DATA).openAsReader()) {
+            try (var reader = fileHelper.getResource(getAbsoluteResourceLoc(tadpoleBucket), PackType.SERVER_DATA)
+                    .openAsReader()) {
                 var advancement = Advancement.Builder.fromJson(
                         gson.fromJson(reader, JsonElement.class).getAsJsonObject(),
                         new DeserializationContext(getAbsoluteResourceLoc(tadpoleBucket), new PredicateManager()));
@@ -75,18 +113,16 @@ public class BucketModAdvancementProvider extends AdvancementProvider {
             }
 
             final var lavaBucket = new ResourceLocation("story/lava_bucket");
-            try (var reader = fileHelper.getResource(getAbsoluteResourceLoc(lavaBucket), PackType.SERVER_DATA).openAsReader()) {
+            try (var reader = fileHelper.getResource(getAbsoluteResourceLoc(lavaBucket), PackType.SERVER_DATA)
+                    .openAsReader()) {
                 var advancement = Advancement.Builder.fromJson(
                         gson.fromJson(reader, JsonElement.class).getAsJsonObject(),
                         new DeserializationContext(getAbsoluteResourceLoc(lavaBucket), new PredicateManager()));
-                advancement.addCriterion(
-                        BucketItems.CERAMIC_LAVA_BUCKET.getId().getPath(),
-                        new InventoryChangeTrigger.TriggerInstance(
-                                EntityPredicate.Composite.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                new ItemPredicate[]{ItemPredicate.Builder.item().of(BucketItems.CERAMIC_LAVA_BUCKET.get()).build()}))
+                advancement.addCriterion(BucketItems.CERAMIC_LAVA_BUCKET.getId().getPath(),
+                                new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY,
+                                        MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                                        new ItemPredicate[]{ItemPredicate.Builder.item()
+                                                .of(BucketItems.CERAMIC_LAVA_BUCKET.get()).build()}))
                         .requirements(RequirementsStrategy.OR.createRequirements(advancement.getCriteria().keySet()))
                         .save(consumer, lavaBucket, fileHelper);
             }
@@ -98,209 +134,118 @@ public class BucketModAdvancementProvider extends AdvancementProvider {
 
         // Mod advancements
         final var earlyBucketsRoot = Advancement.Builder.advancement()
-                .display(new ItemStack(BucketItems.WOODEN_AXOLOTL_BUCKET.get()),
-                        Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("root")) + ".title"),
-                        Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("root")) + ".description"),
+                .display(new ItemStack(BucketItems.WOODEN_AXOLOTL_BUCKET.get()), Component.translatable(
+                                Util.makeDescriptionId("advancements", getTranslationLocation("root")) + ".title"),
+                        Component.translatable(Util.makeDescriptionId("advancements", getTranslationLocation("root")) +
+                                ".description"),
                         new ResourceLocation(BucketModCommon.MOD_ID, "textures/gui/advancements/backgrounds/water.png"),
-                        FrameType.TASK,
-                        false,
-                        false,
-                        false)
-                .addCriterion(
-                        BucketItems.WOODEN_BUCKET.getId().getPath(),
-                        new InventoryChangeTrigger.TriggerInstance(
-                                EntityPredicate.Composite.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                new ItemPredicate[]{ItemPredicate.Builder.item().of(BucketTags.Items.WOODEN_BUCKETS).build()}))
-                .save(consumer, getDefaultAdvLoc("root"), fileHelper);
+                        FrameType.TASK, false, false, false)
+                .addCriterion(BucketItems.WOODEN_BUCKET.getId().getPath(),
+                        new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY,
+                                MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                                new ItemPredicate[]{ItemPredicate.Builder.item()
+                                        .of(BucketTags.Items.WOODEN_BUCKETS).build()}))
+                .save(consumer, getAdvancementLocation("root"), fileHelper);
         final var woodenBucket = Advancement.Builder.advancement()
                 .parent(earlyBucketsRoot)
-                .display(new ItemStack(BucketItems.WOODEN_BUCKET.get()),
-                        Component.translatable(Util.makeDescriptionId("advancements", BucketItems.WOODEN_BUCKET.getId()) + ".title"),
-                        Component.translatable(Util.makeDescriptionId("advancements", BucketItems.WOODEN_BUCKET.getId()) + ".description"),
-                        null,
-                        FrameType.TASK,
-                        true,
-                        true,
-                        false)
-                .addCriterion(
-                        BucketItems.WOODEN_BUCKET.getId().getPath(),
-                        new InventoryChangeTrigger.TriggerInstance(
-                                EntityPredicate.Composite.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                new ItemPredicate[]{ItemPredicate.Builder.item().of(BucketTags.Items.WOODEN_BUCKETS).build()}))
-                .save(consumer, getDefaultAdvLoc(BucketItems.WOODEN_BUCKET.getId().getPath()), fileHelper);
+                .display(new ItemStack(BucketItems.WOODEN_BUCKET.get()), Component.translatable(
+                                Util.makeDescriptionId("advancements", BucketItems.WOODEN_BUCKET.getId()) + ".title"),
+                        Component.translatable(
+                                Util.makeDescriptionId("advancements", BucketItems.WOODEN_BUCKET.getId()) +
+                                        ".description"), null, FrameType.TASK, true, true, false)
+                .addCriterion(BucketItems.WOODEN_BUCKET.getId().getPath(),
+                        new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY,
+                                MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                                new ItemPredicate[]{ItemPredicate.Builder.item()
+                                        .of(BucketTags.Items.WOODEN_BUCKETS).build()}))
+                .save(consumer, getAdvancementLocation(BucketItems.WOODEN_BUCKET.getId().getPath()), fileHelper);
         final var clayBucket = Advancement.Builder.advancement()
                 .parent(woodenBucket)
-                .display(new ItemStack(BucketItems.CLAY_BUCKET.get()),
-                        Component.translatable(Util.makeDescriptionId("advancements", BucketItems.CLAY_BUCKET.getId()) + ".title"),
-                        Component.translatable(Util.makeDescriptionId("advancements", BucketItems.CLAY_BUCKET.getId()) + ".description"),
-                        null,
-                        FrameType.TASK,
-                        true,
-                        true,
-                        false)
-                .addCriterion(
-                        BucketItems.CLAY_BUCKET.getId().getPath(),
-                        new InventoryChangeTrigger.TriggerInstance(
-                                EntityPredicate.Composite.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                new ItemPredicate[]{ItemPredicate.Builder.item().of(BucketTags.Items.CLAY_BUCKETS).build()}))
-                .save(consumer, getDefaultAdvLoc(BucketItems.CLAY_BUCKET.getId().getPath()), fileHelper);
+                .display(new ItemStack(BucketItems.CLAY_BUCKET.get()), Component.translatable(
+                                Util.makeDescriptionId("advancements", BucketItems.CLAY_BUCKET.getId()) + ".title"),
+                        Component.translatable(Util.makeDescriptionId("advancements", BucketItems.CLAY_BUCKET.getId()) +
+                                ".description"), null, FrameType.TASK, true, true, false)
+                .addCriterion(BucketItems.CLAY_BUCKET.getId().getPath(),
+                        new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY,
+                                MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                                new ItemPredicate[]{ItemPredicate.Builder.item()
+                                        .of(BucketTags.Items.CLAY_BUCKETS).build()}))
+                .save(consumer, getAdvancementLocation(BucketItems.CLAY_BUCKET.getId().getPath()), fileHelper);
         Advancement.Builder.advancement()
                 .parent(clayBucket)
-                .display(new ItemStack(BucketItems.CERAMIC_BUCKET.get()),
-                        Component.translatable(Util.makeDescriptionId("advancements", BucketItems.CERAMIC_BUCKET.getId()) + ".title"),
-                        Component.translatable(Util.makeDescriptionId("advancements", BucketItems.CERAMIC_BUCKET.getId()) + ".description"),
-                        null,
-                        FrameType.TASK,
-                        true,
-                        true,
-                        false)
-                .addCriterion(
-                        BucketItems.CERAMIC_BUCKET.getId().getPath(),
-                        new InventoryChangeTrigger.TriggerInstance(
-                                EntityPredicate.Composite.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                new ItemPredicate[]{ItemPredicate.Builder.item().of(BucketTags.Items.CERAMIC_BUCKETS).build()}))
-                .save(consumer, getDefaultAdvLoc(BucketItems.CERAMIC_BUCKET.getId().getPath()), fileHelper);
+                .display(new ItemStack(BucketItems.CERAMIC_BUCKET.get()), Component.translatable(
+                                Util.makeDescriptionId("advancements", BucketItems.CERAMIC_BUCKET.getId()) + ".title"),
+                        Component.translatable(
+                                Util.makeDescriptionId("advancements", BucketItems.CERAMIC_BUCKET.getId()) +
+                                        ".description"), null, FrameType.TASK, true, true, false)
+                .addCriterion(BucketItems.CERAMIC_BUCKET.getId().getPath(),
+                        new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY,
+                                MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                                new ItemPredicate[]{ItemPredicate.Builder.item()
+                                        .of(BucketTags.Items.CERAMIC_BUCKETS).build()}))
+                .save(consumer, getAdvancementLocation(BucketItems.CERAMIC_BUCKET.getId().getPath()), fileHelper);
         Advancement.Builder.advancement()
                 .parent(clayBucket)
-                .display(new ItemStack(Items.CLAY_BALL),
-                        Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("clay_bucket_dissolved")) + ".title"),
-                        Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("clay_bucket_dissolved")) + ".description"),
-                        null,
-                        FrameType.TASK,
-                        true,
-                        true,
-                        true)
-                .addCriterion(BucketItems.CLAY_BUCKET.getId().getPath() + "_to_" + Objects.requireNonNull(
-                                ForgeRegistries.ITEMS.getKey(Items.CLAY_BALL)).getPath(),
+                .display(new ItemStack(Items.CLAY_BALL), Component.translatable(
+                        Util.makeDescriptionId("advancements", getTranslationLocation("clay_bucket_dissolved")) +
+                                ".title"), Component.translatable(
+                        Util.makeDescriptionId("advancements", getTranslationLocation("clay_bucket_dissolved")) +
+                                ".description"), null, FrameType.TASK, true, true, true)
+                .addCriterion(BucketItems.CLAY_BUCKET.getId().getPath() +
+                                "_to_" +
+                                Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(Items.CLAY_BALL)).getPath(),
                         CustomFilledBucketTrigger.TriggerInstance.filledCustomBucket(
                                 ItemPredicate.Builder.item().of(BucketItems.CLAY_BUCKET.get()).build(),
                                 ItemPredicate.Builder.item().of(Items.CLAY_BALL).build()))
-                .save(consumer, getDefaultAdvLoc("clay_bucket_dissolved"), fileHelper);
+                .save(consumer, getAdvancementLocation("clay_bucket_dissolved"), fileHelper);
         final var filledClayBucket = Advancement.Builder.advancement()
                 .parent(clayBucket)
-                .display(new DisplayInfo(
-                        new ItemStack(BucketItems.CLAY_WATER_BUCKET.get()),
-                        Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("we_will_persevere")) + ".title"),
-                        Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("we_will_persevere")) + ".description"),
-                        null,
-                        FrameType.GOAL,
-                        true,
-                        true,
-                        true))
-                .addCriterion(BucketItems.CLAY_BUCKET.getId().getPath() + "_to_" + BucketItems.CLAY_WATER_BUCKET.getId().getPath(),
+                .display(new DisplayInfo(new ItemStack(BucketItems.CLAY_WATER_BUCKET.get()), Component.translatable(
+                        Util.makeDescriptionId("advancements", getTranslationLocation("we_will_persevere")) + ".title"),
+                        Component.translatable(
+                                Util.makeDescriptionId("advancements", getTranslationLocation("we_will_persevere")) +
+                                        ".description"), null, FrameType.GOAL, true, true, true))
+                .addCriterion(BucketItems.CLAY_BUCKET.getId().getPath() +
+                                "_to_" +
+                                BucketItems.CLAY_WATER_BUCKET.getId().getPath(),
                         CustomFilledBucketTrigger.TriggerInstance.filledCustomBucket(
                                 ItemPredicate.Builder.item().of(BucketItems.CLAY_BUCKET.get()).build(),
                                 ItemPredicate.Builder.item().of(BucketItems.CLAY_WATER_BUCKET.get()).build()))
-                .save(consumer, getDefaultAdvLoc("we_will_persevere"), fileHelper);
+                .save(consumer, getAdvancementLocation("we_will_persevere"), fileHelper);
         Advancement.Builder.advancement()
                 .parent(filledClayBucket)
-                .display(new DisplayInfo(
-                        new ItemStack(BucketItems.CLAY_AXOLOTL_BUCKET.get()),
-                        Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("feels_like_home")) + ".title"),
-                        Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("feels_like_home")) + ".description"),
-                        null,
-                        FrameType.CHALLENGE,
-                        true,
-                        true,
-                        true))
-                .addCriterion(
-                        BucketItems.CLAY_AXOLOTL_BUCKET.getId().getPath(),
-                        new InventoryChangeTrigger.TriggerInstance(
-                                EntityPredicate.Composite.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                MinMaxBounds.Ints.ANY,
-                                new ItemPredicate[]{ItemPredicate.Builder.item().of(BucketItems.CLAY_AXOLOTL_BUCKET.get()).build()}))
-                .save(consumer, getDefaultAdvLoc("feels_like_home"), fileHelper);
+                .display(new DisplayInfo(new ItemStack(BucketItems.CLAY_AXOLOTL_BUCKET.get()), Component.translatable(
+                        Util.makeDescriptionId("advancements", getTranslationLocation("feels_like_home")) + ".title"),
+                        Component.translatable(
+                                Util.makeDescriptionId("advancements", getTranslationLocation("feels_like_home")) +
+                                        ".description"), null, FrameType.CHALLENGE, true, true, true))
+                .addCriterion(BucketItems.CLAY_AXOLOTL_BUCKET.getId().getPath(),
+                        new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY,
+                                MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY,
+                                new ItemPredicate[]{ItemPredicate.Builder.item()
+                                        .of(BucketItems.CLAY_AXOLOTL_BUCKET.get()).build()}))
+                .save(consumer, getAdvancementLocation("feels_like_home"), fileHelper);
         final ItemStack ceramicLavaBucket = new ItemStack(BucketItems.CERAMIC_LAVA_BUCKET.get());
-        ceramicLavaBucket.setDamageValue((int)Math.ceil(ceramicLavaBucket.getMaxDamage() * CeramicBucketItem.CRACKS_AT_USE_PERCENT));
+        ceramicLavaBucket.setDamageValue(
+                (int) Math.ceil(ceramicLavaBucket.getMaxDamage() * CeramicBucketItem.CRACKS_AT_USE_PERCENT));
         Advancement.Builder.advancement()
                 .parent(clayBucket)
-                .display(
-                        new DisplayInfo(
-                                ceramicLavaBucket,
-                                Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("flash_fire")) + ".title"),
-                                Component.translatable(Util.makeDescriptionId("advancements", getDefaultTransLoc("flash_fire")) + ".description"),
-                                null,
-                                FrameType.TASK,
-                                true,
-                                true,
-                                true))
-                .addCriterion(BucketItems.CLAY_BUCKET.getId().getPath() + "_to_" + BucketItems.CERAMIC_LAVA_BUCKET.getId().getPath(),
+                .display(new DisplayInfo(ceramicLavaBucket, Component.translatable(
+                        Util.makeDescriptionId("advancements", getTranslationLocation("flash_fire")) + ".title"),
+                        Component.translatable(
+                                Util.makeDescriptionId("advancements", getTranslationLocation("flash_fire")) +
+                                        ".description"), null, FrameType.TASK, true, true, true))
+                .addCriterion(BucketItems.CLAY_BUCKET.getId().getPath() +
+                                "_to_" +
+                                BucketItems.CERAMIC_LAVA_BUCKET.getId().getPath(),
                         CustomFilledBucketTrigger.TriggerInstance.filledCustomBucket(
                                 ItemPredicate.Builder.item().of(BucketItems.CLAY_BUCKET.get()).build(),
                                 ItemPredicate.Builder.item().of(BucketItems.CERAMIC_LAVA_BUCKET.get()).build()))
-                .save(consumer, getDefaultAdvLoc("flash_fire"), fileHelper);
+                .save(consumer, getAdvancementLocation("flash_fire"), fileHelper);
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return "Early Game Buckets Advancement Provider";
-    }
-
-    public static ResourceLocation getDefaultTransLoc(String advancement) {
-        return new ResourceLocation(BucketModCommon.MOD_ID, advancement);
-    }
-
-    private static ResourceLocation getDefaultAdvLoc(String advancement) {
-        return new ResourceLocation(BucketModCommon.MOD_ID, BucketModCommon.MOD_ID + "/" + advancement);
-    }
-
-    private static void addTadpoleCriteria(Advancement.Builder builder) {
-        final var bucketItems = new RegistrySupplier[] {
-                BucketItems.WOODEN_TADPOLE_BUCKET,
-                BucketItems.CERAMIC_TADPOLE_BUCKET
-        };
-        addBucketableCriteria(builder, bucketItems);
-    }
-
-    private static void addAxolotlCriteria(Advancement.Builder builder) {
-        final var bucketItems = new RegistrySupplier[] {
-                BucketItems.CERAMIC_AXOLOTL_BUCKET,
-                BucketItems.WOODEN_AXOLOTL_BUCKET,
-                BucketItems.CLAY_AXOLOTL_BUCKET
-        };
-        addBucketableCriteria(builder, bucketItems);
-    }
-
-    private static void addFishCriteria(Advancement.Builder builder) {
-        final var bucketItems = new RegistrySupplier[] {
-                BucketItems.CERAMIC_COD_BUCKET,
-                BucketItems.CERAMIC_TROPICAL_FISH_BUCKET,
-                BucketItems.CERAMIC_PUFFERFISH_BUCKET,
-                BucketItems.CERAMIC_SALMON_BUCKET,
-                BucketItems.WOODEN_COD_BUCKET,
-                BucketItems.WOODEN_TROPICAL_FISH_BUCKET,
-                BucketItems.WOODEN_PUFFERFISH_BUCKET,
-                BucketItems.WOODEN_SALMON_BUCKET
-        };
-        addBucketableCriteria(builder, bucketItems);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private static void addBucketableCriteria(Advancement.Builder builder, RegistrySupplier[] bucketItemSuppliers) {
-        for (final var item : bucketItemSuppliers) {
-            builder.addCriterion(
-                    item.getId().getPath(),
-                    FilledBucketTrigger.TriggerInstance.filledBucket(ItemPredicate.Builder.item()
-                            .of((ItemLike)item.get())
-                            .build()));
-        }
-    }
-
-    private static ResourceLocation getAbsoluteResourceLoc(ResourceLocation relative) {
-        return new ResourceLocation(relative.getNamespace(), "advancements/" + relative.getPath() + ".json");
     }
 }

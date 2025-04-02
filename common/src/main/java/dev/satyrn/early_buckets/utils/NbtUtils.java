@@ -3,7 +3,6 @@ package dev.satyrn.early_buckets.utils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Utility class for NBT tag modification.
@@ -24,8 +23,8 @@ public final class NbtUtils {
      *
      * @since 1.0.0
      */
-    public static void copyEnchantmentItemTags(final @NotNull ItemStack sourceStack,
-                                               final @NotNull ItemStack targetStack) {
+    public static void copyEnchantmentItemTags(final ItemStack sourceStack,
+                                               final ItemStack targetStack) {
         final CompoundTag targetTags = targetStack.getOrCreateTag();
         if (!targetTags.contains("Enchantments", 9)) {
             targetTags.put("Enchantments", new ListTag());

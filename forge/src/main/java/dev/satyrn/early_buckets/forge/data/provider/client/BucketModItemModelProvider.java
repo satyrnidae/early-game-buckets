@@ -10,16 +10,17 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.NotNull;
 
 public class BucketModItemModelProvider extends ItemModelProvider {
-    public BucketModItemModelProvider(DataGenerator generator, String modid, ExistingFileHelper existingFileHelper) {
-        super(generator, modid, existingFileHelper);
+    public BucketModItemModelProvider(final DataGenerator generator,
+                                      final String modId,
+                                      final ExistingFileHelper existingFileHelper) {
+        super(generator, modId, existingFileHelper);
     }
 
     @Override
-    public @NotNull String getName() {
-        return "Early Game Buckets: Item Models";
+    public String getName() {
+        return "Early Game Buckets Item Model Provider";
     }
 
     @Override
@@ -52,7 +53,7 @@ public class BucketModItemModelProvider extends ItemModelProvider {
 
     }
 
-    private void ceramicBucketItem(RegistrySupplier<Item> ceramicBucket) {
+    private void ceramicBucketItem(final RegistrySupplier<Item> ceramicBucket) {
         this.basicItem(ceramicBucket.get())
                 .override()
                 .predicate(new ResourceLocation("damage"), CeramicBucketItem.CRACKS_AT_USE_PERCENT)

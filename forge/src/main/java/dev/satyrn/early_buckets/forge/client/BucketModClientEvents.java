@@ -7,7 +7,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.jetbrains.annotations.NotNull;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = BucketModCommon.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -16,7 +15,7 @@ public class BucketModClientEvents {
     }
 
     @SubscribeEvent
-    static void onClientSetup(final @NotNull FMLClientSetupEvent event) {
+    static void onClientSetup(final FMLClientSetupEvent event) {
         // Client initialization
         BucketModClient.initClient();
     }

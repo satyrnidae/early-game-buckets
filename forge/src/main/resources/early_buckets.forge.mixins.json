@@ -6,8 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "CeramicBucketItemMixin",
-    "WoodenBucketItemMixin"
+    "world.item.CeramicBucketItemMixin",
+    "world.item.WoodenBucketItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

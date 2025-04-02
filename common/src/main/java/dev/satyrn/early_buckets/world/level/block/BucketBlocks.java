@@ -3,7 +3,7 @@ package dev.satyrn.early_buckets.world.level.block;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import dev.satyrn.early_buckets.BucketModCommon;
-import dev.satyrn.early_buckets.mixin.accessor.BlocksAccessor;
+import dev.satyrn.early_buckets.mixin.world.level.block.BlocksAccessor;
 import net.minecraft.core.Registry;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;

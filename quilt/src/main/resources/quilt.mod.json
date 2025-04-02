@@ -5,12 +5,19 @@
     "id": "early_buckets",
     "version": "${version}",
     "metadata": {
-      "name": "Early Game Buckets",
-      "description": "This is an example description! Tell everyone what your mod is about!",
+      "name": "Early-Game Buckets",
+      "description": "Adds new buckets made from materials other than iron!",
       "contributors": {
-        "Me!": "Author"
+        "Isabel Maskrey": ["Owner", "Author"]
       },
-      "icon": "assets/early_buckets/icon.png"
+      "icon": "assets/early_buckets/icon.png",
+      "contact": {
+        "email": "isabel@satyrn.dev",
+        "homepage": "https://github.com/satyrnidae/early-game-buckets/releases",
+        "issues": "https://github.com/satyrnidae/early-game-buckets/issues",
+        "sources": "https://github.com/satyrnidae/early-game-buckets"
+      },
+      "license": "MIT"
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "entrypoints": {
@@ -19,6 +26,9 @@
       ],
       "client_init": [
         "dev.satyrn.early_buckets.quilt.client.BucketModQuiltClient"
+      ],
+      "jei_mod_plugin": [
+        "dev.satyrn.early_buckets.jei.plugins.BucketModPlugin"
       ]
     },
     "depends": [
@@ -37,10 +47,28 @@
       {
         "id": "architectury",
         "version": ">=6.6.92"
+      },
+      {
+        "id": "jei",
+        "version": ">=11.8.1",
+        "optional": true
+      },
+      {
+        "id": "modmenu",
+        "version": ">=4.0.6",
+        "optional": true
       }
     ]
   },
   "mixin": [
     "early_buckets.common.mixins.json"
-  ]
+  ],
+  "modmenu": {
+    "links": {
+      "modmenu.buymeacoffee": "https://ko-fi.com/satyrnidae",
+      "modmenu.github_releases": "https://github.com/satyrnidae/a-fools-barrel/releases",
+      "modmenu.curseforge": "https://legacy.curseforge.com/minecraft/mc-mods/early-game-buckets"
+    },
+    "update_checker": false
+  }
 }

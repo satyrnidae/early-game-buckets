@@ -3,7 +3,6 @@ package dev.satyrn.early_buckets.world.item;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Models a ceramic bucket that is full of milk.
@@ -20,7 +19,7 @@ public class CeramicMilkBucketItem extends CustomMilkBucketItem {
      *
      * @since 1.0.0
      */
-    public CeramicMilkBucketItem(final @NotNull Properties settings) {
+    public CeramicMilkBucketItem(final Properties settings) {
         super(settings);
     }
 
@@ -44,7 +43,7 @@ public class CeramicMilkBucketItem extends CustomMilkBucketItem {
      * @return The translation key. If the bucket stack damage is over 87.5%, appends .cracked to the translation key.
      */
     @Override
-    public String getDescriptionId(final @NotNull ItemStack stack) {
+    public String getDescriptionId(final ItemStack stack) {
         String translationKey = this.getDescriptionId();
         if ((float) stack.getDamageValue() / stack.getMaxDamage() >= 0.875F) {
             translationKey += ".cracked";

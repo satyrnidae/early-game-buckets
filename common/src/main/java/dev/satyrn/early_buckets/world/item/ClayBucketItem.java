@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -34,7 +33,7 @@ public class ClayBucketItem extends CustomBucketItem {
      *
      * @since 1.0.0
      */
-    public ClayBucketItem(final @NotNull Properties settings) {
+    public ClayBucketItem(final Properties settings) {
         super(Fluids.EMPTY, settings);
     }
 
@@ -44,7 +43,7 @@ public class ClayBucketItem extends CustomBucketItem {
      * @param fluid    The fluid to fill the bucket with.
      * @param settings The item settings.
      */
-    public ClayBucketItem(final @NotNull Fluid fluid, final @NotNull Properties settings) {
+    public ClayBucketItem(final Fluid fluid, final Properties settings) {
         super(fluid, settings);
     }
 
@@ -72,7 +71,7 @@ public class ClayBucketItem extends CustomBucketItem {
      */
     @Override
     @SuppressWarnings("deprecation")
-    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Fluid fluid) {
+    public ItemStack getFilledItemStack(final ItemStack sourceStack, final Fluid fluid) {
         if (fluid.is(FluidTags.WATER)) {
             return createItemStack(Items.CLAY_BALL, sourceStack);
         } else if (fluid.is(FluidTags.LAVA)) {
@@ -98,7 +97,7 @@ public class ClayBucketItem extends CustomBucketItem {
      */
     @Override
     @SuppressWarnings("deprecation")
-    public ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull LivingEntity entity) {
+    public ItemStack getFilledItemStack(final ItemStack sourceStack, final LivingEntity entity) {
         if (this.fluid.is(FluidTags.WATER) && EntityType.AXOLOTL.equals(entity.getType())) {
             return createItemStack(BucketItems.CLAY_AXOLOTL_BUCKET.get(), sourceStack);
         }
@@ -124,7 +123,7 @@ public class ClayBucketItem extends CustomBucketItem {
      * @param returnedItemStack The filled bucket item stack.
      */
     @Override
-    public void playSoundOnFill(final @NotNull Player user, final @NotNull ItemStack returnedItemStack) {
+    public void playSoundOnFill(final Player user, final ItemStack returnedItemStack) {
         final Item returnedItem = returnedItemStack.getItem();
         System.out.println("Clay bucket filled returned as " +
                 Objects.requireNonNull(Registry.ITEM.getKey(returnedItem)).getPath());

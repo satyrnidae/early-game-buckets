@@ -2,7 +2,7 @@ package dev.satyrn.early_buckets;
 
 import dev.satyrn.early_buckets.advancements.criterion.CustomFilledBucketTrigger;
 import dev.satyrn.early_buckets.core.cauldron.CustomBucketCauldronInteractions;
-import dev.satyrn.early_buckets.mixin.accessor.CriteriaTriggersAccessor;
+import dev.satyrn.early_buckets.mixin.advancements.CriteriaTriggersAccessor;
 import dev.satyrn.early_buckets.sounds.BucketSoundEvents;
 import dev.satyrn.early_buckets.stats.BucketStats;
 import dev.satyrn.early_buckets.world.inventory.BucketMenuTypes;

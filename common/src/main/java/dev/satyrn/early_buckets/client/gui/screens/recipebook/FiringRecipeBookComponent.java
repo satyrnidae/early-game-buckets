@@ -9,7 +9,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.inventory.RecipeBookMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -37,7 +36,11 @@ public class FiringRecipeBookComponent extends AbstractFurnaceRecipeBookComponen
     }
 
     @Override
-    public void init(int i, int j, Minecraft minecraft, boolean bl, RecipeBookMenu<?> recipeBookMenu) {
+    public void init(final int i,
+                     final int j,
+                     final Minecraft minecraft,
+                     final boolean bl,
+                     final RecipeBookMenu<?> recipeBookMenu) {
         super.init(i, j, minecraft, bl, recipeBookMenu);
         this.setVisible(false);
     }
@@ -48,7 +51,7 @@ public class FiringRecipeBookComponent extends AbstractFurnaceRecipeBookComponen
     }
 
     @Override
-    public void render(PoseStack poseStack, int i, int j, float f) {
+    public void render(final PoseStack poseStack, final int i, final int j, final float f) {
         // Render nothing
     }
 }

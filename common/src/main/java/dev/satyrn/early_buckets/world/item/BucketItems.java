@@ -12,7 +12,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
-import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -196,7 +195,7 @@ public final class BucketItems {
      *
      * @return The new item stack.
      */
-    public static ItemStack createItemStack(@NotNull Item item, @NotNull ItemStack sourceStack) {
+    public static ItemStack createItemStack(final Item item, final ItemStack sourceStack) {
         final ItemStack createdItemStack = new ItemStack(item);
 
         if (item.canBeDepleted()) {

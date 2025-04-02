@@ -24,41 +24,42 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
 public class FiringRecipeCategory implements IRecipeCategory<FiringRecipe> {
     public final static RecipeType<FiringRecipe> FIRING = RecipeType.create(BucketModCommon.MOD_ID,
             BucketModCommon.FIRING_RECIPE_ID.getPath(), FiringRecipe.class);
-    private final static ResourceLocation VANILLA_RECIPE_GUI = new ResourceLocation("jei", "textures/gui/gui_vanilla.png");
-
+    private final static ResourceLocation VANILLA_RECIPE_GUI = new ResourceLocation("jei",
+            "textures/gui/gui_vanilla.png");
+    private final static int REGULAR_COOK_TIME = 100;
     private final IDrawableAnimated animatedFlame;
     private final IDrawable background;
-    private final static int REGULAR_COOK_TIME = 100;
     private final IDrawable icon;
     private final Component localizedName;
     private final LoadingCache<Integer, IDrawableAnimated> cachedArrows;
 
-    public FiringRecipeCategory(final @NotNull IGuiHelper guiHelper) {
+    public FiringRecipeCategory(final IGuiHelper guiHelper) {
         IDrawableStatic staticFlame = guiHelper.createDrawable(VANILLA_RECIPE_GUI, 82, 114, 14, 14);
-        this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 150, IDrawableAnimated.StartDirection.TOP, true);
+        this.animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 150, IDrawableAnimated.StartDirection.TOP,
+                true);
         this.background = guiHelper.createDrawable(VANILLA_RECIPE_GUI, 0, 114, 82, 54);
         this.icon = guiHelper.createDrawableItemStack(new ItemStack(BucketBlocks.KILN.get()));
         this.localizedName = Component.translatable("gui.early_buckets.category.firing");
         this.cachedArrows = CacheBuilder.newBuilder().maximumSize(25).build(new CacheLoader<>() {
             @Override
-            public IDrawableAnimated load(final @NotNull Integer cookTime) {
-                return guiHelper.drawableBuilder(VANILLA_RECIPE_GUI, 82, 128, 24, 17).buildAnimated(cookTime,
-                        IDrawableAnimated.StartDirection.LEFT, false);
+            public IDrawableAnimated load(final Integer cookTime) {
+                return guiHelper.drawableBuilder(VANILLA_RECIPE_GUI, 82, 128, 24, 17)
+                        .buildAnimated(cookTime, IDrawableAnimated.StartDirection.LEFT, false);
             }
         });
     }
 
     public List<FiringRecipe> getRecipes() {
-        return Validator.getValidHandledRecipes(Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager(), new Validator(this));
+        return Validator.getValidHandledRecipes(
+                Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager(), new Validator(this));
     }
 
     @Override
@@ -82,20 +83,20 @@ public class FiringRecipeCategory implements IRecipeCategory<FiringRecipe> {
     }
 
     @Override
-    public void setRecipe(final @NotNull IRecipeLayoutBuilder builder, final @NotNull FiringRecipe recipe, final @NotNull IFocusGroup focuses) {
+    public void setRecipe(final IRecipeLayoutBuilder builder, final FiringRecipe recipe, final IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(recipe.getIngredients().get(0));
         builder.addSlot(RecipeIngredientRole.OUTPUT, 61, 19).addItemStack(recipe.getResultItem());
     }
 
     @Override
-    public boolean isHandled(final @NotNull FiringRecipe recipe) {
+    public boolean isHandled(final FiringRecipe recipe) {
         return !recipe.isSpecial();
     }
 
     @Override
-    public void draw(final @NotNull FiringRecipe recipe,
-                     final @NotNull IRecipeSlotsView recipeSlotsView,
-                     final @NotNull PoseStack stack,
+    public void draw(final FiringRecipe recipe,
+                     final IRecipeSlotsView recipeSlotsView,
+                     final PoseStack stack,
                      final double mouseX,
                      final double mouseY) {
         this.animatedFlame.draw(stack, 1, 20);
@@ -104,7 +105,7 @@ public class FiringRecipeCategory implements IRecipeCategory<FiringRecipe> {
         this.drawCookTime(recipe, stack);
     }
 
-    private IDrawableAnimated getArrow(final @NotNull FiringRecipe recipe) {
+    private IDrawableAnimated getArrow(final FiringRecipe recipe) {
         int cookTime = recipe.getCookingTime();
         if (cookTime <= 0) {
             cookTime = REGULAR_COOK_TIME;
@@ -112,7 +113,7 @@ public class FiringRecipeCategory implements IRecipeCategory<FiringRecipe> {
         return this.cachedArrows.getUnchecked(cookTime);
     }
 
-    private void drawExperience(final @NotNull FiringRecipe recipe, final @NotNull PoseStack stack) {
+    private void drawExperience(final FiringRecipe recipe, final PoseStack stack) {
         final float xp = recipe.getExperience();
         if (xp > 0) {
             final var xpString = Component.translatable("gui.early_buckets.category.firing.experience", xp);
@@ -122,11 +123,12 @@ public class FiringRecipeCategory implements IRecipeCategory<FiringRecipe> {
         }
     }
 
-    private void drawCookTime(final @NotNull FiringRecipe recipe, final @NotNull PoseStack stack) {
+    private void drawCookTime(final FiringRecipe recipe, final PoseStack stack) {
         final int cookTime = recipe.getCookingTime();
         if (cookTime > 0) {
             final int cookTimeInSeconds = cookTime / 20;
-            final var timeComponent = Component.translatable("gui.early_buckets.category.firing.cook_time", cookTimeInSeconds);
+            final var timeComponent = Component.translatable("gui.early_buckets.category.firing.cook_time",
+                    cookTimeInSeconds);
             final var fontRenderer = Minecraft.getInstance().font;
             final int strWidth = fontRenderer.width(timeComponent);
             fontRenderer.draw(stack, timeComponent, this.getWidth() - strWidth, 45, 0xFF808080);
@@ -136,12 +138,33 @@ public class FiringRecipeCategory implements IRecipeCategory<FiringRecipe> {
     public static class Validator {
         private final FiringRecipeCategory category;
 
-        public Validator(final @NotNull FiringRecipeCategory category) {
+        public Validator(final FiringRecipeCategory category) {
             this.category = category;
         }
 
-        public boolean isRecipeValid(final @NotNull FiringRecipe recipe) {
-            if (recipe.isSpecial()) return true;
+        public static List<FiringRecipe> getValidHandledRecipes(final RecipeManager manager,
+                                                                final Validator validator) {
+            return manager.getAllRecipesFor(BucketRecipeTypes.FIRING.get())
+                    .stream()
+                    .filter(r -> validator.isRecipeValid(r) && validator.isRecipeHandled(r))
+                    .toList();
+        }
+
+        private static int getInputs(final List<Ingredient> ingredients) {
+            int inputCnt = 0;
+            for (final var ingredient : ingredients) {
+                final var inputs = ingredient.getItems();
+                if (inputs.length > 0) {
+                    inputCnt++;
+                }
+            }
+            return inputCnt;
+        }
+
+        public boolean isRecipeValid(final FiringRecipe recipe) {
+            if (recipe.isSpecial()) {
+                return true;
+            }
 
             final var output = recipe.getResultItem();
             if (output.isEmpty()) {
@@ -152,27 +175,8 @@ public class FiringRecipeCategory implements IRecipeCategory<FiringRecipe> {
             return ingredientCnt <= 1;
         }
 
-        public boolean isRecipeHandled(final @NotNull FiringRecipe recipe) {
+        public boolean isRecipeHandled(final FiringRecipe recipe) {
             return this.category.isHandled(recipe);
-        }
-
-        public static List<FiringRecipe> getValidHandledRecipes(final @NotNull RecipeManager manager,
-                                                                final @NotNull Validator validator) {
-            return manager.getAllRecipesFor(BucketRecipeTypes.FIRING.get())
-                    .stream()
-                    .filter(r -> validator.isRecipeValid(r) && validator.isRecipeHandled(r))
-                    .toList();
-        }
-
-        private static int getInputs(final @NotNull List<Ingredient> ingredients) {
-            int inputCnt = 0;
-            for (final var ingredient : ingredients) {
-                final var inputs = ingredient.getItems();
-                if (inputs.length > 0) {
-                    inputCnt++;
-                }
-            }
-            return inputCnt;
         }
     }
 }

@@ -6,17 +6,17 @@ loom {
     accessWidenerPath.set(project(":common").loom.accessWidenerPath)
 
     mixin {
-        defaultRefmapName = "early_buckets.forge.refmap.json"
+        defaultRefmapName = "${project.rootProject.name}.${project.name}.refmap.json"
     }
 
     forge {
-        mixinConfig "early_buckets.common.mixins.json"
-        mixinConfig "early_buckets.forge.mixins.json"
+        mixinConfig "${project.rootProject.name}.common.mixins.json"
+        mixinConfig "${project.rootProject.name}.${project.name}.mixins.json"
     }
     runs {
         data {
             data()
-            programArgs "--all", "--mod", "early_buckets"
+            programArgs "--all", "--mod", project.rootProject.name
             programArgs "--output", file("../common/src/generated").absolutePath
             programArgs "--validate"
             programArgs "--existing", file("../common/src/main/resources").absolutePath
@@ -54,6 +54,8 @@ dependencies {
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
     shadowBundle project(path: ':common', configuration: 'transformProductionForge')
+    // at runtime, use the full JEI jar for Fabric
+    modRuntimeOnly("mezz.jei:jei-${rootProject.minecraft_version}-forge:${rootProject.jei_version}")
 }
 
 processResources {

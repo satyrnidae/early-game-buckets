@@ -4,7 +4,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Implementation for wooden fish buckets.
@@ -22,10 +21,10 @@ public class WoodenEntityBucketItem extends CustomEntityBucketItem {
      *
      * @since 1.0.0
      */
-    public WoodenEntityBucketItem(final @NotNull EntityType<?> type,
-                                  final @NotNull Fluid fluid,
-                                  final @NotNull SoundEvent emptyingSound,
-                                  final @NotNull Properties settings) {
+    public WoodenEntityBucketItem(final EntityType<?> type,
+                                  final Fluid fluid,
+                                  final SoundEvent emptyingSound,
+                                  final Properties settings) {
         super(type, fluid, emptyingSound, settings);
     }
 

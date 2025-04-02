@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Duck interface for bucket operations.
@@ -42,7 +41,7 @@ public interface CustomBucket {
      * @since 1.0.0
      */
     @SuppressWarnings("deprecation")
-    default int getDamageOnDispenseFluid(final @NotNull Fluid fluid) {
+    default int getDamageOnDispenseFluid(final Fluid fluid) {
         if (fluid.is(FluidTags.LAVA)) {
             return 2;
         }
@@ -59,7 +58,7 @@ public interface CustomBucket {
      *
      * @return The damage accrued.
      */
-    default int getDamageOnEntityInteraction(final @NotNull EntityType<?> entityType) {
+    default int getDamageOnEntityInteraction(final EntityType<?> entityType) {
         if (entityType.is(BucketTags.EntityTypes.FISH)) {
             return 1;
         }
@@ -73,7 +72,7 @@ public interface CustomBucket {
      *
      * @return The damage accrued.
      */
-    default int getDamageOnDispenseBlock(final @NotNull Block block) {
+    default int getDamageOnDispenseBlock(final Block block) {
         if (block == Blocks.POWDER_SNOW) {
             return 1;
         }
@@ -91,7 +90,7 @@ public interface CustomBucket {
      *
      * @since 2.0.0+alpha.1
      */
-    ItemStack getEmptyItemStack(final @NotNull ItemStack sourceStack, final @NotNull Player player);
+    ItemStack getEmptyItemStack(final ItemStack sourceStack, final Player player);
 
     /**
      * Attempts to fill the bucket with the given fluid.
@@ -105,7 +104,7 @@ public interface CustomBucket {
      *
      * @since 2.0.0+alpha.1
      */
-    ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Fluid fluid);
+    ItemStack getFilledItemStack(final ItemStack sourceStack, final Fluid fluid);
 
     /**
      * Attempts to fill the bucket with the given block.
@@ -118,7 +117,7 @@ public interface CustomBucket {
      *
      * @since 2.0.0+alpha.1
      */
-    ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull Block block);
+    ItemStack getFilledItemStack(final ItemStack sourceStack, final Block block);
 
     /**
      * Attempts to shove an entity into the bucket.
@@ -132,7 +131,7 @@ public interface CustomBucket {
      *
      * @since 2.0.0+alpha.1
      */
-    ItemStack getFilledItemStack(final @NotNull ItemStack sourceStack, final @NotNull LivingEntity entity);
+    ItemStack getFilledItemStack(final ItemStack sourceStack, final LivingEntity entity);
 
     /**
      * Attempts to fill the bucket with cow juice.
@@ -144,7 +143,7 @@ public interface CustomBucket {
      *
      * @since 2.0.0+alpha.1
      */
-    ItemStack getMilkBucketItemStack(final @NotNull ItemStack sourceStack);
+    ItemStack getMilkBucketItemStack(final ItemStack sourceStack);
 
     /**
      * Gets the fluid for this bucket.
@@ -159,6 +158,6 @@ public interface CustomBucket {
      * @param user              The player that used the bucket.
      * @param returnedItemStack The filled bucket item stack.
      */
-    default void playSoundOnFill(final @NotNull Player user, final @NotNull ItemStack returnedItemStack) {
+    default void playSoundOnFill(final Player user, final ItemStack returnedItemStack) {
     }
 }

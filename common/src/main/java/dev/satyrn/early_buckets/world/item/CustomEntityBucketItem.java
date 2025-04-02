@@ -22,9 +22,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -48,10 +47,10 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      *
      * @since 1.0.0
      */
-    public CustomEntityBucketItem(final @NotNull EntityType<?> type,
-                                  final @NotNull Fluid fluid,
-                                  final @NotNull SoundEvent emptyingSound,
-                                  final @NotNull Properties settings) {
+    public CustomEntityBucketItem(final EntityType<?> type,
+                                  final Fluid fluid,
+                                  final SoundEvent emptyingSound,
+                                  final Properties settings) {
         super(fluid, settings);
         this.entityType = type;
         this.emptyingSound = emptyingSound;
@@ -69,9 +68,9 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      */
     @Override
     public void checkExtraContent(final @Nullable Player player,
-                                  final @NotNull Level world,
-                                  final @NotNull ItemStack stack,
-                                  final @NotNull BlockPos pos) {
+                                  final Level world,
+                                  final ItemStack stack,
+                                  final BlockPos pos) {
         if (world instanceof final ServerLevel serverLevel) {
             this.spawnEntity(serverLevel, player, stack, pos);
             world.gameEvent(player, GameEvent.ENTITY_PLACE, pos);
@@ -89,8 +88,8 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      */
     @Override
     protected void playEmptySound(final @Nullable Player player,
-                                  final @NotNull LevelAccessor world,
-                                  final @NotNull BlockPos pos) {
+                                  final LevelAccessor world,
+                                  final BlockPos pos) {
         world.playSound(player, pos, this.emptyingSound, SoundSource.NEUTRAL, 1.0F, 1.0F);
     }
 
@@ -105,12 +104,12 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      * @since 1.0.0
      */
     @Override
-    public void appendHoverText(final @NotNull ItemStack stack,
+    public void appendHoverText(final ItemStack stack,
                                 final @Nullable Level world,
-                                final @NotNull List<Component> tooltip,
-                                final @NotNull TooltipFlag context) {
+                                final List<Component> tooltip,
+                                final TooltipFlag context) {
         if (this.entityType == EntityType.TROPICAL_FISH) {
-            CompoundTag compoundTag = stack.getTag();
+            @Nullable CompoundTag compoundTag = stack.getTag();
             if (compoundTag != null && compoundTag.contains("BucketVariantTag", 3)) {
                 int i = compoundTag.getInt("BucketVariantTag");
                 ChatFormatting[] formattings = new ChatFormatting[]{ChatFormatting.ITALIC, ChatFormatting.GRAY};
@@ -147,7 +146,7 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      * @since 1.0.0
      */
     @Override
-    public boolean isValidRepairItem(final @NotNull ItemStack stack, final @NotNull ItemStack ingredient) {
+    public boolean isValidRepairItem(final ItemStack stack, final ItemStack ingredient) {
         return false;
     }
 
@@ -173,11 +172,11 @@ public abstract class CustomEntityBucketItem extends CustomBucketItem {
      * @since 1.0.0
      */
     @SuppressWarnings("deprecation")
-    private void spawnEntity(final @NotNull ServerLevel serverWorld,
+    private void spawnEntity(final ServerLevel serverWorld,
                              final @Nullable Player player,
-                             final @NotNull ItemStack stack,
-                             final @NotNull BlockPos pos) {
-        Entity entity = this.entityType.spawn(serverWorld, stack, null, pos, MobSpawnType.BUCKET, true, false);
+                             final ItemStack stack,
+                             final BlockPos pos) {
+        @Nullable Entity entity = this.entityType.spawn(serverWorld, stack, null, pos, MobSpawnType.BUCKET, true, false);
         if (entity instanceof final Bucketable bucketable && entity instanceof Mob mob) {
             Bucketable.loadDefaultDataFromBucketTag(mob, stack.getOrCreateTag());
             bucketable.setFromBucket(true);

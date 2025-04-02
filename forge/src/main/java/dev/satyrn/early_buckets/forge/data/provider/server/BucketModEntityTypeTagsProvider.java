@@ -5,19 +5,17 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class BucketModEntityTypeTagsProvider extends EntityTypeTagsProvider {
-    public BucketModEntityTypeTagsProvider(DataGenerator arg,
-                                           String modId,
-                                           @Nullable ExistingFileHelper existingFileHelper) {
+    public BucketModEntityTypeTagsProvider(final DataGenerator arg,
+                                           final String modId,
+                                           final ExistingFileHelper existingFileHelper) {
         super(arg, modId, existingFileHelper);
     }
 
     @Override
-    public @NotNull String getName() {
-        return "Early Game Buckets Entity Type Tags Provider";
+    public String getName() {
+        return "Early Game Buckets Entity Type Tag Provider";
     }
 
     @Override

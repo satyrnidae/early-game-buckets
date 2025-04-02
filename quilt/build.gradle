@@ -8,6 +8,9 @@ repositories {
 
 loom {
     accessWidenerPath.set(project(":common").loom.accessWidenerPath)
+    mixin {
+        defaultRefmapName = "${project.rootProject.name}.${project.name}.refmap.json"
+    }
 }
 
 architectury {
@@ -49,6 +52,9 @@ dependencies {
     shadowBundle project(path: ':common', configuration: 'transformProductionQuilt')
     common(project(path: ':fabric-like', configuration: 'namedElements')) { transitive false }
     shadowBundle project(path: ':fabric-like', configuration: 'transformProductionQuilt')
+
+    // at runtime, use the full JEI jar for Fabric
+    modRuntimeOnly("mezz.jei:jei-${rootProject.minecraft_version}-fabric:${rootProject.jei_version}")
 }
 
 processResources {

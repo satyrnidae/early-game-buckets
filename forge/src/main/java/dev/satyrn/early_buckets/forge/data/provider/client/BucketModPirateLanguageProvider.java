@@ -7,20 +7,18 @@ import net.minecraft.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
-import org.jetbrains.annotations.NotNull;
 
 public class BucketModPirateLanguageProvider extends LanguageProvider {
     private final String locale;
-    public BucketModPirateLanguageProvider(final @NotNull DataGenerator gen,
-                                           final @NotNull String modid,
-                                           final @NotNull String locale) {
-        super(gen, modid, locale);
+
+    public BucketModPirateLanguageProvider(final DataGenerator gen, final String modId, final String locale) {
+        super(gen, modId, locale);
         this.locale = locale;
     }
 
     @Override
-    public @NotNull String getName() {
-        return "Early Game Buckets: Language Provider: en_pt";
+    public String getName() {
+        return "Early Game Buckets Pirate English Language Provider";
     }
 
     @Override
@@ -33,7 +31,8 @@ public class BucketModPirateLanguageProvider extends LanguageProvider {
         // Container description
         this.add(Util.makeDescriptionId("container", BucketBlocks.KILN.getId()), "Oven what fer Cookin' Clay");
         // Kiln sound description
-        this.add(Util.makeDescriptionId("subtitles.block", BucketBlocks.KILN.getId()) + ".fire_crackle", "Oven what fer cookin' clay crackles");
+        this.add(Util.makeDescriptionId("subtitles.block", BucketBlocks.KILN.getId()) + ".fire_crackle",
+                "Oven what fer cookin' clay crackles");
 
         //this.add(KilnRecipeBookComponent.KILN_RECIPE_BOOK_FILTER_NAME, "Showing Fired");
 

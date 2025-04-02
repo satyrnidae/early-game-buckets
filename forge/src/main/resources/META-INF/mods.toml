@@ -1,7 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "[43,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/satyrnidae/early-game-buckets/issues"
+license = "MIT"
 
 [[mods]]
 modId = "early_buckets"
@@ -11,7 +11,7 @@ authors = "Isabel Maskrey"
 description = '''
 Adds new buckets made from materials other than iron!
 '''
-logoFile = "assets/early_buckets/icon.png"
+logoFile = "icon.png"
 
 [[dependencies.early_buckets]]
 modId = "forge"
@@ -31,5 +31,12 @@ side = "BOTH"
 modId = "architectury"
 mandatory = true
 versionRange = "[6.6.92,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.early_buckets]]
+modId = "jei"
+mandatory = false
+versionRange = "[11.8.1,)"
 ordering = "AFTER"
 side = "BOTH"

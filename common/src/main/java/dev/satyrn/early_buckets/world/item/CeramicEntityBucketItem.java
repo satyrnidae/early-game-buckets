@@ -5,7 +5,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Implementation for ceramic fish buckets.
@@ -20,9 +19,13 @@ public class CeramicEntityBucketItem extends CustomEntityBucketItem {
      * @param type     The entity type.
      * @param fluid    The fluid.
      * @param settings The item initialization settings.
+     *
      * @since 1.0.0
      */
-    public CeramicEntityBucketItem(final @NotNull EntityType<?> type, final @NotNull Fluid fluid, final @NotNull SoundEvent emptyingSound, final @NotNull Properties settings) {
+    public CeramicEntityBucketItem(final EntityType<?> type,
+                                   final Fluid fluid,
+                                   final SoundEvent emptyingSound,
+                                   final Properties settings) {
         super(type, fluid, emptyingSound, settings);
     }
 
@@ -30,6 +33,7 @@ public class CeramicEntityBucketItem extends CustomEntityBucketItem {
      * Gets the emptied item for this bucket.
      *
      * @return The emptied item for this bucket
+     *
      * @since 1.0.0
      */
     @Override
@@ -41,10 +45,11 @@ public class CeramicEntityBucketItem extends CustomEntityBucketItem {
      * Gets the translation key for an item stack.
      *
      * @param stack The stack that requires a translation key.
+     *
      * @return The translation key. If the bucket stack damage is over 87.5%, appends .cracked to the translation key.
      */
     @Override
-    public String getDescriptionId(final @NotNull ItemStack stack) {
+    public String getDescriptionId(final ItemStack stack) {
         String translationKey = this.getDescriptionId();
         if ((float) stack.getDamageValue() / stack.getMaxDamage() >= 0.875F) {
             translationKey += ".cracked";

@@ -151,13 +151,13 @@ public final class CustomBucketCauldronInteractions {
      *
      * @return The action result for the item.
      */
-    private static InteractionResult emptyBucket(Level world,
-                                                 BlockPos pos,
-                                                 Player player,
-                                                 InteractionHand hand,
-                                                 ItemStack stack,
-                                                 BlockState state,
-                                                 SoundEvent soundEvent) {
+    private static InteractionResult emptyBucket(final Level world,
+                                                 final BlockPos pos,
+                                                 final Player player,
+                                                 final InteractionHand hand,
+                                                 final ItemStack stack,
+                                                 final BlockState state,
+                                                 final SoundEvent soundEvent) {
         if (!world.isClientSide) {
             final Item item = stack.getItem();
             ItemStack returningStack = new ItemStack(Items.BUCKET);
@@ -192,14 +192,14 @@ public final class CustomBucketCauldronInteractions {
      *
      * @return The action result for the item.
      */
-    private static InteractionResult fillBucket(BlockState state,
-                                                Level world,
-                                                BlockPos pos,
-                                                Player player,
-                                                InteractionHand hand,
-                                                ItemStack stack,
-                                                Predicate<BlockState> predicate,
-                                                SoundEvent soundEvent) {
+    private static InteractionResult fillBucket(final BlockState state,
+                                                final Level world,
+                                                final BlockPos pos,
+                                                final Player player,
+                                                final InteractionHand hand,
+                                                final ItemStack stack,
+                                                final Predicate<BlockState> predicate,
+                                                final SoundEvent soundEvent) {
         InteractionResult result = InteractionResult.sidedSuccess(world.isClientSide);
         if (!world.isClientSide) {
             final ItemStack initialStack = stack.copy();

@@ -5,11 +5,19 @@
   "name": "Early Game Buckets",
   "description": "Adds new buckets made from materials other than iron!",
   "authors": [
-    "Isabel Maskrey"
+    {
+      "name": "Isabel Maskrey",
+      "contact": {
+        "email": "isabel@satyrn.dev",
+        "homepage": "https://satyrn.dev"
+      }
+    }
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "email": "isabel@satyrn.dev",
+    "homepage": "https://github.com/satyrnidae/early-game-buckets/releases",
+    "issues": "https://github.com/satyrnidae/early-game-buckets/issues",
+    "sources": "https://github.com/satyrnidae/early-game-buckets"
   },
   "license": "MIT",
   "icon": "assets/early_buckets/icon.png",
@@ -20,6 +28,9 @@
     ],
     "client": [
       "dev.satyrn.early_buckets.fabric.client.BucketModFabricClient"
+    ],
+    "jei_mod_plugin": [
+      "dev.satyrn.early_buckets.jei.plugins.BucketModPlugin"
     ]
   },
   "mixins": [
@@ -33,6 +44,17 @@
     "fabric-api": "*"
   },
   "suggests": {
-    "another-mod": "*"
+    "jei": ">=11.8.1",
+    "modmenu": ">=4.0.6"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.buymeacoffee": "https://ko-fi.com/satyrnidae",
+        "modmenu.github_releases": "https://github.com/satyrnidae/a-fools-barrel/releases",
+        "modmenu.curseforge": "https://legacy.curseforge.com/minecraft/mc-mods/early-game-buckets"
+      },
+      "update_checker": false
+    }
   }
 }

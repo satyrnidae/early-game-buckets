@@ -3,19 +3,21 @@ package dev.satyrn.early_buckets.forge.data.provider.server;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 public class BucketModBlockTagsProvider extends BlockTagsProvider {
 
-    public BucketModBlockTagsProvider(DataGenerator arg,
-                                      String modId,
-                                      @Nullable ExistingFileHelper existingFileHelper) {
+    public BucketModBlockTagsProvider(final DataGenerator arg,
+                                      final String modId,
+                                      final ExistingFileHelper existingFileHelper) {
         super(arg, modId, existingFileHelper);
     }
 
     @Override
     protected void addTags() {
-
     }
 
+    @Override
+    public String getName() {
+        return "Early Game Buckets Block Tag Provider";
+    }
 }

@@ -1,7 +1,7 @@
 package dev.satyrn.early_buckets.world.item.crafting;
 
 import com.google.gson.JsonObject;
-import dev.satyrn.early_buckets.mixin.accessor.ShapedRecipeAccessor;
+import dev.satyrn.early_buckets.mixin.world.item.crafting.ShapedRecipeAccessor;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -13,9 +13,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 
 import static dev.satyrn.early_buckets.world.item.BucketItems.createItemStack;
@@ -28,7 +27,7 @@ import static dev.satyrn.early_buckets.world.item.BucketItems.createItemStack;
  */
 public class BreakableShapedRecipe extends ShapedRecipe {
     // The recipe's group.
-    private final @Nullable String group;
+    private final String group;
     // The recipe width.
     private final int width;
     // The recipe height.
@@ -54,13 +53,13 @@ public class BreakableShapedRecipe extends ShapedRecipe {
      *
      * @since 1.0.0
      */
-    public BreakableShapedRecipe(final @NotNull ResourceLocation id,
-                                 final @Nullable String group,
+    public BreakableShapedRecipe(final ResourceLocation id,
+                                 final String group,
                                  final int width,
                                  final int height,
-                                 final @NotNull NonNullList<Ingredient> ingredients,
+                                 final NonNullList<Ingredient> ingredients,
                                  final int damage,
-                                 final @NotNull ItemStack output) {
+                                 final ItemStack output) {
         super(id, group, width, height, ingredients, output);
         this.group = group;
         this.width = width;
@@ -87,9 +86,9 @@ public class BreakableShapedRecipe extends ShapedRecipe {
             final Item item = itemStack.getItem();
 
             if (item.hasCraftingRemainingItem()) {
-                final Item remainder = item.getCraftingRemainingItem();
+                final @Nullable Item remainder = item.getCraftingRemainingItem();
                 if (remainder != null) {
-                    @NotNull ItemStack remainingItem = new ItemStack(remainder);
+                    ItemStack remainingItem = new ItemStack(remainder);
                     if (remainder.canBeDepleted()) {
                         remainingItem = createItemStack(remainder, itemStack);
 

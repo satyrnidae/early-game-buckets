@@ -8,20 +8,18 @@ import net.minecraft.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
-import org.jetbrains.annotations.NotNull;
 
 public class BucketModLanguageProvider extends LanguageProvider {
     private final String locale;
-    public BucketModLanguageProvider(final @NotNull DataGenerator gen,
-                                     final @NotNull String modid,
-                                     final @NotNull String locale) {
-        super(gen, modid, locale);
+
+    public BucketModLanguageProvider(final DataGenerator gen, final String modId, final String locale) {
+        super(gen, modId, locale);
         this.locale = locale;
     }
 
     @Override
-    public @NotNull String getName() {
-        return "Early Game Buckets: Language Provider: en_us";
+    public String getName() {
+        return "Early Game Buckets US English Language Provider";
     }
 
     @Override
@@ -34,7 +32,8 @@ public class BucketModLanguageProvider extends LanguageProvider {
         // Container description
         this.add(Util.makeDescriptionId("container", BucketBlocks.KILN.getId()), "Kiln");
         // Kiln sound description
-        this.add(Util.makeDescriptionId("subtitles.block", BucketBlocks.KILN.getId()) + ".fire_crackle", "Kiln crackles");
+        this.add(Util.makeDescriptionId("subtitles.block", BucketBlocks.KILN.getId()) + ".fire_crackle",
+                "Kiln crackles");
 
         //this.add(KilnRecipeBookComponent.KILN_RECIPE_BOOK_FILTER_NAME, "Showing Fired");
 
@@ -66,29 +65,50 @@ public class BucketModLanguageProvider extends LanguageProvider {
         this.add(BucketItems.WOODEN_TROPICAL_FISH_BUCKET.get(), "Wooden Bucket of Tropical Fish");
         this.add(BucketItems.WOODEN_WATER_BUCKET.get(), "Wooden Water Bucket");
 
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("root")) + ".title", "Early-Game Buckets");
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("root")) + ".description", "Simple buckets for the early game.");
+        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getTranslationLocation("root")) +
+                ".title", "Early-Game Buckets");
+        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getTranslationLocation("root")) +
+                ".description", "Simple buckets for the early game.");
 
-        this.add(Util.makeDescriptionId("advancements", BucketItems.WOODEN_BUCKET.getId()) + ".title", "Crude, but Effective");
-        this.add(Util.makeDescriptionId("advancements", BucketItems.WOODEN_BUCKET.getId()) + ".description", "Craft a wooden bucket.");
+        this.add(Util.makeDescriptionId("advancements", BucketItems.WOODEN_BUCKET.getId()) + ".title",
+                "Crude, but Effective");
+        this.add(Util.makeDescriptionId("advancements", BucketItems.WOODEN_BUCKET.getId()) + ".description",
+                "Craft a wooden bucket.");
 
         this.add(Util.makeDescriptionId("advancements", BucketItems.CLAY_BUCKET.getId()) + ".title", "Pottery Class");
-        this.add(Util.makeDescriptionId("advancements", BucketItems.CLAY_BUCKET.getId()) + ".description", "Craft an unfired bucket out of clay.");
+        this.add(Util.makeDescriptionId("advancements", BucketItems.CLAY_BUCKET.getId()) + ".description",
+                "Craft an unfired bucket out of clay.");
 
-        this.add(Util.makeDescriptionId("advancements", BucketItems.CERAMIC_BUCKET.getId()) + ".title", "You're Kiln Me");
-        this.add(Util.makeDescriptionId("advancements", BucketItems.CERAMIC_BUCKET.getId()) + ".description", "Fire a clay bucket in a furnace or kiln.");
+        this.add(Util.makeDescriptionId("advancements", BucketItems.CERAMIC_BUCKET.getId()) + ".title",
+                "You're Kiln Me");
+        this.add(Util.makeDescriptionId("advancements", BucketItems.CERAMIC_BUCKET.getId()) + ".description",
+                "Fire a clay bucket in a furnace or kiln.");
 
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("clay_bucket_dissolved")) + ".title", "Turned to Mush");
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("clay_bucket_dissolved")) + ".description", "That less well than you'd hoped.");
+        this.add(Util.makeDescriptionId("advancements",
+                        BucketModAdvancementProvider.getTranslationLocation("clay_bucket_dissolved")) + ".title",
+                "Turned to Mush");
+        this.add(Util.makeDescriptionId("advancements",
+                        BucketModAdvancementProvider.getTranslationLocation("clay_bucket_dissolved")) + ".description",
+                "That less well than you'd hoped.");
 
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("we_will_persevere")) + ".title", "We Shall Persevere");
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("we_will_persevere")) + ".description", "Finally, a water-filled clay bucket!");
+        this.add(Util.makeDescriptionId("advancements",
+                        BucketModAdvancementProvider.getTranslationLocation("we_will_persevere")) + ".title",
+                "We Shall Persevere");
+        this.add(Util.makeDescriptionId("advancements",
+                        BucketModAdvancementProvider.getTranslationLocation("we_will_persevere")) + ".description",
+                "Finally, a water-filled clay bucket!");
 
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("feels_like_home")) + ".title", "Feels Like Home");
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("feels_like_home")) + ".description", "Carry an axolotl in a clay bucket.");
+        this.add(Util.makeDescriptionId("advancements",
+                BucketModAdvancementProvider.getTranslationLocation("feels_like_home")) + ".title", "Feels Like Home");
+        this.add(Util.makeDescriptionId("advancements",
+                        BucketModAdvancementProvider.getTranslationLocation("feels_like_home")) + ".description",
+                "Carry an axolotl in a clay bucket.");
 
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("flash_fire")) + ".title", "No Kiln, No Problem");
-        this.add(Util.makeDescriptionId("advancements", BucketModAdvancementProvider.getDefaultTransLoc("flash_fire")) + ".description", "Flash-fire a clay bucket in some lava.");
+        this.add(Util.makeDescriptionId("advancements",
+                BucketModAdvancementProvider.getTranslationLocation("flash_fire")) + ".title", "No Kiln, No Problem");
+        this.add(Util.makeDescriptionId("advancements",
+                        BucketModAdvancementProvider.getTranslationLocation("flash_fire")) + ".description",
+                "Flash-fire a clay bucket in some lava.");
 
         this.add("gui.early_buckets.category.firing", "Firing");
         this.add("gui.early_buckets.category.firing.experience", "%s XP");
