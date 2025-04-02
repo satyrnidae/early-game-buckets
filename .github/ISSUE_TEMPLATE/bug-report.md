@@ -22,10 +22,10 @@ If applicable, add screenshots or videos to help explain your problem.
 
 **Version Information:**
  - OS: [e.g. Linux, Mac, Windows]
- - Java: [e.g. MC Default, Java 8, Java 9]
- - Minecraft Version: [e.g. 1.7.10, 1.12.2]
- - Forge Version: [e.g. 14.23.5.2838]
- - Mod Version: [e.g. 2.1.0.4-ALPHA]
+ - Java: [e.g. Java 16, Java 17]
+ - Minecraft Version: [e.g. 1.17.1, 1.18.1]
+ - Fabric Loader Version: [e.g. 0.12.12]
+ - Mod Version: [e.g. 2.0.0+alpha1]
 
 **Additional Context**
 Add any other context about the problem here.
