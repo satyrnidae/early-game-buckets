@@ -1,0 +1,13 @@
+{
+  "values": [
+    "minecraft:brick",
+    {
+      "id": "#c:bricks/normal",
+      "required": false
+    },
+    {
+      "id": "#forge:ingots/brick",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "kiln",
+  "key": {
+    "A": {
+      "tag": "early_buckets:bricks"
+    },
+    "B": {
+      "item": "minecraft:furnace"
+    },
+    "C": {
+      "item": "minecraft:smooth_stone_slab"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "CCC"
+  ],
+  "result": {
+    "item": "early_buckets:kiln"
+  }
+}

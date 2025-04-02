@@ -1,0 +1,10 @@
+{
+  "type": "early_buckets:firing",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "group": "glass",
+  "ingredient": {
+    "tag": "early_buckets:sand"
+  },
+  "result": "minecraft:glass"
+}

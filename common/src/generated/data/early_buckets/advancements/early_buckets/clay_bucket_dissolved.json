@@ -1,0 +1,40 @@
+{
+  "parent": "early_buckets:early_buckets/clay_bucket",
+  "criteria": {
+    "clay_bucket_to_clay_ball": {
+      "conditions": {
+        "empty": {
+          "items": [
+            "early_buckets:clay_bucket"
+          ]
+        },
+        "filled": {
+          "items": [
+            "minecraft:clay_ball"
+          ]
+        }
+      },
+      "trigger": "early_buckets:filled_bucket"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.early_buckets.clay_bucket_dissolved.description"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "minecraft:clay_ball"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.early_buckets.clay_bucket_dissolved.title"
+    }
+  },
+  "requirements": [
+    [
+      "clay_bucket_to_clay_ball"
+    ]
+  ]
+}

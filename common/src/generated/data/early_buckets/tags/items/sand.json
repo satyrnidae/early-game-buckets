@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#minecraft:sand",
+      "required": false
+    },
+    {
+      "id": "#minecraft:smelts_to_sand",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "package": "dev.satyrn.early_buckets.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+    "client.gui.screens.inventory.AbstractFurnaceScreenAccessor"
+  ],
+  "mixins": [
+    "world.item.crafting.AbstractCookingRecipeMixin",
+    "world.entity.animal.axolotl.AxolotlMixin",
+    "world.entity.animal.BucketableMixin",
+    "world.entity.animal.CowMixin",
+    "world.inventory.FurnaceFuelSlotMixin",
+    "world.item.crafting.RepairItemRecipeMixin",
+    "world.level.block.BlocksAccessor",
+    "advancements.CriteriaTriggersAccessor",
+    "world.level.block.LiquidBlockAccessor",
+    "world.item.crafting.ShapedRecipeAccessor",
+    "data.recipes.ShapedRecipeBuilderAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

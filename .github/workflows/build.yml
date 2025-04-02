@@ -34,17 +34,17 @@ jobs:
         if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # Only upload artifacts built from LTS java on one OS
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: forge libraries
+          name: forge artifacts
           path: forge/build/libs/
       - name: capture fabric build artifacts
-        if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # Only upload artifacts built from LTS java on one OS
+        if: ${{ runner.os == 'Linux' && matrix.java == '17' }}
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: fabric libraries
-          path: fabric/build/libs/
+          name: fabric artifacts
+          path: fabric/build/libs
       - name: capture quilt build artifacts
-        if: ${{ runner.os == 'Linux' && matrix.java == '17' }} # Only upload artifacts built from LTS java on one OS
+        if: ${{ runner.os == 'Linux' && matrix.java == '17' }}
         uses: actions/upload-artifact@v4.6.2
         with:
-          name: quilt libraries
-          path: quilt/build/libs/
+          name: quilt artifacts
+          path: quilt/build/libs

@@ -1,0 +1,5 @@
+// 1.19.2	2025-03-26T19:28:40.147193	Early Game Buckets: Block States and Block Models
+4b2f9ff7fdff931225231d4bc4c103fe6f760d04 assets/early_buckets/blockstates/kiln.json
+5bd66722be6a1ca635422f516495353d99e2fe43 assets/early_buckets/models/block/kiln.json
+9cc03ce2d97cab156b87579c6d8d9a05550a86c3 assets/early_buckets/models/block/kiln_on.json
+5c188fb862231ddd0088824c002832fb91a3abbf assets/early_buckets/models/item/kiln.json

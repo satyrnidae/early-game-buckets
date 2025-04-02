@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:milk_bucket",
+    "early_buckets:wooden_milk_bucket",
+    "early_buckets:ceramic_milk_bucket",
+    {
+      "id": "#c:buckets/milk",
+      "required": false
+    }
+  ]
+}

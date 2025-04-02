@@ -1,0 +1,40 @@
+{
+  "parent": "early_buckets:early_buckets/clay_bucket",
+  "criteria": {
+    "clay_bucket_to_clay_water_bucket": {
+      "conditions": {
+        "empty": {
+          "items": [
+            "early_buckets:clay_bucket"
+          ]
+        },
+        "filled": {
+          "items": [
+            "early_buckets:clay_water_bucket"
+          ]
+        }
+      },
+      "trigger": "early_buckets:filled_bucket"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.early_buckets.we_will_persevere.description"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "early_buckets:clay_water_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.early_buckets.we_will_persevere.title"
+    }
+  },
+  "requirements": [
+    [
+      "clay_bucket_to_clay_water_bucket"
+    ]
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "parent": "minecraft:husbandry/fishy_business",
+  "criteria": {
+    "ceramic_cod_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "early_buckets:ceramic_cod_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "ceramic_pufferfish_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "early_buckets:ceramic_pufferfish_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "ceramic_salmon_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "early_buckets:ceramic_salmon_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "ceramic_tropical_fish_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "early_buckets:ceramic_tropical_fish_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "cod_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:cod_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "pufferfish_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:pufferfish_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "salmon_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:salmon_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "tropical_fish_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "minecraft:tropical_fish_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "wooden_cod_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "early_buckets:wooden_cod_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "wooden_pufferfish_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "early_buckets:wooden_pufferfish_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "wooden_salmon_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "early_buckets:wooden_salmon_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    },
+    "wooden_tropical_fish_bucket": {
+      "conditions": {
+        "item": {
+          "items": [
+            "early_buckets:wooden_tropical_fish_bucket"
+          ]
+        }
+      },
+      "trigger": "minecraft:filled_bucket"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.tactical_fishing.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:pufferfish_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.tactical_fishing.title"
+    }
+  },
+  "requirements": [
+    [
+      "cod_bucket",
+      "tropical_fish_bucket",
+      "salmon_bucket",
+      "ceramic_salmon_bucket",
+      "wooden_cod_bucket",
+      "pufferfish_bucket",
+      "ceramic_tropical_fish_bucket",
+      "wooden_tropical_fish_bucket",
+      "wooden_pufferfish_bucket",
+      "ceramic_cod_bucket",
+      "wooden_salmon_bucket",
+      "ceramic_pufferfish_bucket"
+    ]
+  ]
+}

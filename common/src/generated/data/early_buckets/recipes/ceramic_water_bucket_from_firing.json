@@ -1,0 +1,10 @@
+{
+  "type": "early_buckets:firing",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "group": "ceramic_water_bucket",
+  "ingredient": {
+    "item": "early_buckets:clay_water_bucket"
+  },
+  "result": "early_buckets:ceramic_water_bucket"
+}
