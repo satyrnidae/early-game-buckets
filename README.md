@@ -1,9 +1,16 @@
 # Early-Game Buckets
 ![Java CI with Gradle](https://github.com/satyrnidae/new-buckets-fabric/workflows/build/badge.svg) [![CurseForge](http://cf.way2muchnoise.eu/475470.svg)](https://www.curseforge.com/minecraft/mc-mods/new-buckets-fabric) [![Versions](http://cf.way2muchnoise.eu/versions/475470.svg)](https://www.curseforge.com/minecraft/mc-mods/new-buckets-fabric/files)
 
-<a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api">
+### All Versions:
+Requires <a href="https://https://modrinth.com/mod/architectury-api/versions">Architectury</a>
+
+### Fabric
+<a href="https://modrinth.com/mod/fabric-api">
     <img src="https://i.imgur.com/Ol1Tcf8.png" alt="Requires Fabric API" height="40">
 </a>
+
+### Quilt
+Requires [Quilted Fabric API](https://modrinth.com/mod/qsl/versions)
 
 A small fabric mod which adds some new early-game buckets!
 
