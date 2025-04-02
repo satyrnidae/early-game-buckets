@@ -1,0 +1,35 @@
+{
+  "parent": "early_buckets:clay_bucket",
+  "display": {
+    "icon": {
+      "item": "early_buckets:ceramic_bucket"
+    },
+    "title": {
+      "translate": "advancements.early_buckets.ceramic_bucket.title"
+    },
+    "description": {
+      "translate": "advancements.early_buckets.ceramic_bucket.description"
+    },
+    "frame": "task",
+    "show_toast": "true",
+    "announce_to_chat": "true",
+    "hidden": false
+  },
+  "criteria": {
+    "get_ceramic_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "early_buckets:ceramic_buckets"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "get_ceramic_bucket"
+    ]
+  ]
+}

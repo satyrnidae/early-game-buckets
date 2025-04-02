@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "early_buckets:item/ceramic_pufferfish_bucket"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "damage": 0.875
+      },
+      "model": "early_buckets:item/cracked_ceramic_pufferfish_bucket"
+    }
+  ]
+}

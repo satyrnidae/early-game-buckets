@@ -1,0 +1,31 @@
+{
+  "parent": "early_buckets:we_will_persevere",
+  "display": {
+    "icon": {
+      "item": "early_buckets:clay_axolotl_bucket"
+    },
+    "title": {
+      "translate": "advancements.early_buckets.feels_like_home.title"
+    },
+    "description": {
+      "translate": "advancements.early_buckets.feels_like_home.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "axolotl_bucket": {
+      "trigger": "minecraft:filled_bucket",
+      "conditions": {
+        "item": {
+          "items": ["early_buckets:clay_axolotl_bucket"]
+        }
+      }
+    }
+  },
+  "requirements": [
+    ["axolotl_bucket"]
+  ]
+}
