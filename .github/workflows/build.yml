@@ -11,11 +11,7 @@ jobs:
     strategy:
       matrix:
         # Use these Java versions
-        java: [
-          1.8,  # Minimum supported by Minecraft
-          11,   # Current Java LTS
-          15    # Latest version
-        ]
+        java: [ 8, 11, 17 ]
         # and run on both Linux and Windows
         os: [ubuntu-20.04, windows-latest]
     runs-on: ${{ matrix.os }}
@@ -28,7 +24,7 @@ jobs:
         uses: actions/setup-java@v4.7.0
         with:
           java-version: ${{ matrix.java }}
-          distribution: oracle
+          distribution: temurin
       - name: make gradle wrapper executable
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
