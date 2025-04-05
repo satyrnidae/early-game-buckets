@@ -10,8 +10,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.datafix.fixes.References;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-import java.util.Objects;
-
 public final class BucketBlockEntityTypes {
 
     public static final RegistrySupplier<BlockEntityType<KilnBlockEntity>> KILN;
@@ -21,10 +19,10 @@ public final class BucketBlockEntityTypes {
 
     static {
         final ResourceLocation kilnId = new ResourceLocation(BucketModCommon.MOD_ID, "kiln");
+        //noinspection DataFlowIssue
         KILN = BLOCK_ENTITIES.register(kilnId,
                 () -> BlockEntityType.Builder.of(KilnBlockEntity::new, BucketBlocks.KILN.get())
-                        .build(Objects.requireNonNull(
-                                Util.fetchChoiceType(References.BLOCK_ENTITY, kilnId.toString()))));
+                        .build(Util.fetchChoiceType(References.BLOCK_ENTITY, kilnId.toString())));
     }
 
     private BucketBlockEntityTypes() {
